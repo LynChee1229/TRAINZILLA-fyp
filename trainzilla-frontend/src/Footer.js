@@ -1,0 +1,29 @@
+import logoDark from './img/logo-dark.png'
+import { Component } from 'react'
+import $ from 'jquery'
+
+class Footer extends Component {
+    componentDidMount() {
+        $(document).ready(function() {
+            $("img").click(function(){
+                $(window).scrollTop(0);
+            });
+        });
+    }
+
+    render() 
+    {
+        return (
+            <div style={{ backgroundColor:"#E2EFFF", paddingTop:"29px"}}>
+                <div style={{ margin:0 }}>
+                    <img src={logoDark} alt="logo" style={{ height:"58px" }}/>
+                    <div>Developed by MMU diploma students, as a final year project.</div>
+                    <div style={{ paddingBottom:"12px" }}>TRAINZILLA &copy; 2021</div>
+                </div>
+            </div>
+        )
+    }
+    
+}
+
+export default Footer
