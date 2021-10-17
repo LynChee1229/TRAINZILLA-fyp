@@ -1,3 +1,28 @@
+.input-group {
+    width: fit-content !important;
+    display: inline !important;
+}
+
+.wcard {
+    padding: 16px 24px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: #999999 2px 2px 3px;
+}
+
+.blue-btn {
+    background-color: white;
+    border: #007bff solid 1.4px;
+    color: #007bff;
+    padding: 2px 8px;
+    margin: 2px;
+    border-radius: 4px;
+}
+
+.blue-btn:hover {
+    background-color: #E0E5FF;
+}
+
 #sidebar {
     background-color: white;
     margin: 0;
@@ -62,4 +87,25 @@
     background-color: white;
     border-radius: 12px;
     box-shadow: #999999 2px 2px 3px;
+}
+
+#sb-content .cpr {
+    margin: 12px;
+    float: right;
+    font-size: 0.6em;
+}
+
+#login-page{
+    background-image: url('/img/map.png');
+    background-repeat: no-repeat;
+    background-size: 480px auto;
+    background-position: 58px 58px;
+}
+
+#login-card {
+    padding: 24px 120px 58px 24px;
+    width: max-content;
+    position: absolute;
+    left: 630px;
+    top: 120px;
 }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,9 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('adminlogin');
-});
+Route::get('/', [AdminController::class, 'loginPage']);
+Route::get('/adminlogin', [AdminController::class, 'loginPage']);
+Route::post('/admin-login', [AdminController::class, 'adminLogin']);
+Route::get('/admin-logout', [AdminController::class, 'logout']);
 
 Route::get('/adminlist', function () {
     return view('adminlist');
