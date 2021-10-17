@@ -96,7 +96,7 @@
   box-shadow: #a4edff 2px 2px 8px;
 }
 
-.actTab {
+.actHome , .actTab {
   color: #003366 !important;
   border-bottom: 3px solid #003366;
 }

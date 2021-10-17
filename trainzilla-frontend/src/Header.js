@@ -16,7 +16,7 @@ function Header()
         <div id="navBar">
             <Navbar variant="light" expand="xl" style={{ backgroundColor:"#E2EFFF", padding:"0", minHeight:"58px" }}>
                 <Nav className="d-flex justify-content-between mx-3">
-                    <NavLink to="/home" id="navTrainzilla">TRAINZILLA</NavLink>
+                    <NavLink to="/" id="navTrainzilla">TRAINZILLA</NavLink>
                 </Nav>
                 <Container>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />

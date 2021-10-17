@@ -1,7 +1,7 @@
 import './App.css';
 import "bootstrap/dist/css/bootstrap.css";
 // import Header from './Header';
-import {BrowserRouter, Route} from 'react-router-dom'
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
 import Bar from './Bar'
 import Login from './Login'
 import Register from './Register'
@@ -17,10 +17,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Bar/>
-        {/* <Header/> */}
-        <Route path="/home">
-          <Home/>
-        </Route>
+        <Switch>
         <Route path="/maproute">
           <MapRoute/>
         </Route>
@@ -39,6 +36,10 @@ function App() {
         <Route path="/profile">
           <Profile/>
         </Route>
+        <Route path="/">
+          <Home/>
+        </Route>
+        </Switch>
         <Footer/>
       </BrowserRouter>
     </div>
