@@ -17,8 +17,9 @@ class Footer extends Component {
             <div style={{ backgroundColor:"#E2EFFF", paddingTop:"29px"}}>
                 <div style={{ margin:0 }}>
                     <img src={logoDark} alt="logo" style={{ height:"58px" }}/>
-                    <div>Developed by MMU diploma students, as a final year project.</div>
-                    <div style={{ paddingBottom:"12px" }}>TRAINZILLA &copy; 2021</div>
+                    <div className="p-2">Developed by MMU diploma students, as a final year project.</div>
+                    <div>TRAINZILLA &copy; 2021</div>
+                    <div style={{ paddingBottom:"12px" }}>Feel free to contact us via customerservice@trainzilla.com .</div>
                 </div>
             </div>
         )

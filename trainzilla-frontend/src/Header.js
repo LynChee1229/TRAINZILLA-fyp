@@ -1,25 +1,26 @@
+import Bar from './Bar'
 import {Navbar, Nav, Container, NavDropdown} from 'react-bootstrap'
-import {NavLink, useHistory} from 'react-router-dom'
+import {NavLink} from 'react-router-dom'
 import * as Icon from 'react-bootstrap-icons'
 
 function Header()
 {
     let user = JSON.parse(localStorage.getItem("user-info"));
-    const history = useHistory();
 
     function logOut() {
         localStorage.clear();
-        history.push('/login');
+        window.location.reload(false);
     }
 
     return (
         <div id="navBar">
+            <Bar/>
             <Navbar variant="light" expand="xl" style={{ backgroundColor:"#E2EFFF", padding:"0", minHeight:"58px" }}>
                 <Nav className="d-flex justify-content-between mx-3">
                     <NavLink to="/" id="navTrainzilla">TRAINZILLA</NavLink>
                 </Nav>
                 <Container>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" className="my-3"/>
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="m-auto d-flex justify-content-between">
                             <NavLink to="/home" className="mx-5" activeClassName="actTab">HOME</NavLink>

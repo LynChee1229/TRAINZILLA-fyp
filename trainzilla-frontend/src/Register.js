@@ -65,6 +65,10 @@ function Register()
             $(".dangerMsg").removeClass("d-none");
             $(".dangerMsg").html(err+" is existing. Please try again.");
         }
+        else if(result.exception) {
+            $(".dangerMsg").removeClass("d-none");
+            $(".dangerMsg").html("Sorry, an unexpected error occurred. Please contact the development team.");
+        }
         else {
             localStorage.setItem("user-info", JSON.stringify(result));
             history.push("/home");

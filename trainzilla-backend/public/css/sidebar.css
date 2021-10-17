@@ -1,0 +1,65 @@
+#sidebar {
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    padding-left: 24px;
+    width: 200px;
+    box-shadow: #999999 1px 0px 3px;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+#sb-tt {
+    font-size: 1.4em;
+    padding: 24px 0 0 12px;
+    font-weight: bold;
+    text-shadow: #999999 0.5px 0.5px 3px;
+    color: #99AAFF;
+}
+
+.sidebar-cat {
+    color: #999999;
+}
+
+#sidebar a {
+    text-decoration: none;
+    color: #4D4D4D;
+}
+
+.sidebar-option {
+    margin: 8px 0 8px 0;
+    padding: 2px 0px;
+}
+
+.sidebar-option:hover {
+    background-color: #99AAFF;
+    width: fit-content;
+    padding: 2px 12px;
+    border-radius: 16px;
+}
+
+#sidebar #signout {
+    height: 14px;
+    margin: 0 5px 0 2px;
+}
+
+#sb-content {
+    margin-left: 200px;
+    padding: 16px 24px;
+}
+
+#sidebar #btm {
+    position: absolute;
+    bottom: 0;
+    padding-bottom: 24px;
+}
+
+#sb-content .content-card {
+    padding: 16px 24px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: #999999 2px 2px 3px;
+}

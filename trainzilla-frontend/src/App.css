@@ -81,7 +81,7 @@
 }
 
 #aboutUsBG .thanksTT {
-  font-size: 1.2em;
+  font-size: 1.2rem;
   font-style: oblique;
   font-family: monospace;
   letter-spacing: 2px;
@@ -90,7 +90,7 @@
 }
 
 #aboutUsBG .mdmPic {
-  width: 158px;
+  max-width: 150px;
   height: auto;
   border-radius: 50%;
   box-shadow: #a4edff 2px 2px 8px;
