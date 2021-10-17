@@ -1,3 +1,4 @@
+import Header from './Header'
 import logoDark from './img/logo-dark.png'
 import dinaPic from './img/dina.JPG'
 import lynPic from './img/lyn.JPG'
@@ -24,6 +25,8 @@ class AboutUs extends Component {
     render()
     {
         return (
+            <>
+            <Header/>
             <div style={{ backgroundImage: "url(/img/aboutusBG.png)", minHeight:"1580px" }} id="aboutUsBG">
                 <div>
                     <div className="display-3" style={{ padding:"2% 0 1% 0", letterSpacing:"0.3em" }}>Our Mission</div>
@@ -68,6 +71,7 @@ class AboutUs extends Component {
                     </div>
                 </div>
             </div>
+            </>
         )
     }
 }

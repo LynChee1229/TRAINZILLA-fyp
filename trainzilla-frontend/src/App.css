@@ -100,3 +100,19 @@
   color: #003366 !important;
   border-bottom: 3px solid #003366;
 }
+
+#navBar .dropdown-menu {
+  border: none;
+  background-color: #E2EFFF;
+  margin-left: -120px;
+  box-shadow: gray 2px 2px 5px;
+}
+
+#navBar .ddItem {
+  padding: 5% 0;
+  padding-left: 12%;
+}
+
+#navBar .ddItem:hover {
+  background-color: #BEE2E7 !important;
+}
