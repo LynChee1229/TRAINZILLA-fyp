@@ -19,32 +19,16 @@ Route::get('/adminlogin', [AdminController::class, 'loginPage']);
 Route::post('/admin-login', [AdminController::class, 'adminLogin']);
 Route::get('/admin-logout', [AdminController::class, 'logout']);
 
-Route::get('/adminlist', function () {
-    return view('adminlist');
-});
+Route::get('/adminlist', [AdminController::class, 'adminList']);
 
-Route::get('/ticketlist', function () {
-    return view('ticketlist');
-});
+Route::get('/ticketlist', [AdminController::class, 'ticketList']);
 
-Route::get('/userlist', function () {
-    return view('userlist');
-});
+Route::get('/userlist', [AdminController::class, 'userList']);
 
-Route::get('/adminroute', function () {
-    return view('adminroute');
-});
+Route::get('/adminroute', [AdminController::class, 'adminRoute']);
 
-Route::get('/adminannouncement', function () {
-    return view('adminannouncement');
-});
+Route::get('/adminannouncement', [AdminController::class, 'adminAnnouncement']);
 
-Route::get('/adminrule', function () {
-    return view('adminrule');
-});
+Route::get('/adminrule', [AdminController::class, 'adminRule']);
 
 
-
-// Auth::routes();
-
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

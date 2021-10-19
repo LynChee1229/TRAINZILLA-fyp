@@ -54,6 +54,10 @@ class UserController extends Controller
         if(!$user || !Hash::check($req->userPassword, $user->userPassword)) {
             return ["error"=>"Record is not matched. Please try again or register for a new account."];
         }
+        else if($user->userStatus == 0) {
+            return ["error"=>"Your account is inactive. Please contact customerservice@trainzilla.com for help or register a new account."];
+        }
+
         return $user;
     }
 }

@@ -66,6 +66,17 @@
     border-radius: 16px;
 }
 
+.sidebar-active {
+    background-color: #99AAFF;
+    width: fit-content;
+    padding: 2px 12px;
+    border-radius: 16px;
+}
+
+.sidebar-active a {
+    color: white !important;
+}
+
 #sidebar #signout {
     height: 14px;
     margin: 0 5px 0 2px;
