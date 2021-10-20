@@ -10,7 +10,22 @@
     box-shadow: #999999 2px 2px 3px;
 }
 
-.blue-btn {
+.card-ttl {
+    font-size: 1.8em;
+}
+
+#sb-content .modal-content {
+    width: 80%;
+    border-radius: 12px;
+}
+
+.modal-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    padding-bottom: 21px;
+}
+
+.blue-btn,  #sb-content .blue-btn{
     background-color: white;
     border: #007bff solid 1.4px;
     color: #007bff;
@@ -19,8 +34,19 @@
     border-radius: 4px;
 }
 
-.blue-btn:hover {
+.blue-btn:hover, #sb-content .blue-btn:hover{
     background-color: #E0E5FF;
+}
+
+#sb-content .discard-btn {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #FF9999;
+    border: 1px solid #FF9999;
+}
+
+#sb-content .discard-btn:hover {
+    background-color: #FFE9E9;
 }
 
 #sidebar {
@@ -98,6 +124,7 @@
     background-color: white;
     border-radius: 12px;
     box-shadow: #999999 2px 2px 3px;
+    min-width: 1020px;
 }
 
 #sb-content .cpr {

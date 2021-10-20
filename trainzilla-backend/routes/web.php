@@ -20,6 +20,9 @@ Route::post('/admin-login', [AdminController::class, 'adminLogin']);
 Route::get('/admin-logout', [AdminController::class, 'logout']);
 
 Route::get('/adminlist', [AdminController::class, 'adminList']);
+Route::post('/getAdminProfile', [AdminController::class, 'getAdminProfile']);
+Route::post('/resetAdminPW', [AdminController::class, 'resetPassword']);
+Route::get('/updateMyContact', [AdminController::class, 'updateMyContact']);
 
 Route::get('/ticketlist', [AdminController::class, 'ticketList']);
 

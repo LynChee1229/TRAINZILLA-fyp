@@ -15,4 +15,13 @@ class Admin extends Model
 	protected $fillable = [
         'adminUniqueCode', 'adminID', 'adminName', 'adminEmail', 'adminPassword', 'adminContact', 'adminStatus'
 	];
+    
+    public static function getAdminName($uc)
+    {
+        $admin = Admin::where('adminUniqueCode', $uc)->first();
+        if(isset($admin)) {
+            return $admin->adminName;
+        }
+        return null;
+    }
 }
