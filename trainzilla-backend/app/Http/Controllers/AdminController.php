@@ -24,7 +24,7 @@ class AdminController extends Controller
             return redirect('/adminlogin')->with('failed', "Record not found. Please try again.");
         }
         else if(!Hash::check($req->password, $admin->adminPassword)) {
-            return redirect('/adminlogin')->with('failed', "Password is not matched. Please try again.");
+            return redirect('/adminlogin')->with('failed', "Password does not match. Please try again.");
         }
         else if($admin->adminStatus == 0) {
             return redirect('/adminlogin')->with('failed', "Your account is inactive.");
@@ -45,7 +45,8 @@ class AdminController extends Controller
     function adminList()
     {
         $tab = "admin";
-        return view('adminlist', compact('tab'));
+        $list = Admin::orderBy('adminID', 'asc')->get();
+        return view('adminlist', compact('tab', 'list'));
     }
 
     function getAdminProfile()
@@ -69,7 +70,7 @@ class AdminController extends Controller
             $admin = Admin::where('adminUniqueCode', "=", request('aUC'))->first();
             if(isset($admin)) {
                 if(!Hash::check(request('oldPW'), $admin->adminPassword)) {
-                    return redirect('/adminlist')->with('failed', "Old Password is not matched. Please try again.");
+                    return redirect('/adminlist')->with('failed', "Old Password does not match. Please try again.");
                 } else {
                     $newPassword= Hash::make(request('newPW'));
                     Admin::where('adminUniqueCode', "=", request('aUC'))->update(['adminPassword' => $newPassword ]);
@@ -90,6 +91,61 @@ class AdminController extends Controller
             }
         }
         return redirect('/adminlist')->with('failed', "Record not found. Please try again.");
+    }
+
+    function newAdmin()
+    {
+        $failed = "Failed to add new admin. Please try again.";
+        if(request('aUC')) {
+            $admin = Admin::where('adminUniqueCode', request('aUC'))->first();
+            if(isset($admin)) {
+                if(!Hash::check(request('myPW1'), $admin->adminPassword)) {
+                    $failed = "Your Password does not match. Please try again.";
+                } else {
+                    $existingEmail = Admin::where('adminEmail', request('newEmail'))->first();
+                    if($existingEmail){
+                        $failed = "The email address already exists. Please try again.";
+                    } 
+                    else {
+                        $new = new Admin;
+                        $id = Admin::max("adminID") ? (Admin::max("adminID") + 1) : 1;
+                        $new->adminUniqueCode = "admin".$id.uniqid().$id;
+                        $new->adminID = $id;
+                        $new->adminName = request('newName');
+                        $new->adminEmail = request('newEmail');
+                        $new->adminContact = request('newContact');
+                        $new->adminPassword = Hash::make("abcd1234");
+                        $new->save();
+                        return redirect('/adminlist')->with('success', "New admin has been added.");
+                    }
+                }
+            }
+        }
+        return redirect('/adminlist')->with('failed', $failed);
+    }
+
+    function changeAdminStatus(Request $req) 
+    {
+        $failed = "Failed to add new admin. Please try again.";
+        if($req->aUC) {
+            $admin = Admin::where('adminUniqueCode', $req->aUC)->first();
+            if(isset($admin)) {
+                if(!Hash::check($req->myPW, $admin->adminPassword)) {
+                    $failed = "Your Password does not match. Please try again.";
+                } else {
+                    $data = Admin::where('adminUniqueCode', $req->statusAUC)->first();
+                    if($req->status=="deac" && $data->adminStatus=="1"){
+                        Admin::where('adminUniqueCode', $data->adminUniqueCode)->update(['adminStatus' => '0' ]);
+                        return redirect('/adminlist')->with('success', $data->adminName."'s account has been deactivated.");
+                    } 
+                    else if($req->status=="act" && $data->adminStatus=="0") {
+                        Admin::where('adminUniqueCode', $data->adminUniqueCode)->update(['adminStatus' => '1' ]);
+                        return redirect('/adminlist')->with('success', $data->adminName."'s account has been activated.");
+                    }
+                }
+            }
+        }
+        return redirect('/adminlist')->with('failed', $failed);
     }
 
 

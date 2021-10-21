@@ -23,6 +23,8 @@ Route::get('/adminlist', [AdminController::class, 'adminList']);
 Route::post('/getAdminProfile', [AdminController::class, 'getAdminProfile']);
 Route::post('/resetAdminPW', [AdminController::class, 'resetPassword']);
 Route::get('/updateMyContact', [AdminController::class, 'updateMyContact']);
+Route::post('/newAdmin', [AdminController::class, 'newAdmin']);
+Route::post('/changeAdminStatus', [AdminController::class, 'changeAdminStatus']);
 
 Route::get('/ticketlist', [AdminController::class, 'ticketList']);
 

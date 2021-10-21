@@ -2,5 +2,6 @@
 
 @section('content')
     <head><title>TRAINZILLA | ADMIN</title></head>
-    <h1>Route List</h1>
+    <div class="card-ttl">Transit Map</div>
+    <div class="card-ttl">Route List</div>
 @endsection

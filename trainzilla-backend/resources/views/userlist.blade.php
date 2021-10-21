@@ -2,5 +2,5 @@
 
 @section('content')
     <head><title>TRAINZILLA | ADMIN</title></head>
-    <h1>User List</h1>
+    <div class="card-ttl">User List</div>
 @endsection
