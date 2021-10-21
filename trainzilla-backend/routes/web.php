@@ -33,6 +33,11 @@ Route::get('/userlist', [AdminController::class, 'userList']);
 Route::get('/adminroute', [AdminController::class, 'adminRoute']);
 
 Route::get('/adminannouncement', [AdminController::class, 'adminAnnouncement']);
+Route::post('/newAnnouncement', [AdminController::class, 'newAnnouncement']);
+Route::post('/changeAnnouncementStatus', [AdminController::class, 'changeAnnouncementStatus']);
+Route::get('/getAnnouncementDetails', [AdminController::class, 'getAnnouncementDetails']);
+Route::get('/editAnnouncement', [AdminController::class, 'editAnnouncement']);
+Route::get('/dltAnnouncement', [AdminController::class, 'dltAnnouncement']);
 
 Route::get('/adminrule', [AdminController::class, 'adminRule']);
 

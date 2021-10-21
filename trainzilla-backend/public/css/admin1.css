@@ -166,6 +166,14 @@ table.dataTable tbody td {
     padding: 12px 12px 0px 12px !important;
 }
 
+table.dataTable tbody tr.even {
+    background: #f6f6f6 !important;
+}
+
+table.dataTable tbody tr.odd {
+    background: #ffffff !important;
+}
+
 #sb-content .dataTables_length , #sb-content .dataTables_filter,
 #sb-content .dataTables_info {
     font-size: 0.75em !important;
@@ -199,7 +207,7 @@ table.dataTable tbody td {
     font-size: 0.7em;
     color: #006633;
     background: #CCFFCC;
-    padding: 3px 6px;
+    padding: 2px 5px;
     border-radius: 12px;
 }
 

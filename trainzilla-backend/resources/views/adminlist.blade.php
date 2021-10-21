@@ -92,9 +92,9 @@
             <td>
                 <p>{{ $l->adminName }} 
                 @if($l->adminStatus == '1')
-                    <span class="activeStatus">Active</span>
+                    <span class="ml-2 activeStatus">Active</span>
                 @elseif($l->adminStatus == '0')
-                    <span class="inactiveStatus">Inactive</span>
+                    <span class="ml-2 inactiveStatus">Inactive</span>
                 @endif
                 </p>
             </td>
@@ -118,7 +118,7 @@
         </tr>
         @endforeach
         @else
-            <td></td><td>No record.</td><td></td><td></td><td></td>
+            <td></td><td><p>No record.</p></td><td></td><td></td><td></td>
         @endif
         </tbody>
     </table>
@@ -347,7 +347,6 @@
                 }
             });
 
-            
         });
     </script>
 @endsection

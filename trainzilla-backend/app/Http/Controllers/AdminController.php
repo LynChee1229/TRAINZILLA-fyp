@@ -5,6 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use App\Models\Admin;
+use App\Models\Announcement;
+use App\Models\Route;
+use App\Models\RouteStation;
+use App\Models\Rule;
+use App\Models\Station;
+use App\Models\Stos;
+use App\Models\Ticket;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
@@ -126,7 +134,7 @@ class AdminController extends Controller
 
     function changeAdminStatus(Request $req) 
     {
-        $failed = "Failed to add new admin. Please try again.";
+        $failed = "Failed to perform the action. Please try again.";
         if($req->aUC) {
             $admin = Admin::where('adminUniqueCode', $req->aUC)->first();
             if(isset($admin)) {
@@ -185,7 +193,95 @@ class AdminController extends Controller
     function adminAnnouncement()
     {
         $tab = "announcement";
-        return view('adminannouncement', compact('tab'));
+        $list = Announcement::orderBy('reportID', 'asc')->get();
+        foreach($list as $l) {
+            $a = Admin::where('adminUniqueCode', $l->adminUniqueCode)->first();
+            $l->adminName = $a->adminName;
+        }
+        return view('adminannouncement', compact('tab', 'list'));
+    }
+
+    function newAnnouncement()
+    {
+        if(request('aUC')) {
+            $admin = Admin::where('adminUniqueCode', request('aUC'))->first();
+            if(isset($admin)) {
+                $new = new Announcement;
+                $new->reportTitle = request('rTitle');
+                $new->reportDetails = request('rDetails');
+                $new->adminUniqueCode = $admin->adminUniqueCode;
+                $new->reportDate = date('Y-m-d');
+                $new->save();
+                return redirect('/adminannouncement')->with('success', "New announcement has been added.");
+            }
+        }
+        return redirect('/adminannouncement')->with('failed', "Failed to add new announcement. Please try again.");
+    }
+
+    function changeAnnouncementStatus()
+    {
+        if(request('aUC')) {
+            $admin = Admin::where('adminUniqueCode', request('aUC'))->first();
+            if(isset($admin)) {
+                $data = Announcement::where('reportID', request('rid'))->first();
+                if(request('sAction')=="deac" && $data->reportStatus=="1"){
+                    Announcement::where('reportID', request('rid'))->update(['reportStatus' => '0' , 'adminUniqueCode' => $admin->adminUniqueCode , 'reportDate' => date('Y-m-d')]);
+                    return redirect('/adminannouncement')->with('success', "The announcement has been deactivated.");
+                } 
+                else if(request('sAction')=="act" && $data->reportStatus=="0") {
+                    Announcement::where('reportID', request('rid'))->update(['reportStatus' => '1' , 'adminUniqueCode' => $admin->adminUniqueCode , 'reportDate' => date('Y-m-d')]);
+                    return redirect('/adminannouncement')->with('success', "The announcement has been activated.");
+                }
+            }
+        }
+        return redirect('/adminannouncement')->with('failed', "Failed to perform the action. Please try again.");
+    }
+
+    function getAnnouncementDetails()
+    {
+        try {
+            if(request('rid')) {
+                $data = Announcement::where('reportID', request('rid'))->first();
+                if(isset($data)) {
+                    return ['status' => true, 'data' => $data];
+                }
+            }
+        } catch (\Exception $e) {
+            \Log::error($e);
+        }
+        return ['status' => false, 'failed' => "Record not found."];
+    }
+
+    function editAnnouncement(Request $r)
+    {
+        if($r->aUC && $r->rid) {
+            $admin = Admin::where('adminUniqueCode', $r->aUC)->first();
+            $data = Announcement::where('reportID', $r->rid)->first();
+            if(isset($data) && isset($admin)) {
+                Announcement::where('reportID', $r->rid)
+                ->update([
+                    'reportTitle' => $r->rTitle , 
+                    'reportDetails' => $r->rDetails , 
+                    'reportDate' => date('Y-m-d') ,
+                    'reportStatus' => '1' , 
+                    'adminUniqueCode' => $admin->adminUniqueCode , 
+                ]);
+                return redirect('/adminannouncement')->with('success', "The announcement has been updated.");
+            }
+        }
+        return redirect('/adminannouncement')->with('failed', "Failed to perform the action. Please try again.");
+    }
+
+    function dltAnnouncement()
+    {
+        if(request('rid')) {
+            $data = Announcement::where('reportID', request('rid'))->first();
+            if(isset($data)) {
+                Announcement::where('reportID', request('rid'))->delete();
+                return redirect('/adminannouncement')->with('success', "The announcement has been removed.");
+            }
+        }
+        return redirect('/adminannouncement')->with('failed', "Failed to perform the action. Please try again.");
     }
 
 
