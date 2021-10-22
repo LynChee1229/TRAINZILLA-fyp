@@ -60,7 +60,7 @@
             <tr>
                 <td>{{ $index+1 }}</td>
                 <td>
-                    <p style="word-break: break-all;" class="titleD">{{ $l->reportTitle }} 
+                    <p style="word-break: break-word;" class="titleD">{{ $l->reportTitle }} 
                     @if($l->reportStatus == '1')
                         <span class="ml-2 activeStatus">Active</span>
                     @elseif($l->reportStatus == '0')
@@ -69,7 +69,7 @@
                     </p>
                 </td>
                 <td>
-                    <p style="word-break: break-all;">{{ $l->reportDetails }}</p>
+                    <p style="word-break: break-word;">{{ $l->reportDetails }}</p>
                 </td>
                 <td>
                     <div style="color:#A0A0A0;"><small><em>Last updated at</em></small></div>
@@ -86,9 +86,7 @@
                             </svg>
                         </button>
                     </div>
-                    <form method="post" action="/changeAnnouncementStatus">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">  
+                    <form method="get" action="/changeAnnouncementStatus">
                         <input type="hidden" class="aUC" name="aUC" />
                         <input type="hidden" name="rid" value="{{ $l->reportID }}"/>
                         <p>
@@ -112,9 +110,7 @@
     <div id="newAnnounceModal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
-            <form action="/newAnnouncement" method="post" id="newForm" autocomplete="off">
-            {{ csrf_field() }}
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">  
+            <form action="/newAnnouncement" method="get" id="newForm" autocomplete="off">
                 <input type="hidden" class="aUC" name="aUC" />
                 <div class="modal-body">
                     <div>

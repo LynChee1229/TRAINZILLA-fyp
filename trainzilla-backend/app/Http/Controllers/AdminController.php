@@ -193,7 +193,7 @@ class AdminController extends Controller
     function adminAnnouncement()
     {
         $tab = "announcement";
-        $list = Announcement::orderBy('reportID', 'asc')->get();
+        $list = Announcement::orderBy('reportID', 'desc')->get();
         foreach($list as $l) {
             $a = Admin::where('adminUniqueCode', $l->adminUniqueCode)->first();
             $l->adminName = $a->adminName;
@@ -291,6 +291,94 @@ class AdminController extends Controller
     function adminRule()
     {
         $tab = "rule";
-        return view('adminrule', compact('tab'));
+        $list = Rule::orderBy('ruleID', 'asc')->get();
+        foreach($list as $l) {
+            $a = Admin::where('adminUniqueCode', $l->adminUniqueCode)->first();
+            $l->adminName = $a->adminName;
+        }
+        return view('adminrule', compact('tab' , 'list'));
+    }
+
+    function newRule()
+    {
+        if(request('aUC')) {
+            $admin = Admin::where('adminUniqueCode', request('aUC'))->first();
+            if(isset($admin)) {
+                $new = new Rule;
+                $new->ruleTitle = request('rTitle');
+                $new->ruleDetails = request('rDetails');
+                $new->adminUniqueCode = $admin->adminUniqueCode;
+                $new->ruleDate = date('Y-m-d');
+                $new->save();
+                return redirect('/adminrule')->with('success', "New rules and regulations has been added.");
+            }
+        }
+        return redirect('/adminrule')->with('failed', "Failed to add new rules and regulations. Please try again.");
+    }
+
+    function changeRuleStatus()
+    {
+        if(request('aUC')) {
+            $admin = Admin::where('adminUniqueCode', request('aUC'))->first();
+            if(isset($admin)) {
+                $data = Rule::where('ruleID', request('rid'))->first();
+                if(request('sAction')=="deac" && $data->ruleStatus=="1"){
+                    Rule::where('ruleID', request('rid'))->update(['ruleStatus' => '0' , 'adminUniqueCode' => $admin->adminUniqueCode , 'ruleDate' => date('Y-m-d')]);
+                    return redirect('/adminrule')->with('success', "The rules and regulations has been deactivated.");
+                } 
+                else if(request('sAction')=="act" && $data->ruleStatus=="0") {
+                    Rule::where('ruleID', request('rid'))->update(['ruleStatus' => '1' , 'adminUniqueCode' => $admin->adminUniqueCode , 'ruleDate' => date('Y-m-d')]);
+                    return redirect('/adminrule')->with('success', "The rules and regulations has been activated.");
+                }
+            }
+        }
+        return redirect('/adminrule')->with('failed', "Failed to perform the action. Please try again.");
+    }
+
+    function getRuleDetails()
+    {
+        try {
+            if(request('rid')) {
+                $data = Rule::where('ruleID', request('rid'))->first();
+                if(isset($data)) {
+                    return ['status' => true, 'data' => $data];
+                }
+            }
+        } catch (\Exception $e) {
+            \Log::error($e);
+        }
+        return ['status' => false, 'failed' => "Record not found."];
+    }
+
+    function editRule(Request $r)
+    {
+        if($r->aUC && $r->rid) {
+            $admin = Admin::where('adminUniqueCode', $r->aUC)->first();
+            $data = Rule::where('ruleID', $r->rid)->first();
+            if(isset($data) && isset($admin)) {
+                Rule::where('ruleID', $r->rid)
+                ->update([
+                    'ruleTitle' => $r->rTitle , 
+                    'ruleDetails' => $r->rDetails , 
+                    'ruleDate' => date('Y-m-d') ,
+                    'ruleStatus' => '1' , 
+                    'adminUniqueCode' => $admin->adminUniqueCode , 
+                ]);
+                return redirect('/adminrule')->with('success', "The rules and regulations has been updated.");
+            }
+        }
+        return redirect('/adminrule')->with('failed', "Failed to perform the action. Please try again.");
+    }
+
+    function dltRule()
+    {
+        if(request('rid')) {
+            $data = Rule::where('ruleID', request('rid'))->first();
+            if(isset($data)) {
+                Rule::where('ruleID', request('rid'))->delete();
+                return redirect('/adminrule')->with('success', "The rules and regulations has been removed.");
+            }
+        }
+        return redirect('/adminrule')->with('failed', "Failed to perform the action. Please try again.");
     }
 }
