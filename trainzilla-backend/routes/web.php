@@ -29,6 +29,7 @@ Route::post('/changeAdminStatus', [AdminController::class, 'changeAdminStatus'])
 Route::get('/ticketlist', [AdminController::class, 'ticketList']);
 
 Route::get('/userlist', [AdminController::class, 'userList']);
+Route::get('/changeUserStatus', [AdminController::class, 'changeUserStatus']);
 
 Route::get('/adminroute', [AdminController::class, 'adminRoute']);
 

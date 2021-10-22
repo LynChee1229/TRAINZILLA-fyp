@@ -51,8 +51,11 @@ class UserController extends Controller
         $user = User::where('userName', $req->key)
         ->orWhere('userEmail', $req->key)->first();
 
-        if(!$user || !Hash::check($req->userPassword, $user->userPassword)) {
+        if(!$user) {
             return ["error"=>"Record is not matched. Please try again or register for a new account."];
+        }
+        else if(!Hash::check($req->userPassword, $user->userPassword)) {
+            return ["error"=>"Password does not match. Please try again."];
         }
         else if($user->userStatus == 0) {
             return ["error"=>"Your account is inactive. Please contact customerservice@trainzilla.com for help or register a new account."];

@@ -88,12 +88,12 @@ function Register()
             {/* you need this dangerMsg for show error message */}
             <div className="dangerMsg alert alert-danger col-6 offset-3 d-none"></div>
 
-            <input type="text" value={userName} onChange={(e)=>setName(e.target.value)} placeholder="Name" /> <br/><br/>
-            <input type="text" value={userEmail} onChange={(e)=>setEmail(e.target.value)} placeholder="Email" /> <br/><br/>
-            <input type="text" value={userContact} onChange={(e)=>setContact(e.target.value)} placeholder="Contact" /> <br/><br/>
-            <input type="text" value={userDOB} onChange={(e)=>setDOB(e.target.value)} placeholder="DOB" /> <br/><br/>
-            <input type="password" value={userPassword} onChange={(e)=>setPassword(e.target.value)} placeholder="Password" /> <br/><br/>
-            <input type="password" value={confirmPassword} onChange={(e)=>setConfirm(e.target.value)} placeholder="Confirm Password" /> <br/><br/>
+            <input type="text" value={userName} onChange={(e)=>setName(e.target.value)} placeholder="Name" size="42" maxlength="20" required/> <br/><br/>
+            <input type="email" value={userEmail} onChange={(e)=>setEmail(e.target.value)} placeholder="Email" size="42" maxlength="20" required/> <br/><br/>
+            <input type="tel" value={userContact} onChange={(e)=>setContact(e.target.value)} placeholder="Contact" size="42" pattern="([1]{1}[0-9]{8})|([1]{1}[0-9]{9}|[0]{1}[1]{1}[0-9]{8})|([0]{1}[1]{1}[0-9]{9})" required/> <br/><br/>
+            <input type="text" value={userDOB} onChange={(e)=>setDOB(e.target.value)} placeholder="DOB" size="42" required/> <br/><br/>
+            <input type="password" value={userPassword} onChange={(e)=>setPassword(e.target.value)} placeholder="Password" size="42" minlength="8" maxlength="15" required/> <br/><br/>
+            <input type="password" value={confirmPassword} onChange={(e)=>setConfirm(e.target.value)} placeholder="Confirm Password" size="42" minlength="8" maxlength="15" required/> <br/><br/>
             <button onClick={validation} className="btn btn-primary">Sign Up</button> <br/><br/>
         </div>
         </>

@@ -29,7 +29,7 @@ class AdminController extends Controller
     {
         $admin = Admin::where('adminEmail', $req->email)->first();
         if(!$admin) {
-            return redirect('/adminlogin')->with('failed', "Record not found. Please try again.");
+            return redirect('/adminlogin')->with('failed', "No matching records found. Please try again.");
         }
         else if(!Hash::check($req->password, $admin->adminPassword)) {
             return redirect('/adminlogin')->with('failed', "Password does not match. Please try again.");
@@ -69,7 +69,7 @@ class AdminController extends Controller
         } catch (\Exception $e) {
             \Log::error($e);
         }
-        return ['status' => false, 'failed' => "Record not found."];
+        return ['status' => false, 'failed' => "No matching records found."];
     }
 
     function resetPassword()
@@ -86,7 +86,7 @@ class AdminController extends Controller
                 }
             }
         }
-        return redirect('/adminlist')->with('failed', "Record not found. Please try again.");
+        return redirect('/adminlist')->with('failed', "No matching records found. Please try again.");
     }
 
     function updateMyContact()
@@ -98,7 +98,7 @@ class AdminController extends Controller
                 return redirect('/adminlist')->with('success', "Contact Number has been updated.");
             }
         }
-        return redirect('/adminlist')->with('failed', "Record not found. Please try again.");
+        return redirect('/adminlist')->with('failed', "No matching records found. Please try again.");
     }
 
     function newAdmin()
@@ -173,7 +173,27 @@ class AdminController extends Controller
     function userList()
     {
         $tab = "user";
-        return view('userlist', compact('tab'));
+        $list = User::orderBy('userID', 'desc')->get();
+        return view('userlist', compact('tab' , 'list'));
+    }
+
+    function changeUserStatus()
+    {
+        if(request('aUC')) {
+            $admin = Admin::where('adminUniqueCode', request('aUC'))->first();
+            if(isset($admin)) {
+                $data = User::where('userUniqueCode', request('uid'))->first();
+                if(request('sAction')=="deac" && $data->userStatus=="1"){
+                    User::where('userUniqueCode', request('uid'))->update(['userStatus' => '0']);
+                    return redirect('/userlist')->with('success', $data->userName."'s account has been deactivated.");
+                } 
+                else if(request('sAction')=="act" && $data->userStatus=="0") {
+                    User::where('userUniqueCode', request('uid'))->update(['userStatus' => '1']);
+                    return redirect('/userlist')->with('success', $data->userName."'s account has been activated.");
+                }
+            }
+        }
+        return redirect('/userlist')->with('failed', "Failed to perform the action. Please try again.");
     }
 
 
@@ -249,7 +269,7 @@ class AdminController extends Controller
         } catch (\Exception $e) {
             \Log::error($e);
         }
-        return ['status' => false, 'failed' => "Record not found."];
+        return ['status' => false, 'failed' => "No matching records found."];
     }
 
     function editAnnouncement(Request $r)
@@ -347,7 +367,7 @@ class AdminController extends Controller
         } catch (\Exception $e) {
             \Log::error($e);
         }
-        return ['status' => false, 'failed' => "Record not found."];
+        return ['status' => false, 'failed' => "No matching records found."];
     }
 
     function editRule(Request $r)

@@ -216,7 +216,7 @@
                         <div>Are you sure you want to <span id="action_s"></span> this admin?
                         <br/> >> <strong><span id="name_s"></span></strong>
                         </div>
-                        <p style="color:blue;"><small>*Please enter your admin password for authorization.</small></p>
+                        <div style="color:blue;"><small>*Please enter your admin password for authorization.</small></div>
                         <div>
                             <div class="mt-1">Your Password : </div>
                             <input type="password" class="input-group myPW_1" name="myPW" size="32" minlength="8" maxlength="15" placeholder="Please enter your admin password" required/>

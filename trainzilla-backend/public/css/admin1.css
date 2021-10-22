@@ -61,6 +61,7 @@
     overflow: auto;
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
+    z-index: 999;
 }
 
 #sb-tt {
@@ -78,6 +79,7 @@
 #sidebar a {
     text-decoration: none;
     color: #4D4D4D;
+    font-size: 0.95em;
 }
 
 .sidebar-option {
@@ -114,9 +116,7 @@
 }
 
 #sidebar #btm {
-    position: absolute;
-    bottom: 0;
-    padding-bottom: 24px;
+    margin-top: 42%;
 }
 
 #sb-content .content-card {
