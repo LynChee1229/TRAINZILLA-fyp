@@ -87,7 +87,7 @@
     padding: 2px 0px;
 }
 
-.sidebar-option:hover {
+.sidebar-option a:hover {
     background-color: #99AAFF;
     width: fit-content;
     padding: 2px 12px;
@@ -241,4 +241,18 @@ table.dataTable tbody tr.odd {
 #sb-content .deactivateBtn:hover {
     background: #990000;
     color: white;
+}
+
+#sb-content .stationCard {
+    background: #EEEEFF;
+    padding: 24px;
+    width: fit-content;
+}
+
+#sb-content .stosCard {
+    background: #FFEFEF;
+    padding: 24px;
+    width: fit-content;
+    margin-top: 32px;
+    margin-left: -24px;
 }

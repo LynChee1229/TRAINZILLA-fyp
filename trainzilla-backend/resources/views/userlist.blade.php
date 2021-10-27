@@ -7,6 +7,7 @@
             .bookingBtn {
                 background-color: #E0E5FF !important;
                 font-size: 0.8em;
+                border: #E0E5FF 1px solid !important;
             }
 
             .bookingBtn:hover {
@@ -43,7 +44,7 @@
             <tr>
                 <td>{{ $index+1 }}</td>
                 <td>
-                    <p style="word-break: break-word;" class="userD">{{ $l->userName }} 
+                    <p style="word-break: break-word;">{{ $l->userName }} 
                     @if($l->userStatus == '1')
                         <span class="ml-2 activeStatus">Active</span>
                     @elseif($l->userStatus == '0')
@@ -91,9 +92,7 @@
         $('.aUC').val(adminUC);
 
         $(document).ready(function() {
-
             $('#userTable').DataTable();
-
         });
     </script>
 @endsection

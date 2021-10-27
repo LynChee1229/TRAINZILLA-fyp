@@ -32,6 +32,14 @@ Route::get('/userlist', [AdminController::class, 'userList']);
 Route::get('/changeUserStatus', [AdminController::class, 'changeUserStatus']);
 
 Route::get('/adminroute', [AdminController::class, 'adminRoute']);
+Route::get('/createroute', [AdminController::class, 'createRoute']);
+Route::get('/getRouteDetails', [AdminController::class, 'getRouteDetails']);
+Route::get('/newRoute', [AdminController::class, 'newRoute']);
+Route::get('/changeRouteStatus', [AdminController::class, 'changeRouteStatus']);
+Route::post('/editRoutePage', [AdminController::class, 'editRoutePage']);
+
+Route::get('/searchStation', [AdminController::class, 'searchStation']);
+Route::get('/getStationDeparture', [AdminController::class, 'getStationDeparture']);
 
 Route::get('/adminannouncement', [AdminController::class, 'adminAnnouncement']);
 Route::get('/newAnnouncement', [AdminController::class, 'newAnnouncement']);

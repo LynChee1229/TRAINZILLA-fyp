@@ -28,7 +28,7 @@
                 padding: 16px 58px 0 0;
             }
 
-            .newAdminBtn:hover {
+            #newBtn:hover , .newAdminBtn:hover {
                 border: #99AAFF 1px solid !important;
                 background-color: #99AAFF !important;
                 color: white !important;
@@ -48,7 +48,7 @@
     <div class="text-danger errorMsg mt-2"></div>
 
     <div class="float-right newDiv">
-        <button class="btn blue-btn font-weight-bold" id="newBtn" data-toggle="modal" data-target="#newAdminModal">Add New Admin</button>
+        <button class="btn blue-btn font-weight-bold" id="newBtn" data-toggle="modal" data-target="#newAdminModal" style="background-color:#E0E5FF;">Add New Admin</button>
     </div>
     <div id="profile-card" class="my-3">
     <form action="/updateMyContact" action="get" autocomplete="off">

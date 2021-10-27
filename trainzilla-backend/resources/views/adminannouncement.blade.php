@@ -20,6 +20,7 @@
 
             .editBtn {
                 font-size: 0.8em;
+                border: #E0E5FF solid 2px!important;
             }
             
             .editBtn:hover {
