@@ -60,12 +60,14 @@
     <div class="card-ttl">Edit Route</div>
 
     <div>
-    <form method="get" action="#">
+    <form method="get" action="/updateRoute">
         <input type="hidden" name="adminUC" class="adminUC" />
         <div class="d-flex flex-row mt-3">
             <div>
                 <p>Route Title </p>
                 <p class="mt-4">Number of Trains </p>
+                <input type="hidden" name="rid" value="{{ $route->routeID }}"/>
+                <input type="hidden" value="{{ $route->routeTitle }}" id="oldTitle"/>
             </div>
             <div class="ml-3" style="width:380px;">
                 <p><input type="text" class="input-group rTitle" placeholder="Insert the route title" size="27" maxlength="48" name="rTitle" value="{{ $route->routeTitle }}" required/></p>
@@ -182,68 +184,31 @@
             });
 
             $(document).on('change', '.rTitle', function(){
-                $.ajax({
-                    url: '/getRouteDetails',
-                    method: 'get',
-                    data: { 
-                        adminUC: adminUC,
-                    },
-                    success: function(d) {
-                        if(d.status) {
-                            var data = d.data;
-                            data.forEach(function(item) {
-                                var t1 = $('.rTitle').val().replaceAll(" ","").toLowerCase();
-                                var t2 = item.routeTitle.replaceAll(" ","").toLowerCase();
-                                if( t1 == t2) {
-                                    $('.rTitle').val('')
-                                    $('.rTitle').attr('placeholder', 'Existing Route Title. Try again.');
-                                }
-                            });
-                        }
-                    },
-                    error: function(xhr) {
-                        console.log(xhr);
-                    }
-                });
-            });
-
-            $(document).on('change', '.stationName', function() {
-                var sName = $(this).val();
-                var time = $(this).parent().find('input.setTime');
-                $.ajax({
-                    url: '/getStationDeparture',
-                    method: 'get',
-                    data: { 
-                        adminUC: adminUC,
-                        sName : sName,
-                    },
-                    success: function(d) {
-                        if(d.status) {
-                            data = d.data;
-                            if(data.stationDeparture) {
-                                var t = data.stationDeparture.split(':');
-                                if(time.prop('disabled') == false) {
-                                    time.attr('type' , 'text');
-                                    time.val(t[0] + ":" + t[1] + " (24h)");
-                                    time.prop('readonly' , true);
-                                }
+                if( $('.rTitle').val() != $('#oldTitle').val() ) {
+                    $.ajax({
+                        url: '/getRouteDetails',
+                        method: 'get',
+                        data: { 
+                            adminUC: adminUC,
+                        },
+                        success: function(d) {
+                            if(d.status) {
+                                var data = d.data;
+                                data.forEach(function(item) {
+                                    var t1 = $('.rTitle').val().replaceAll(" ","").toLowerCase();
+                                    var t2 = item.routeTitle.replaceAll(" ","").toLowerCase();
+                                    if( t1 == t2) {
+                                        $('.rTitle').val('')
+                                        $('.rTitle').attr('placeholder', 'Existing Route Title. Try again.');
+                                    }
+                                });
                             }
-                            else {
-                                time.prop('readonly' , false);
-                                time.attr('type' , 'time');
-                                time.val('');
-                            }
+                        },
+                        error: function(xhr) {
+                            console.log(xhr);
                         }
-                        else {
-                            time.prop('readonly' , false);
-                            time.attr('type' , 'time');
-                            time.val('');
-                        }
-                    },
-                    error: function(xhr) {
-                        console.log(xhr);
-                    }
-                });
+                    });
+                }
             });
 
             $(document).on('click', '.newStationBtn', function() {

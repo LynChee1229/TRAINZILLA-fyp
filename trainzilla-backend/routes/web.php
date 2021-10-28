@@ -37,6 +37,7 @@ Route::get('/getRouteDetails', [AdminController::class, 'getRouteDetails']);
 Route::get('/newRoute', [AdminController::class, 'newRoute']);
 Route::get('/changeRouteStatus', [AdminController::class, 'changeRouteStatus']);
 Route::post('/editRoutePage', [AdminController::class, 'editRoutePage']);
+Route::get('/updateRoute', [AdminController::class, 'updateRoute']);
 
 Route::get('/searchStation', [AdminController::class, 'searchStation']);
 Route::get('/getStationDeparture', [AdminController::class, 'getStationDeparture']);

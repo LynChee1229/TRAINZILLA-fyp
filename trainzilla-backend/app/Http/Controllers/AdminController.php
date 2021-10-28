@@ -264,7 +264,6 @@ class AdminController extends Controller
     function newRoute(Request $r)
     {
         if($r->adminUC) {
-
             // route
             if($r->rTitle && $r->rTrain) {
                 $list = Route::where('routeTitle', '=', $r->rTitle)->first();
@@ -420,6 +419,114 @@ class AdminController extends Controller
                 }
             }
             return view('/adminrouteedit', compact('tab', 'route', 'station', 'stos'));
+        }
+        return redirect('/adminroute')->with('failed', "Failed to perform the action. Please try again.");
+    }
+
+    function updateRoute(Request $r)
+    {
+        if($r->adminUC) {
+            // update route
+            if($r->rTitle && $r->rTrain) {
+                Route::where('routeID', '=', $r->rid)
+                ->update([
+                    'routeTitle' => $r->rTitle ,
+                    'routeTrainNum' => $r->rTrain ,
+                ]);
+            }
+
+
+            $num = count($r->stationName);
+            foreach ($r->stationName as $index => $name) {
+
+                // update station
+                $staTemp = Station::where('stationName', '=', $name)->first();
+                if($staTemp) {
+                    if( ($index == 0) && ($r->stationDeparture[0]) ) {
+                        Station::where('stationName', '=', $name)
+                        ->update([
+                            'stationDeparture' => $r->stationDeparture[0] ,
+                        ]);
+                    } 
+                    else if( ($index == ($num-1)) && ($r->stationDeparture[1]) ) {
+                        Station::where('stationName', '=', $name)
+                        ->update([
+                            'stationDeparture' => $r->stationDeparture[1] ,
+                        ]);
+                    }
+                } 
+                else {
+                    $newS = new Station;
+                    $newS->stationName = $name;
+                    if($index == 0) {
+                        $newS->stationDeparture = $r->stationDeparture[0];
+                    } 
+                    else if($index == ($num-1)) {
+                        $newS->stationDeparture = $r->stationDeparture[1];
+                    }
+                    $newS->save();
+                }
+
+                // update station to station (stos)
+                $sA = $name;
+                if(($index+1) < count($r->stationName)) {
+                    $sB = $r->stationName[$index+1];
+                    $rsTemp = Stos::where([
+                        ['stationA', '=', $sA],
+                        ['stationB', '=', $sB],
+                    ])
+                    ->orWhere([
+                        ['stationA', '=', $sB],
+                        ['stationB', '=', $sA],
+                    ])
+                    ->first();
+    
+                    if($rsTemp) {
+                        $taken =  ($r->minutesTaken[$index] * 60) + $r->secondsTaken[$index];
+                        Stos::where([
+                            ['stationA', '=', $sA],
+                            ['stationB', '=', $sB],
+                        ])->orWhere([
+                            ['stationA', '=', $sB],
+                            ['stationB', '=', $sA],
+                        ])->update([
+                            'stationDistance' => $r->stosDistance[$index] ,
+                            'stationTimeTaken' => $taken ,
+                        ]);
+                    }
+                    else if(!$rsTemp) {
+                        $newStos = new Stos;
+                        $newStos->stationA = $sA;
+                        $newStos->stationB = $sB;
+                        $newStos->stationDistance = $r->stosDistance[$index];
+                        $taken =  ($r->minutesTaken[$index] * 60) + $r->secondsTaken[$index];
+                        $newStos->stationTimeTaken = $taken;
+                        $newStos->save();
+                    }
+                }
+                
+                // update route_station (sequence)
+                $routeTemp = Route::where('routeTitle', '=', $r->rTitle)->first();
+                RouteStation::where('routeID', '=', $routeTemp->routeID)->delete();
+
+                foreach ($r->stationName as $index => $name) {
+                    $stationTemp = Station::where('stationName', '=', $name)->first();
+                    if($routeTemp && $stationTemp) {
+                        $rs = RouteStation::where([
+                            ['routeID', '=', $routeTemp->routeID],
+                            ['stationID', '=', $stationTemp->stationID]
+                        ])->first();
+                        if(!$rs) {
+                            $newRS = new RouteStation;
+                            $newRS->route_station_sequence = $index + 1;
+                            $newRS->routeID = $routeTemp->routeID;
+                            $newRS->stationID = $stationTemp->stationID;
+                            $newRS->save();
+                        }
+                    }
+                }
+            }
+            return redirect('/adminroute')->with('success', "Route has been updated.");
         }
         return redirect('/adminroute')->with('failed', "Failed to perform the action. Please try again.");
     }
