@@ -61,7 +61,8 @@ class AdminController extends Controller
             $newPassword = uniqid();
             Admin::where('adminUniqueCode', "=", $admin->adminUniqueCode)->update(['adminPassword'=>Hash::make($newPassword)]);
 
-            $data = ['name'=>$admin->adminName , 'pw'=>$newPassword];
+            $data = ['content'=>"Hi ".$admin->adminName.", \n\nYour administrator account password has been reset to ".$newPassword.".\nPlease log in and reset your new password."];
+
             Mail::send(['text'=>'email'], $data, function($message) use ($req, $admin) {
                 $message->to($req->email, $admin->adminName)
                 ->subject('Admin Account Reset Password')
@@ -156,6 +157,15 @@ class AdminController extends Controller
                         $new->adminContact = request('newContact');
                         $new->adminPassword = Hash::make("abcd1234");
                         $new->save();
+
+                        $data = ['content'=>"Hi ".request('newName').", \n\nYou have been added as an administrator of Tranzilla.\nPlease log in to your administrator account with the following details : \n\nEmail : ".request('newEmail')."\nDefault Password : abcd1234\n\nPlease log in and reset your new password."];
+
+                        Mail::send(['text'=>'email'], $data, function($message) {
+                            $message->to(request('newEmail'), request('newName'))
+                            ->subject('Welcome to join the TRAINZILLA admin team!')
+                            ->from('trainzilla@helpdesk.com','TRAINZILLA DEVELOPMENT TEAM');
+                        });
+
                         return redirect('/adminlist')->with('success', "New admin has been added.");
                     }
                 }
