@@ -1,0 +1,258 @@
+.input-group {
+    width: fit-content !important;
+    display: inline !important;
+}
+
+.wcard {
+    padding: 16px 24px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: #999999 2px 2px 3px;
+}
+
+.card-ttl {
+    font-size: 1.8em;
+}
+
+#sb-content .modal-content {
+    width: 80%;
+    border-radius: 12px;
+}
+
+.modal-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    padding-bottom: 21px;
+}
+
+.blue-btn,  #sb-content .blue-btn{
+    background-color: white;
+    border: #007bff solid 1.4px;
+    color: #007bff;
+    padding: 2px 8px;
+    margin: 2px;
+    border-radius: 4px;
+}
+
+.blue-btn:hover, #sb-content .blue-btn:hover{
+    background-color: #E0E5FF;
+}
+
+#sb-content .discard-btn {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: #FF9999;
+    border: 1px solid #FF9999;
+}
+
+#sb-content .discard-btn:hover {
+    background-color: #FFE9E9;
+}
+
+#sidebar {
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    padding-left: 24px;
+    width: 200px;
+    box-shadow: #999999 1px 0px 3px;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px;
+    z-index: 999;
+}
+
+#sb-tt {
+    font-size: 1.4em;
+    padding: 24px 0 0 12px;
+    font-weight: bold;
+    text-shadow: #999999 0.5px 0.5px 3px;
+    color: #99AAFF;
+}
+
+.sidebar-cat {
+    color: #999999;
+}
+
+#sidebar a {
+    text-decoration: none;
+    color: #4D4D4D;
+    font-size: 0.95em;
+}
+
+.sidebar-option {
+    margin: 8px 0 8px 0;
+    padding: 2px 0px;
+}
+
+.sidebar-option a:hover {
+    background-color: #99AAFF;
+    width: fit-content;
+    padding: 2px 12px;
+    border-radius: 16px;
+}
+
+.sidebar-active {
+    background-color: #99AAFF;
+    width: fit-content;
+    padding: 2px 12px;
+    border-radius: 16px;
+}
+
+.sidebar-active a {
+    color: white !important;
+}
+
+#sidebar #signout {
+    height: 14px;
+    margin: 0 5px 0 2px;
+}
+
+#sb-content {
+    margin-left: 200px;
+    padding: 16px 24px;
+}
+
+#sidebar #btm {
+    margin-top: 42%;
+}
+
+#sb-content .content-card {
+    padding: 16px 24px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: #999999 2px 2px 3px;
+    min-width: 1020px;
+}
+
+#sb-content .cpr {
+    margin: 12px;
+    float: right;
+    font-size: 0.6em;
+}
+
+#login-page{
+    background-image: url('/img/map.png');
+    background-repeat: no-repeat;
+    background-size: 480px auto;
+    background-position: 58px 58px;
+}
+
+#login-card {
+    padding: 24px 120px 58px 24px;
+    width: max-content;
+    position: absolute;
+    left: 630px;
+    top: 120px;
+}
+
+#sb-content .dataTable , #sb-content .dataTable td , #sb-content .dataTable tr {
+    border-top: none !important;
+    border-bottom: none !important;
+}
+
+#sb-content .dataTable th {
+    background-color: #E5E5E5 !important;
+    text-align: center;
+}
+
+#sb-content .dataTable {
+    font-size: 0.92em !important;
+}
+
+table.dataTable tbody td {
+    padding: 12px 12px 0px 12px !important;
+}
+
+table.dataTable tbody tr.even {
+    background: #f6f6f6 !important;
+}
+
+table.dataTable tbody tr.odd {
+    background: #ffffff !important;
+}
+
+#sb-content .dataTables_length , #sb-content .dataTables_filter,
+#sb-content .dataTables_info {
+    font-size: 0.75em !important;
+}
+
+#sb-content .dataTables_wrapper .dataTables_paginate span {
+    background: #E5E5E5!important;
+    border-radius: 50px;
+}
+
+#sb-content .dataTables_wrapper .dataTables_paginate .paginate_button {
+    font-size: 0.85em !important;
+}
+
+#sb-content .dataTables_wrapper .dataTables_paginate .paginate_button:hover , 
+#sb-content .dataTables_wrapper .dataTables_paginate .paginate_button a:hover {
+    background: #E0E5FF !important;
+    border-color: #E0E5FF !important;
+    color: #000066 !important;
+    border-radius: 25px;
+}
+
+#sb-content .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+    background: #99AAFF !important;
+    border-radius: 50%;
+    border-color: #99AAFF !important;
+    font-weight: bold;
+}
+
+#sb-content .activeStatus {
+    font-size: 0.7em;
+    color: #006633;
+    background: #CCFFCC;
+    padding: 2px 5px;
+    border-radius: 12px;
+}
+
+#sb-content .inactiveStatus {
+    font-size: 0.65em;
+    color: #990000;
+    background: #FFDADA;
+    padding: 2px 5px;
+    border-radius: 12px;
+}
+
+#sb-content .activateBtn {
+    font-size: 0.8em;
+    color: #006633;
+    background: #E6FFE6;
+    padding: 5px 8px;
+}
+
+#sb-content .activateBtn:hover {
+    background: #006633;
+    color: white;
+}
+
+#sb-content .deactivateBtn {
+    font-size: 0.8em;
+    color: #990000;
+    background: #FFECEC;
+    padding: 5px 8px;
+}
+
+#sb-content .deactivateBtn:hover {
+    background: #990000;
+    color: white;
+}
+
+#sb-content .stationCard {
+    background: #EEEEFF;
+    padding: 24px;
+    width: fit-content;
+}
+
+#sb-content .stosCard {
+    background: #FFEFEF;
+    padding: 24px;
+    width: fit-content;
+    margin-top: 32px;
+    margin-left: -24px;
+}
