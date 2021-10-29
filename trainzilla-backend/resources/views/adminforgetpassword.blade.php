@@ -15,35 +15,56 @@
         <script>
             localStorage.clear();
         </script>
+        <style>
+            .sentMsg {
+                width: 100%;
+                word-break: normal;
+                margin-right: -288px;
+                margin-left: 36px;
+            }
+
+            .resetBtn:disabled {
+                background: #EEEEEE;
+            }
+        </style>
     </head>
 
     <body style="background-color: #E0E5FF; width: 100%; height: 100%;" id="login-page">
-        <form name="adminlogin-form" action="/admin-login" method="post">
+        <form action="/resetForgotPassword" method="post">
         {{ csrf_field() }}
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
         <div id="login-card" class="wcard">
             <div style="font-size:1.2em;">Welcome to TRAINZILLA admin panel !</div>
-            <div>Please sign in : </div>
+            <div class="font-weight-bold mb-3">Reset Password : </div>
 
             @if(session()->has('failed'))
-                <div class="text-danger">{{ session()->pull('failed') }}</div>
+                <div class="text-danger mt-2">{{ session()->pull('failed') }}</div>
+            @endif
+
+            @if(session()->has('sent'))
+                <div class="text-danger mt-2 sentMsg text-center">{{ session()->pull('sent') }}</div>
+                <input type="hidden" value="emailSent" class="btnCheck"/>
             @endif
 
             <br/>
             <div>
                 Admin Email : <input type="email" name="email" placeholder="Please enter your email address" class="input-group" size="29" required />
             </div>
-            <div class="my-2">
-                Password : <input type="password" name="password" placeholder="Please enter your password" class="input-group" size="32" required />
-            </div>
-            <div>
-                <a href="/forgetPassword" >Forget Password?</a>
+            <div class="mb-3 mt-1">
+                <a href="/adminlogin" >Back to SIGN IN page.</a>
             </div>
             <br/>
-            <div class="d-flex justify-content-center" style="margin-left:58px;"><button type="submit" class="blue-btn">SIGN IN</button></div>
+            <div class="d-flex justify-content-center" style="margin-left:58px;"><button type="submit" class="blue-btn resetBtn">RESET PASSWORD</button></div>
         </div>
         </form>
     </body>
     
+    <script>
+        $(document).ready(function() {
+            if($('.btnCheck').val() == 'emailSent') {
+                $('.resetBtn').prop('disabled', true);
+            }
+        });
+    </script>
 </html>

@@ -18,6 +18,8 @@ Route::get('/', [AdminController::class, 'loginPage']);
 Route::get('/adminlogin', [AdminController::class, 'loginPage']);
 Route::post('/admin-login', [AdminController::class, 'adminLogin']);
 Route::get('/admin-logout', [AdminController::class, 'logout']);
+Route::get('/forgetPassword', [AdminController::class, 'forgetPassword']);
+Route::post('/resetForgotPassword', [AdminController::class, 'resetForgotPassword']);
 
 Route::get('/adminlist', [AdminController::class, 'adminList']);
 Route::post('/getAdminProfile', [AdminController::class, 'getAdminProfile']);

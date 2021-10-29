@@ -14,6 +14,7 @@ use App\Models\Stos;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AdminController extends Controller
 {
@@ -44,6 +45,37 @@ class AdminController extends Controller
     function logout()
     {
         return redirect('/adminlogin');
+    }
+
+    function forgetPassword()
+    {
+        return view('/adminforgetpassword');
+    }
+
+    function resetForgotPassword(Request $req)
+    {
+        $msg = 'Failed to perform the action. Please try again.';
+        $admin = Admin::where('adminEmail', $req->email)->first();
+        
+        if($admin && ($admin->adminStatus == 1) ) {
+            $newPassword = uniqid();
+            Admin::where('adminUniqueCode', "=", $admin->adminUniqueCode)->update(['adminPassword'=>Hash::make($newPassword)]);
+
+            $data = ['name'=>$admin->adminName , 'pw'=>$newPassword];
+            Mail::send(['text'=>'email'], $data, function($message) use ($req, $admin) {
+                $message->to($req->email, $admin->adminName)
+                ->subject('Admin Account Reset Password')
+                ->from('trainzilla@helpdesk.com','TRAINZILLA DEVELOPMENT TEAM');
+            });
+
+            return redirect('/forgetPassword')->with('sent', "An email has been sent to you, please check your mailbox to reset your password.");
+        } else if(!$admin) {
+            $msg = "Email does not exist.";
+        } else if($admin->adminStatus == 0) {
+            $msg = "Your account is inactive.";
+        }
+
+        return redirect('/forgetPassword')->with('failed', $msg);
     }
 
 
