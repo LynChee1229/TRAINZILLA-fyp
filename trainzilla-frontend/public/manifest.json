@@ -1,14 +1,14 @@
 {
   "short_name": "TRAINZILLA",
-  "name": "TRAINZILLA",
+  "name": "Make Our Life Convenient",
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "512x512",
+      "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "train-light.png",
+      "src": "logo192.png",
       "type": "image/png",
       "sizes": "192x192"
     },

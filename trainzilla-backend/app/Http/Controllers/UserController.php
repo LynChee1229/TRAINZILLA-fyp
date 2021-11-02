@@ -28,7 +28,7 @@ class UserController extends Controller
         if($existingName) {
             $error["name"] = "Name";
         }
-            
+
         if($existingEmail) {
             $error["email"] = "Email";
         }
@@ -36,7 +36,7 @@ class UserController extends Controller
         if($existingContact) {
             $error["contact"] = "Contact";
         }
-            
+
         if($error) {
             return $error;
         }
@@ -63,4 +63,22 @@ class UserController extends Controller
 
         return $user;
     }
+
+    function getAvailableStation()
+        {
+            $data = Route::join('routes_stations', function ($join) {
+                                   $join->on ('routes.routeID', '=', 'routes_stations.routeID')
+                                        ->where ('routes.routeStatus', '=', 1);
+                               })
+                               ->get ();
+
+            foreach ($data as $d) {
+                $station = Station::where('stationID', $d->stationID)->first();
+                if($station) {
+                    $d->stationName = $station->stationName;
+                }
+            }
+
+            return $data;
+        }
 }
