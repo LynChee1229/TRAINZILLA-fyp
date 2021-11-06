@@ -12,11 +12,14 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.24.0",
     "bootstrap": "^5.1.1",
+    "datatables.net": "^1.11.3",
+    "datatables.net-dt": "^1.11.3",
     "node-sass": "^6.0.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.0.0-rc.0",
     "react-bootstrap-icons": "^1.5.0",
     "react-dom": "^17.0.2",
+    "react-jquery-datatables": "^1.0.0",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
@@ -46,6 +49,7 @@
     ]
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.8",
     "jquery": "^3.6.0",
     "prettier": "2.4.0"
   }

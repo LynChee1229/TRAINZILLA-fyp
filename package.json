@@ -1,5 +1,10 @@
 {
   "dependencies": {
-    "react-bootstrap-icons": "^1.5.0"
+    "datatables.net-dt": "^1.11.3",
+    "jquery": "^3.6.0",
+    "react-bootstrap-icons": "^1.5.0",
+    "react-data-table-component": "^7.4.5",
+    "react-jquery-datatables": "^1.0.0",
+    "styled-components": "^5.3.3"
   }
 }

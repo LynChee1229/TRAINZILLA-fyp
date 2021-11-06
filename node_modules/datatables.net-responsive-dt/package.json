@@ -1,0 +1,46 @@
+{
+    "name": "datatables.net-responsive-dt",
+    "description": "Responsive for DataTables with styling for [DataTables](https://datatables.net/)",
+    "main": "js/responsive.dataTables.js",
+    "style": "css/responsive.dataTables.css",
+    "types": "./types/responsive.dataTables.d.ts",
+    "version": "2.2.9",
+    "files": [
+        "css/**/*.css",
+        "js/**/*.js"
+    ],
+    "keywords": [
+        "Responsive",
+        "Datatables",
+        "jQuery",
+        "table",
+        "filter",
+        "sort"
+    ],
+    "dependencies": {
+        "jquery": ">=1.7",
+        "datatables.net-dt": "^1.10.15",
+        "datatables.net-responsive": "2.2.9"
+    },
+    "moduleType": [
+        "globals",
+        "amd",
+        "node"
+    ],
+    "ignore": [
+        "composer.json",
+        "datatables.json",
+        "package.json"
+    ],
+    "author": {
+        "name": "SpryMedia Ltd",
+        "url": "http://datatables.net"
+    },
+    "homepage": "https://datatables.net",
+    "bugs": "https://datatables.net/forums",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DataTables/Dist-DataTables-Responsive-DataTables.git"
+    }
+}
