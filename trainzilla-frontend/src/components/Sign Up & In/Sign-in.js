@@ -5,17 +5,17 @@ import DoubleArrowIcon from '@mui/icons-material/DoubleArrow'
 import AppleIcon from '@mui/icons-material/Apple'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import '../../styles/css/sign-in.sass'
-import '../../styles/Font/fonts.sass'
 import {Login} from '../../API/signinAuth'
 import GoogleLogin from "react-google-login";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
-// import $ from 'jquery'
+import $ from 'jquery'
 
 const SignIn = () => {
     const [userKey, setUserKey] = useState('')
     const [userPass, setUserPass] = useState('')
     const history = useHistory()
+    
 
     const handleKeyChange = (e) => {
         setUserKey(e.target.value)
@@ -49,98 +49,102 @@ const SignIn = () => {
     return (
         <div>
             <Header />
-            <Paper id="bgPaper">
-                <Card className="middleCard default-font" elevation={7}>
-                    <Container className="bigTitle bold centerFont">
-                        Sign In
-                    </Container>
-                    <CardContent className="flexDisplay">
-                        <div>
-                            <Container className="container">
-                                <TextField
-                                    value={userKey}
-                                    onChange={handleKeyChange}
-                                    className="textBox"
-                                    label="Username / Email"
-                                    variant="filled"
-                                    onKeyDown={(e) => {
-                                        if (e.key === "Enter")
-                                            Login(userKey, userPass).then(() => {
-                                                if (localStorage.getItem('user-info')) {
-                                                    history.push('/home')
-                                                }
-                                            })
-                                    }}
-                                />
-                            </Container>
-                            <Container className="container">
-                                <TextField
-                                    value={userPass}
-                                    onChange={handlePassChange}
-                                    className="textBox"
-                                    label="Password"
-                                    type="password"
-                                    variant="filled"
-                                    onKeyDown={(e) => {
-                                        if (e.key === "Enter")
-                                            Login(userKey, userPass).then(() => {
-                                                if (localStorage.getItem('user-info')) {
-                                                    history.push('/home')
-                                                }
-                                            })
-                                    }}
-                                />
-                            </Container>
-                        </div>
-                        <Button
-                            className="submitButton"
-                            variant="contained"
-                            aria-label="submitLogin"
-                            onClick={() => {
-                                Login(userKey, userPass).then(() => {
-                                    if (localStorage.getItem('user-info')) {
-                                        history.push('/home')
-                                    }
-                                })
-                            }}
-                        >
-                            <DoubleArrowIcon/>
-                        </Button>
-                    </CardContent>
-                    <Container className="dangerMsg alert alert-danger d-none flexDisplay bold"/>
-                    <Container className="title centerFont">OR:</Container>
-                    <CardContent className="flexDisplay">
-
-                        <GoogleLogin
-                            className="icon"
-                            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                            buttonText=""
-                            onSuccess={handleLogin}
-                            onFailure={handleLogin}
-                            cookiePolicy={'single_host_origin'}
-                        />
-
-                        <IconButton aria-label="apple" className="icon">
-                            <AppleIcon/>
-                        </IconButton>
-                        <IconButton aria-label="facebook" className="icon">
-                            <FacebookIcon/>
-                        </IconButton>
-                    </CardContent>
-                    <CardContent className="flexDisplay">
-                        <NavLink to="/sign-up">
+            <div id="bgPaper">
+                <div id="loginBG">
+                    <div className="bigTitle">LOGIN</div>
+                    <Card className="middleCard">
+                        <Container className="dangerMsg alert alert-danger d-none flexDisplay bold"/>
+                        <CardContent className="flexDisplay">
+                            <div>
+                                <Container className="container">
+                                    <TextField
+                                        value={userKey}
+                                        onChange={handleKeyChange}
+                                        className="textBox"
+                                        label="Username / Email"
+                                        variant="filled"
+                                        onKeyDown={(e) => {
+                                            if (e.key === "Enter")
+                                                Login(userKey, userPass).then(() => {
+                                                    if (localStorage.getItem('user-info')) {
+                                                        history.push('/home')
+                                                    }
+                                                })
+                                        }}
+                                    />
+                                </Container>
+                                <Container className="container">
+                                    <TextField
+                                        value={userPass}
+                                        onChange={handlePassChange}
+                                        className="textBox"
+                                        label="Password"
+                                        type="password"
+                                        variant="filled"
+                                        onKeyDown={(e) => {
+                                            if (e.key === "Enter")
+                                                Login(userKey, userPass).then(() => {
+                                                    if (localStorage.getItem('user-info')) {
+                                                        history.push('/home')
+                                                    }
+                                                })
+                                        }}
+                                    />
+                                </Container>
+                            </div>
                             <Button
+                                className="submitButton"
                                 variant="contained"
-                                aria-label="registerAcc"
-                                className="registerBtn"
+                                aria-label="submitLogin"
+                                onClick={() => {
+                                    Login(userKey, userPass).then(() => {
+                                        if (localStorage.getItem('user-info')) {
+                                            history.push('/home')
+                                        }
+                                    })
+                                }}
                             >
-                                Never been here before? Register Now!
+                                <DoubleArrowIcon/>
                             </Button>
-                        </NavLink>
-                    </CardContent>
-                </Card>
-                <Footer/>
-            </Paper>
+                        </CardContent>
+
+                        <Container className="orTitle">OR : </Container>
+
+                        <CardContent className="flexDisplay">
+                            <GoogleLogin
+                                className="icon"
+                                clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                                buttonText=""
+                                onSuccess={handleLogin}
+                                onFailure={handleLogin}
+                                cookiePolicy={'single_host_origin'}
+                            />
+
+                            <IconButton aria-label="apple" className="icon">
+                                <AppleIcon/>
+                            </IconButton>
+                            <IconButton aria-label="facebook" className="icon">
+                                <FacebookIcon/>
+                            </IconButton>
+                        </CardContent>
+                        <CardContent>
+                            <NavLink to="/sign-up">
+                                <Button
+                                    variant="contained"
+                                    aria-label="registerAcc"
+                                    className="registerBtn"
+                                    onClick={()=>{
+                                        $(window).scrollTop(0);
+                                    }}
+                                >
+                                    Never been here before? Register Now!
+                                </Button>
+                            </NavLink>
+                        </CardContent>
+                    </Card>
+                    <Footer/>
+                </div>
+            </div>
         </div>
     )
 }

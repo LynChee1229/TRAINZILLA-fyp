@@ -35,7 +35,7 @@ class AboutUs extends Component {
                 <div id="outer">
                     <div id="aboutUsBG">
                         <div className="display-3" id="ourTeam">
-                            Our Mission
+                            OUR MISSION
                         </div>
                         <div>
                             <img className="img" src={logoDark} alt="logo"/>

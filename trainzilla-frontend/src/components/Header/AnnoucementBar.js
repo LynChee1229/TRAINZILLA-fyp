@@ -39,7 +39,8 @@ const AnnouncementBar = () => {
                         return  <Carousel.Item>
                                     <a href="/announcements" >
                                         <span className="aRT mr-5">{item.reportTitle} : </span>
-                                        {item.reportDetails.substring(0, ttl)} {dot}
+                                        {item.reportDetails.substring(0, ttl)} {dot} 
+                                        <span style={{marginLeft:'12px' , color:"#99CCFF"}}><em><small> (view more)</small></em></span>
                                     </a>
                                 </Carousel.Item>
                     })

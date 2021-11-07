@@ -91,7 +91,7 @@ function Header() {
                             ) : (
                                 <>
                                     <NavLink to="/sign-in" className="nlink">
-                                        LOGIN / REGISTER
+                                        LOGIN
                                     </NavLink>
                                 </>
                             )}
