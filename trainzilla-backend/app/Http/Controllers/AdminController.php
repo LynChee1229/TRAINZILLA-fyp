@@ -580,7 +580,7 @@ class AdminController extends Controller
     function adminAnnouncement()
     {
         $tab = "announcement";
-        $list = Announcement::orderBy('reportID', 'desc')->get();
+        $list = Announcement::orderBy('reportDate', 'desc')->get();
         foreach($list as $l) {
             $a = Admin::where('adminUniqueCode', $l->adminUniqueCode)->first();
             $l->adminName = $a->adminName;
@@ -678,7 +678,7 @@ class AdminController extends Controller
     function adminRule()
     {
         $tab = "rule";
-        $list = Rule::orderBy('ruleID', 'asc')->get();
+        $list = Rule::orderBy('ruleID', 'desc')->get();
         foreach($list as $l) {
             $a = Admin::where('adminUniqueCode', $l->adminUniqueCode)->first();
             $l->adminName = $a->adminName;

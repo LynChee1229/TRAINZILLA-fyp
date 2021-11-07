@@ -47,99 +47,101 @@ const SignIn = () => {
     }
 
     return (
-        <Paper id="bgPaper" className="default-font">
-            <Header/>
-            <Card className="middleCard" elevation={7}>
-                <Container className="bigTitle bold centerFont">
-                    Sign In
-                </Container>
-                <CardContent className="flexDisplay">
-                    <div>
-                        <Container className="container">
-                            <TextField
-                                value={userKey}
-                                onChange={handleKeyChange}
-                                className="textBox"
-                                label="Username / Email"
-                                variant="filled"
-                                onKeyDown={(e) => {
-                                    if (e.key === "Enter")
-                                        Login(userKey, userPass).then(() => {
-                                            if (localStorage.getItem('user-info')) {
-                                                history.push('/home')
-                                            }
-                                        })
-                                }}
-                            />
-                        </Container>
-                        <Container className="container">
-                            <TextField
-                                value={userPass}
-                                onChange={handlePassChange}
-                                className="textBox"
-                                label="Password"
-                                type="password"
-                                variant="filled"
-                                onKeyDown={(e) => {
-                                    if (e.key === "Enter")
-                                        Login(userKey, userPass).then(() => {
-                                            if (localStorage.getItem('user-info')) {
-                                                history.push('/home')
-                                            }
-                                        })
-                                }}
-                            />
-                        </Container>
-                    </div>
-                    <Button
-                        className="submitButton"
-                        variant="contained"
-                        aria-label="submitLogin"
-                        onClick={() => {
-                            Login(userKey, userPass).then(() => {
-                                if (localStorage.getItem('user-info')) {
-                                    history.push('/home')
-                                }
-                            })
-                        }}
-                    >
-                        <DoubleArrowIcon/>
-                    </Button>
-                </CardContent>
-                <Container className="dangerMsg alert alert-danger d-none flexDisplay bold"/>
-                <Container className="title centerFont">OR:</Container>
-                <CardContent className="flexDisplay">
-
-                    <GoogleLogin
-                        className="icon"
-                        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-                        buttonText=""
-                        onSuccess={handleLogin}
-                        onFailure={handleLogin}
-                        cookiePolicy={'single_host_origin'}
-                    />
-
-                    <IconButton aria-label="apple" className="icon">
-                        <AppleIcon/>
-                    </IconButton>
-                    <IconButton aria-label="facebook" className="icon">
-                        <FacebookIcon/>
-                    </IconButton>
-                </CardContent>
-                <CardContent className="flexDisplay">
-                    <NavLink to="/sign-up">
+        <div>
+            <Header />
+            <Paper id="bgPaper">
+                <Card className="middleCard default-font" elevation={7}>
+                    <Container className="bigTitle bold centerFont">
+                        Sign In
+                    </Container>
+                    <CardContent className="flexDisplay">
+                        <div>
+                            <Container className="container">
+                                <TextField
+                                    value={userKey}
+                                    onChange={handleKeyChange}
+                                    className="textBox"
+                                    label="Username / Email"
+                                    variant="filled"
+                                    onKeyDown={(e) => {
+                                        if (e.key === "Enter")
+                                            Login(userKey, userPass).then(() => {
+                                                if (localStorage.getItem('user-info')) {
+                                                    history.push('/home')
+                                                }
+                                            })
+                                    }}
+                                />
+                            </Container>
+                            <Container className="container">
+                                <TextField
+                                    value={userPass}
+                                    onChange={handlePassChange}
+                                    className="textBox"
+                                    label="Password"
+                                    type="password"
+                                    variant="filled"
+                                    onKeyDown={(e) => {
+                                        if (e.key === "Enter")
+                                            Login(userKey, userPass).then(() => {
+                                                if (localStorage.getItem('user-info')) {
+                                                    history.push('/home')
+                                                }
+                                            })
+                                    }}
+                                />
+                            </Container>
+                        </div>
                         <Button
+                            className="submitButton"
                             variant="contained"
-                            aria-label="registerAcc"
-                            className="registerBtn"
+                            aria-label="submitLogin"
+                            onClick={() => {
+                                Login(userKey, userPass).then(() => {
+                                    if (localStorage.getItem('user-info')) {
+                                        history.push('/home')
+                                    }
+                                })
+                            }}
                         >
-                            Never been here before? Register Now!
+                            <DoubleArrowIcon/>
                         </Button>
-                    </NavLink>
-                </CardContent>
-            </Card>
-            <Footer/>
-        </Paper>
+                    </CardContent>
+                    <Container className="dangerMsg alert alert-danger d-none flexDisplay bold"/>
+                    <Container className="title centerFont">OR:</Container>
+                    <CardContent className="flexDisplay">
+
+                        <GoogleLogin
+                            className="icon"
+                            clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                            buttonText=""
+                            onSuccess={handleLogin}
+                            onFailure={handleLogin}
+                            cookiePolicy={'single_host_origin'}
+                        />
+
+                        <IconButton aria-label="apple" className="icon">
+                            <AppleIcon/>
+                        </IconButton>
+                        <IconButton aria-label="facebook" className="icon">
+                            <FacebookIcon/>
+                        </IconButton>
+                    </CardContent>
+                    <CardContent className="flexDisplay">
+                        <NavLink to="/sign-up">
+                            <Button
+                                variant="contained"
+                                aria-label="registerAcc"
+                                className="registerBtn"
+                            >
+                                Never been here before? Register Now!
+                            </Button>
+                        </NavLink>
+                    </CardContent>
+                </Card>
+                <Footer/>
+            </Paper>
+        </div>
     )
 }
 

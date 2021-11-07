@@ -99,4 +99,25 @@ class UserController extends Controller
     {
         return Rule::where('ruleStatus', '1')->get();
     }
+
+    function announcementBar()
+    {
+        $today = date('Y-m-d');
+        $list = Announcement::where([
+            ['reportStatus', '=', '1'],
+            ['reportDate', '=', $today]
+        ])->get();
+
+        if(count($list) < 5) {
+            $list = Announcement::where('reportStatus', '=', '1')
+            ->orderBy('reportDate', 'desc')
+            ->take(5)
+            ->get();
+        }
+
+        if($list) {
+            return $list;
+        }
+        return null;
+    }
 }

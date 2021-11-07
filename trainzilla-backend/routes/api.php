@@ -24,3 +24,4 @@ Route::post('login', [UserController::class, 'login']);
 Route::get('getAvailableStation', [UserController::class, 'getAvailableStation']);
 Route::get('announcementList', [UserController::class, 'announcementList']);
 Route::get('ruleList', [UserController::class, 'ruleList']);
+Route::get('announcementBar', [UserController::class, 'announcementBar']);

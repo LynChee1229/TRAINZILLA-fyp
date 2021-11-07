@@ -139,9 +139,9 @@ class AboutUs extends Component {
                                 Suraya!" - Trainzilla Develop Team
                             </div>
                         </div>
+                        <Footer />
                     </div>
                 </div>
-                <Footer />
             </Paper>
         )
     }

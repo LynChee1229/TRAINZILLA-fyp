@@ -10,6 +10,7 @@ import { NavLink } from 'react-router-dom'
 import * as Icon from 'react-bootstrap-icons'
 import '../../styles/css/header.sass'
 import 'bootstrap/dist/css/bootstrap.css'
+import $ from 'jquery'
 
 function Header() {
     const user = JSON.parse(localStorage.getItem('user-info'))
@@ -19,6 +20,10 @@ function Header() {
         localStorage.clear()
         window.location.reload(false)
     }
+
+    $(document).on('click', '.navbar-collapse a', function(){
+        $('.navbar-collapse').removeClass('show');
+    });
 
     return (
         <div>
@@ -37,28 +42,28 @@ function Header() {
                         <Nav className="m-auto">
                             <NavLink
                                 to="/home"
-                                className="mx-5"
+                                className="nlink"
                                 activeClassName="actTab"
                             >
                                 HOME
                             </NavLink>
                             <NavLink
                                 to="/map-routes"
-                                className="mx-5"
+                                className="nlink"
                                 activeClassName="actTab"
                             >
                                 MAP & ROUTE
                             </NavLink>
                             <NavLink
                                 to="/announcements"
-                                className="mx-5"
+                                className="nlink"
                                 activeClassName="actTab"
                             >
                                 ANNOUNCEMENT
                             </NavLink>
                             <NavLink
                                 to="/about-us"
-                                className="mx-5"
+                                className="nlink"
                                 activeClassName="actTab"
                             >
                                 ABOUT US
@@ -85,7 +90,7 @@ function Header() {
                                 </>
                             ) : (
                                 <>
-                                    <NavLink to="/sign-in" className="mx-5">
+                                    <NavLink to="/sign-in" className="nlink">
                                         LOGIN / REGISTER
                                     </NavLink>
                                 </>

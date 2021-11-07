@@ -42,9 +42,9 @@ class Announcement extends Component {
                         </button>
                         <AnnouncementList />
                         <RuleList />
+                        <Footer />
                     </div>
                 </div>
-                <Footer />
             </Paper>
         )
     }
