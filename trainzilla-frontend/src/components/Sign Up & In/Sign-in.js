@@ -1,21 +1,13 @@
-import React, { useEffect, useState } from 'react'
-import {
-    Button,
-    Card,
-    CardContent,
-    Container,
-    IconButton,
-    Paper,
-    TextField,
-} from '@mui/material'
-import { NavLink, useHistory } from 'react-router-dom'
+import React, {useEffect, useState} from 'react'
+import {Button, Card, CardContent, Container, IconButton, Paper, TextField,} from '@mui/material'
+import {NavLink, useHistory} from 'react-router-dom'
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow'
-import GoogleIcon from '@mui/icons-material/Google'
 import AppleIcon from '@mui/icons-material/Apple'
 import FacebookIcon from '@mui/icons-material/Facebook'
 import '../../styles/css/sign-in.sass'
 import '../../styles/Font/fonts.sass'
-import { Login } from '../../API/signinAuth'
+import {Login} from '../../API/signinAuth'
+import GoogleLogin from "react-google-login";
 // import $ from 'jquery'
 
 const SignIn = () => {
@@ -36,6 +28,21 @@ const SignIn = () => {
             history.push('/home')
         }
     })
+
+    const handleLogin = async googleData => {
+        const res = await fetch("http://localhost:8000/api/api/v1/auth/google", {
+            method: "POST",
+            body: JSON.stringify({
+                token: googleData.tokenId
+            }),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        const data = await res.json()
+        console.log(data)
+        // store returned user somehow
+    }
 
     return (
         <Paper id="bgPaper" className="default-font">
@@ -77,20 +84,27 @@ const SignIn = () => {
                             })
                         }}
                     >
-                        <DoubleArrowIcon />
+                        <DoubleArrowIcon/>
                     </Button>
                 </CardContent>
-                <Container className="dangerMsg alert alert-danger d-none flexDisplay bold" />
+                <Container className="dangerMsg alert alert-danger d-none flexDisplay bold"/>
                 <Container className="title centerFont">OR:</Container>
                 <CardContent className="flexDisplay">
-                    <IconButton aria-label="google" className="icon">
-                        <GoogleIcon />
-                    </IconButton>
+
+                    <GoogleLogin
+                        className="icon"
+                        clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                        buttonText=""
+                        onSuccess={handleLogin}
+                        onFailure={handleLogin}
+                        cookiePolicy={'single_host_origin'}
+                    />
+
                     <IconButton aria-label="apple" className="icon">
-                        <AppleIcon />
+                        <AppleIcon/>
                     </IconButton>
                     <IconButton aria-label="facebook" className="icon">
-                        <FacebookIcon />
+                        <FacebookIcon/>
                     </IconButton>
                 </CardContent>
                 <CardContent className="flexDisplay">

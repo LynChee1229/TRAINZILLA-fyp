@@ -1,32 +1,25 @@
 import React, {useState} from 'react'
-import {
-    Button,
-    Card,
-    Container,
-    FormControl,
-    IconButton,
-    InputAdornment,
-    Paper,
-    TextField,
-} from '@mui/material'
+import {Button, Card, Container, FormControl, IconButton, InputAdornment, Paper, TextField,} from '@mui/material'
 import '../../styles/css/sign-in.sass'
 import '../../styles/Font/fonts.sass'
 import {Visibility, VisibilityOff} from '@mui/icons-material'
 
 const SignUP = () => {
-    const [showPassword, changeShowPassword] = useState(false)
+    const [showPassword1, changeShowPassword1] = useState(false)
+    const [showPassword2, changeShowPassword2] = useState(false)
+    const [username, setUsername] = useState('')
+    const [dob, setDOB] = useState('')
+    const [email, setEmail] = useState('')
+    const [contact, setContact] = useState('')
     const [password, setPassword] = useState('')
-
-    const handleChange = () => (event) => {
-        setPassword(event.target.value)
-    }
-
-    const handleClickShowPassword = () => {
-        changeShowPassword(!showPassword)
-    }
+    const [confirmPassword, setConfirmPassword] = useState('')
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault()
+    }
+
+    const handleRegister = () => {
+        console.log(username, dob, email, contact, password, confirmPassword)
     }
 
     return (
@@ -42,6 +35,9 @@ const SignUP = () => {
                             label="Username"
                             type="text"
                             variant="filled"
+                            onChange={(e) => {
+                                setUsername(e.target.value)
+                            }}
                         />
                         <TextField
                             id="dob"
@@ -50,6 +46,9 @@ const SignUP = () => {
                             type="date"
                             variant="filled"
                             InputLabelProps={{shrink: true}}
+                            onChange={(e) => {
+                                setDOB(e.target.value)
+                            }}
                         />
                     </div>
 
@@ -60,6 +59,9 @@ const SignUP = () => {
                             label="Email"
                             type="email"
                             variant="filled"
+                            onChange={(e) => {
+                                setEmail(e.target.value)
+                            }}
                         />
                         <TextField
                             id="contact"
@@ -67,6 +69,9 @@ const SignUP = () => {
                             label="Contact Number"
                             type="tel"
                             variant="filled"
+                            onChange={(e) => {
+                                setContact(e.target.value)
+                            }}
                         />
                     </div>
 
@@ -75,22 +80,26 @@ const SignUP = () => {
                             id="password"
                             className="registerTextBox leftTextBox"
                             label="Password"
-                            type={showPassword ? 'text' : 'password'}
+                            type={showPassword1 ? 'text' : 'password'}
                             value={password}
-                            onChange={handleChange()}
+                            onChange={(e) => {
+                                setPassword(e.target.value)
+                            }}
                             variant="filled"
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
                                         <IconButton
                                             aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
+                                            onClick={() => {
+                                                changeShowPassword1(!showPassword1)
+                                            }}
                                             onMouseDown={
                                                 handleMouseDownPassword
                                             }
                                             edge="end"
                                         >
-                                            {showPassword ? (
+                                            {showPassword1 ? (
                                                 <VisibilityOff/>
                                             ) : (
                                                 <Visibility/>
@@ -105,22 +114,26 @@ const SignUP = () => {
                             id="confirmPass"
                             className="registerTextBox"
                             label="Confirm Password"
-                            type={showPassword ? 'text' : 'password'}
-                            value={password}
-                            onChange={handleChange()}
+                            type={showPassword2 ? 'text' : 'password'}
+                            value={confirmPassword}
+                            onChange={(e) => {
+                                setConfirmPassword(e.target.value)
+                            }}
                             variant="filled"
                             InputProps={{
                                 endAdornment: (
                                     <InputAdornment position="end">
                                         <IconButton
                                             aria-label="toggle password visibility"
-                                            onClick={handleClickShowPassword}
+                                            onClick={() => {
+                                                changeShowPassword2(!showPassword2)
+                                            }}
                                             onMouseDown={
                                                 handleMouseDownPassword
                                             }
                                             edge="end"
                                         >
-                                            {showPassword ? (
+                                            {showPassword2 ? (
                                                 <VisibilityOff/>
                                             ) : (
                                                 <Visibility/>
@@ -136,6 +149,7 @@ const SignUP = () => {
                         variant="contained"
                         aria-label="submitRegisterAcc"
                         className="registerBtn"
+                        onClick={handleRegister}
                     >
                         Register Account
                     </Button>

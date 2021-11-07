@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Route;
+use App\Models\RouteStation;
+use App\Models\Station;
 
 class UserController extends Controller
 {
@@ -65,20 +68,20 @@ class UserController extends Controller
     }
 
     function getAvailableStation()
-        {
-            $data = Route::join('routes_stations', function ($join) {
-                                   $join->on ('routes.routeID', '=', 'routes_stations.routeID')
-                                        ->where ('routes.routeStatus', '=', 1);
-                               })
-                               ->get ();
+    {
+        $data = Route::join('routes_stations', function ($join) {
+                               $join->on ('routes.routeID', '=', 'routes_stations.routeID')
+                                    ->where ('routes.routeStatus', '=', 1);
+                           })
+                           ->get ();
 
-            foreach ($data as $d) {
-                $station = Station::where('stationID', $d->stationID)->first();
-                if($station) {
-                    $d->stationName = $station->stationName;
-                }
+        foreach ($data as $d) {
+            $station = Station::where('stationID', $d->stationID)->first();
+            if($station) {
+                $d->stationName = $station->stationName;
             }
-
-            return $data;
         }
+
+        return $data;
+    }
 }
