@@ -51,6 +51,7 @@
   "devDependencies": {
     "@types/jquery": "^3.5.8",
     "jquery": "^3.6.0",
-    "prettier": "2.4.0"
+    "prettier": "2.4.0",
+    "react-google-login": "^5.2.2"
   }
 }

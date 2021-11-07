@@ -8,6 +8,8 @@ import '../../styles/css/sign-in.sass'
 import '../../styles/Font/fonts.sass'
 import {Login} from '../../API/signinAuth'
 import GoogleLogin from "react-google-login";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 // import $ from 'jquery'
 
 const SignIn = () => {
@@ -46,6 +48,7 @@ const SignIn = () => {
 
     return (
         <Paper id="bgPaper" className="default-font">
+            <Header/>
             <Card className="middleCard" elevation={7}>
                 <Container className="bigTitle bold centerFont">
                     Sign In
@@ -59,6 +62,14 @@ const SignIn = () => {
                                 className="textBox"
                                 label="Username / Email"
                                 variant="filled"
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter")
+                                        Login(userKey, userPass).then(() => {
+                                            if (localStorage.getItem('user-info')) {
+                                                history.push('/home')
+                                            }
+                                        })
+                                }}
                             />
                         </Container>
                         <Container className="container">
@@ -69,6 +80,14 @@ const SignIn = () => {
                                 label="Password"
                                 type="password"
                                 variant="filled"
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter")
+                                        Login(userKey, userPass).then(() => {
+                                            if (localStorage.getItem('user-info')) {
+                                                history.push('/home')
+                                            }
+                                        })
+                                }}
                             />
                         </Container>
                     </div>
@@ -119,6 +138,7 @@ const SignIn = () => {
                     </NavLink>
                 </CardContent>
             </Card>
+            <Footer/>
         </Paper>
     )
 }

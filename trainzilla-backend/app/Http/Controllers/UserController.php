@@ -34,7 +34,7 @@ class UserController extends Controller
 
         $error = [];
         if($existingName) {
-            $error["name"] = "Name";
+            $error["userName"] = "Username";
         }
 
         if($existingEmail) {

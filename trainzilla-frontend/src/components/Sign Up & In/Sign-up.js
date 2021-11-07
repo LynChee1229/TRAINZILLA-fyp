@@ -3,6 +3,12 @@ import {Button, Card, Container, FormControl, IconButton, InputAdornment, Paper,
 import '../../styles/css/sign-in.sass'
 import '../../styles/Font/fonts.sass'
 import {Visibility, VisibilityOff} from '@mui/icons-material'
+import $ from 'jquery'
+import {useHistory} from 'react-router-dom'
+import {signUp} from "../../API/signUpAPI";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
+
 
 const SignUP = () => {
     const [showPassword1, changeShowPassword1] = useState(false)
@@ -13,19 +19,37 @@ const SignUP = () => {
     const [contact, setContact] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
+    const history = useHistory()
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault()
     }
 
     const handleRegister = () => {
-        console.log(username, dob, email, contact, password, confirmPassword)
+        if (username && email && contact && dob && password && confirmPassword) {
+            if (password === confirmPassword) {
+                signUp(username, email, contact, dob, password).then(() => {
+                    if (localStorage.getItem('user-info')) {
+                        history.push('/home')
+                    }
+                });
+            } else {
+                $(".dangerMsg").removeClass("d-none");
+                $(".dangerMsg").html("Passwords are not matched!");
+            }
+        } else {
+            $(".dangerMsg").removeClass("d-none");
+            $(".dangerMsg").html("Please fill in all the fields!");
+        }
     }
 
     return (
         <Paper id="bgPaper" className="default-font">
+            <Header />
             <Card className="middleCard" elevation={7}>
                 <Container className="bigTitle bold">Sign Up</Container>
+
+                <Container className="dangerMsg alert alert-danger d-none flexDisplay bold"/>
 
                 <FormControl className="form">
                     <div>
@@ -65,14 +89,14 @@ const SignUP = () => {
                         />
                         <TextField
                             id="contact"
-                            className="registerTextBox"
                             label="Contact Number"
-                            type="tel"
+                            className="registerTextBox"
                             variant="filled"
                             onChange={(e) => {
                                 setContact(e.target.value)
                             }}
                         />
+
                     </div>
 
                     <div>
@@ -155,6 +179,7 @@ const SignUP = () => {
                     </Button>
                 </FormControl>
             </Card>
+            <Footer />
         </Paper>
     )
 }

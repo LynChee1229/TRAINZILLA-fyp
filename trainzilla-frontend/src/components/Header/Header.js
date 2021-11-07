@@ -67,7 +67,7 @@ function Header() {
                             {user ? (
                                 <>
                                     <NavDropdown
-                                        title={"Hi, "+user.userName}
+                                        title={"Hi, " + (user.userName).charAt(0).toUpperCase() + (user.userName).slice(1)}
                                         id="navDD"
                                     >
                                         <NavDropdown.Item className="ddItem">
@@ -88,7 +88,6 @@ function Header() {
                                     <NavLink to="/sign-in" className="mx-5">
                                         LOGIN / REGISTER
                                     </NavLink>
-                                    {/*<NavLink to="/register"> REGISTER</NavLink>*/}
                                 </>
                             )}
                         </Nav>
