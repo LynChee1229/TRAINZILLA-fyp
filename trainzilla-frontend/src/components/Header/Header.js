@@ -37,28 +37,28 @@ function Header() {
                         <Nav className="m-auto">
                             <NavLink
                                 to="/home"
-                                className="mx-4"
+                                className="mx-5"
                                 activeClassName="actTab"
                             >
                                 HOME
                             </NavLink>
                             <NavLink
                                 to="/map-routes"
-                                className="mx-4"
+                                className="mx-5"
                                 activeClassName="actTab"
                             >
                                 MAP & ROUTE
                             </NavLink>
                             <NavLink
                                 to="/announcements"
-                                className="mx-4"
+                                className="mx-5"
                                 activeClassName="actTab"
                             >
                                 ANNOUNCEMENT
                             </NavLink>
                             <NavLink
                                 to="/about-us"
-                                className="mx-4"
+                                className="mx-5"
                                 activeClassName="actTab"
                             >
                                 ABOUT US
@@ -67,7 +67,7 @@ function Header() {
                             {user ? (
                                 <>
                                     <NavDropdown
-                                        title={user.userName}
+                                        title={"Hi, "+user.userName}
                                         id="navDD"
                                     >
                                         <NavDropdown.Item className="ddItem">
@@ -85,7 +85,7 @@ function Header() {
                                 </>
                             ) : (
                                 <>
-                                    <NavLink to="/sign-in" className="mx-3">
+                                    <NavLink to="/sign-in" className="mx-5">
                                         LOGIN / REGISTER
                                     </NavLink>
                                     {/*<NavLink to="/register"> REGISTER</NavLink>*/}

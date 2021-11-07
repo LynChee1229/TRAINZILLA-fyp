@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use App\Models\Admin;
+use App\Models\Announcement;
 use App\Models\Route;
 use App\Models\RouteStation;
+use App\Models\Rule;
 use App\Models\Station;
+use App\Models\Stos;
+use App\Models\Ticket;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -70,10 +75,10 @@ class UserController extends Controller
     function getAvailableStation()
     {
         $data = Route::join('routes_stations', function ($join) {
-                               $join->on ('routes.routeID', '=', 'routes_stations.routeID')
+                                $join->on ('routes.routeID', '=', 'routes_stations.routeID')
                                     ->where ('routes.routeStatus', '=', 1);
-                           })
-                           ->get ();
+                            })
+                            ->get ();
 
         foreach ($data as $d) {
             $station = Station::where('stationID', $d->stationID)->first();
@@ -83,5 +88,15 @@ class UserController extends Controller
         }
 
         return $data;
+    }
+
+    function announcementList()
+    {
+        return Announcement::where('reportStatus', '1')->get();
+    }
+
+    function ruleList()
+    {
+        return Rule::where('ruleStatus', '1')->get();
     }
 }

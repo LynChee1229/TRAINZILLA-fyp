@@ -1,71 +1,53 @@
-import React from 'react'
-import { useState } from "react";
-import '../../styles/css/announcement.sass'
-import Header from "../Header/Header";
+import React, {Component} from 'react';
+import '../../styles/css/announcement.sass';
+import Header from '../Header/Header';
+import Footer from "../Footer/Footer";
+import AnnouncementList from './AnnouncementList';
+import RuleList from './RuleList';
+import $ from 'jquery';
+import {Paper} from "@mui/material";
 
-function Announcement()
-{
-    const [announcement, setAnnouncement] = useState("Filter by");
+class Announcement extends Component {
+    componentDidMount() {
+        $(document).on('click', '#aButton', function() {
+            $(this).addClass('actList');
+            $(this).removeClass('inactList');
+            $('#rButton').addClass('inactList');
+            $('#rButton').removeClass('actList');
+            $('#announceComponent').removeClass('d-none');
+            $('#ruleComponent').addClass('d-none');
+        });
 
-    const handleChange = (event) => {
-        setAnnouncement(event.target.value)
+        $(document).on('click', '#rButton', function() {
+            $(this).addClass('actList');
+            $(this).removeClass('inactList');
+            $('#aButton').addClass('inactList');
+            $('#aButton').removeClass('actList');
+            $('#ruleComponent').removeClass('d-none');
+            $('#announceComponent').addClass('d-none');
+        });
     }
 
-    return (
-        <div className="Announcement">
-            <Header />
-            <div class="upper">
-                <div class="inUpper1">Train Updates</div>
-                <a href="/rules"><div class="inUpper2">Rules</div></a>
-            </div>
-
-            <div class="filter">
-                <form>
-                    <select value={announcement} onChange={handleChange}>
-                        {/*<div class="filter">Filter by</div></a>*/}
-                        <option value="Newest date">Newest date</option>
-                        <option value="Oldest date">Oldest date</option>
-                        <option value="Oldest date">ASC title</option>
-                        <option value="Oldest date">DSC title</option>
-                    </select>
-                </form>
-            </div>
-
-            <div class="bottom">
-                <table>
-                    <tr>
-                        <th>DATE</th>
-                        <th class="title">TITLE</th>
-                        <th class="desc">DETAIL</th>
-                    </tr>
-                    <tr>
-                        <td>5/10/2021</td>
-                        <td class="titles">Lorem ipsum dolor sit amet</td>
-                        <td>Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit, sed do eiusmod tempor incididunt </td>
-                    </tr>
-                    <tr>
-                        <td>4/10/2021</td>
-                        <td class="titles">Lorem ipsum dolor sit amet</td>
-                        <td>Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit, sed do eiusmod tempor incididunt </td>
-                    </tr>
-                    <tr>
-                        <td>3/10/2021</td>
-                        <td class="titles">Lorem ipsum dolor sit amet</td>
-                        <td>Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit, sed do eiusmod tempor incididunt </td>
-                    </tr>
-                    <tr>
-                        <td>2/10/2021</td>
-                        <td class="titles">Lorem ipsum dolor sit amet</td>
-                        <td>Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit, sed do eiusmod tempor incididunt </td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-    )
+    render() {
+        return (
+            <Paper>
+                <Header/>
+                <div id="listOuter">
+                    <div id="listBG">
+                        <button className="btn tabBtn actList" id="aButton">
+                            Train Updates
+                        </button>
+                        <button className="btn tabBtn inactList" id="rButton">
+                            Rules & Regulations
+                        </button>
+                        <AnnouncementList />
+                        <RuleList />
+                    </div>
+                </div>
+                <Footer />
+            </Paper>
+        )
+    }
 }
 
 export default Announcement

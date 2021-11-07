@@ -1,8 +1,22 @@
 #navBar
   background-color: #E2EFFF
   margin: 0
-  height: 55px
+  height: 58px
 
+  .navbar-nav
+      background-color: #E2EFFF
+      position: relative
+      z-index: 99999
+
+  @media (max-width: 1200px)
+    .basic-navbar-nav
+      margin-top: 3px
+
+  @media (max-width: 1200px)
+    .navbar-nav
+      border-radius: 0 0 5px 5px
+      box-shadow: 0 8px 8px -6px gray
+    
   a
     text-decoration: none
     color: gray
@@ -16,15 +30,29 @@
   .dropdown-menu
     border: none
     background-color: #E2EFFF
-    margin-left: -120px
-    box-shadow: gray 2px 2px 5px
+    margin-left: -52px
+    margin-top: -1px !important
+    box-shadow: 0 8px 8px -6px #404040
+
+  @media (max-width: 1200px)
+    .dropdown-menu
+      position: relative
+      margin: 0px
+  
+  @media (max-width: 1200px)
+    .ddItem.dropdown-item
+      padding-top: 2%
+      padding-bottom: 2%
+
+  #navDD
+    margin-left: 58px
 
   .itemBox
     padding: 0
     margin: 0
 
   .ddItem
-    padding: 5% 0 0 12%
+    padding: 5% 12%
 
   .ddItem:hover
     background-color: #BEE2E7 !important

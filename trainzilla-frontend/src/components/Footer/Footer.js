@@ -1,30 +1,29 @@
 import logoDark from '../../styles/Images/darkLogo.png'
 import {Component} from 'react'
 import '../../styles/css/footer.sass'
-import '../../styles/Font/fonts.sass'
 
-// import $ from 'jquery'
+import $ from 'jquery'
 
 class Footer extends Component {
-    // componentDidMount() {
-    //     $(document).ready(function() {
-    //         $("img").click(function(){
-    //             $(window).scrollTop(0);
-    //         });
-    //     });
-    // }
+    componentDidMount() {
+        $(document).ready(function() {
+            $(".footerimg").click(function(){
+                $(window).scrollTop(0);
+            });
+        });
+    }
 
     render() {
         return (
-            <div className="background fontType">
-                <div className="center">
-                    <img src={logoDark} alt="logo" className="img" />
+            <div className="background">
+                <div>
+                    <img src={logoDark} alt="logo" className="footerimg" />
                 </div>
-                <div className="center">
+                <div>
                     Developed by MMU diploma students, as a final year project.
                 </div>
-                <div className="center">TRAINZILLA &copy; 2021</div>
-                <div className="center">
+                <div id="cr">TRAINZILLA &copy; 2021</div>
+                <div>
                     Feel free to contact us via customerservice@trainzilla.com .
                 </div>
             </div>
