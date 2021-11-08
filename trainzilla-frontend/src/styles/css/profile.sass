@@ -1,0 +1,178 @@
+#listOuter 
+	background-repeat: no-repeat 
+	background-size: cover 
+	min-height: 100vh 
+	text-align: center 
+
+#listBG 
+	background-color: rgba(255,255,255,0.85) 
+	min-height: 100vh 
+	.dataTables_wrapper 
+		.dataTables_length 
+			select 
+				font-weight: bold 
+				margin-bottom: 12px 
+				border-bottom: white 2px solid 
+				text-shadow: 0px 0px 6px white 
+		.dataTables_filter 
+			input 
+				border-color: rgba(255,255,255,0.42) 
+				border-bottom: black 2px solid 
+				margin-bottom: 12px 
+		.dataTables_paginate 
+			span 
+				background: rgba(255,255,255,0.42) 
+				border-radius: 50px 
+			.paginate_button 
+				&.disabled 
+					&:hover 
+						background: transparent !important 
+						color: gray !important 
+				&.current 
+					background: rgba(0,0,102,0.85) !important 
+					border-radius: 50% 
+					border-color: #99AAFF !important 
+					color: #FFFFFF !important 
+
+.tabBtn 
+	font-size: 1.4em 
+	margin: 29px 
+	font-weight: bold 
+	box-shadow: 2px 2px 2px gray 
+	padding: 12px 16px 
+	color: white 
+	&:hover 
+	color: white 
+
+.actList 
+	background-color: rgba(0,0,102,0.75) 
+	
+.inactList 
+	background-color: rgba(0,0,102,0.12) 
+	text-shadow: 1px 1px 6px gray 
+	&:hover 
+	background-color: rgba(0,0,102,0.29) 
+
+#userComponent , #ticketComponent 
+	padding: 2% 5% 5% 5% 
+	font-weight: bold 
+
+#ticketTable , #ticketTable th 
+	border: black 1px solid 
+
+#ticketTable 
+	th 
+		background-color: rgba(255,255,255,0.24) 
+
+#tableTableBody 
+	tr 
+		width: 80vw 
+		font-weight: normal 
+	td 
+		word-wrap: break-word 
+		padding: 12px 
+
+#ticketComponent 
+	.aDate 
+		width: 12vw 
+	.aID 
+		width: 12vw 
+	.aDep 
+		width: 20vw 
+	.aArr 
+		width: 20vw 
+	.aPrice 
+		width: 12vw 
+	tr 
+		&.odd 
+			background-color: #FFECEC 
+		&.even 
+			background-color: #FFF5F5 
+
+#listBG .dataTables_wrapper .dataTables_paginate .paginate_button:hover , 
+#listBG .dataTables_wrapper .dataTables_paginate .paginate_button a:hover 
+	background: rgba(0,0,102,0.29) !important 
+	border-color: rgba(0,0,102,0.29) !important 
+	border-radius: 25px 
+	color: white !important 
+
+div 
+	&.leftBox 
+		float: left 
+		width: 550px 
+		height: 400px 
+		margin-left: 100px
+
+	&.editBtn 
+		float: left 
+		color: white 
+		border: 1px solid black 
+		padding: 10px 
+		margin-left: 470px 
+		background-color: rgb(27, 93, 168) 
+		font-weight: bold 
+		border-radius: 10px 
+		cursor: pointer 
+	&.title 
+		margin-top: 5px 
+		font-size: 15px 
+		text-align: left
+		margin-left: 10px
+	&.name 
+		font-size: 25px 
+		text-align: left
+		margin-left: 10px
+	&.rightBox 
+		float: left 
+		margin-left: 50px 
+		right: 50px 
+		width: 350px 
+		height: 300px 
+	&.top 
+		margin-left: 320px 
+	&.currPoint 
+		clear: both 
+		font-size: 20px 
+		font-weight: bold 
+		margin-bottom: 15px 
+	&.line 
+		clear: both 
+		width: 50% 
+		padding-top: 10px 
+	&.curr2 
+		padding-left: 350px 
+		font-weight: normal 
+	&.availVouch 
+		clear: both 
+		margin-top: 20px 
+		margin-left: 5px 
+		margin-bottom: 20px 
+		font-size: 20px 
+		font-weight: bold 
+
+div.editBtn:hover, #reset:hover, #deleteAcc:hover 
+	background-color: rgb(18, 69, 128) 
+	color: white 
+	font-weight: bold 
+
+#reset, #deleteAcc 
+	border: 1px solid black 
+	padding: 10px 
+	border-radius: 10px 
+	background-color: rgb(27, 93, 168) 
+	color: white 
+	width: 50% 
+	margin-left: 20px 
+	margin-top: 30% 
+	font-size: 20px 
+	cursor: pointer 
+
+#deleteAcc 
+	margin-top: 20px 
+
+Dialog 
+	border-radius: 20px 
+
+div.curr1, div.curr2 
+	float: left 
+	font-size: 20px 
