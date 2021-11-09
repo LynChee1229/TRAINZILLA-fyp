@@ -1,94 +1,145 @@
-body
-    //background-color: lightblue
+#profileOuter
+    background-repeat: no-repeat
+    background-size: cover
+    min-height: 100vh
+    background-image: url("../Images/profileBG.jpg")
+    text-align: center
 
+#profileBG
+    background-color: rgba(224,236,255,0.8)
+    min-height: 100vh
 
-ul.announcement
-    background-color: #388EBF
+    .tabBtn
+        margin: 29px 85px
+
+    .actList
+        background-color: rgba(0,0,0,0.5)
+
+    .inactList
+        background-color: rgba(255,255,255,0.12)
+
+    .inactList:hover
+        background-color: rgba(0,0,0,0.2)
+
+    #infoComponent
+        width: fit-content
+        margin: auto
+
+        .userDetails
+            text-align: left !important
+            font-size: 1.2em
+            width: 42em
+        
+        .infoLabel
+            letter-spacing: 2px
+            word-spacing: 5px
+        
+        .profileInfo
+            font-weight: bold
+            font-size: 1.4em
+            padding: 0 29px
+            margin: 0 0 36px 0
+            font-family: "Georgia", "Times New Roman", 'serif'
+            box-shadow: 0 8px 8px -5px white
+            border-radius: 24px
+            text-shadow: 1px 1px 5px white
+
+        .editIcon
+            margin-bottom: 8px
+            float: right
+            color: #003366
+        
+        .editIcon:hover
+            cursor: pointer
+            color: #CC0066
+
+        input
+            background-color: transparent
+            border: none
+            border-radius: 24px
+            box-shadow: 0 8px 8px -5px white
+            margin-bottom: 29px
+        
+        .saveInfo
+            font-weight: bold
+            margin-bottom: 5px
+            padding: 5px
+            float: right
+        
+        .saveInfo:hover
+            box-shadow: 4px 4px 5px gray
+
+        .discardBtn
+            font-weight: bold
+            margin-bottom: 5px
+            margin-left: 12px
+            padding: 5px
+            float: right
+        
+        .discardBtn:hover
+            box-shadow: 3px 3px 5px white
+
+        .alertMsg
+            margin-left: 12px
+            font-size: 0.8em
+
+        .resetBtn , .deleteBtn
+            box-shadow: 2px 2px 8px white
+            font-weight: bold
+            font-size: 1.2em
+            color: #CC0066
+
+        .resetBtn:hover , .deleteBtn:hover
+            box-shadow: 2px 2px 8px black
+
+        .pwSuccess
+            padding: 5px 24px
+            text-align: center
+            color: green
+
+#resetModal .modal-content
+    background-color: #F9FCFF
+
+.resetModalTitle
+    text-align: center
+    font-weight: bold 
+    font-size: 1.4em
+    letter-spacing: 5px
+    font-family: "Georgia", "Times New Roman", 'serif' 
+
+.modal Button
+    margin: 12px 29px 29px 29px
+    letter-spacing: 2px
+    background: rgba(0,51,102,0.85)
+    border: none
     color: white
-    margin-top: -5px
-    padding: 0
+    box-shadow: 1px 1px 3px #003366
+
+.modal Button:hover
+    color: #003366
+    background: rgba(224,236,255,0.8)
+    box-shadow: 2px 2px 5px #003366
+
+.modal Button:focus
+    background: rgba(0,51,102,0.85)
+
+.modal Button:focus:hover
+    color: #003366
+    background: rgba(224,236,255,0.8)
 
 
-li.announcement
-    display: block
+.deleteTitle
     text-align: center
-    margin: 0
-    padding: 0
+    font-weight: bold 
+    font-size: 1.2em
+    letter-spacing: 2px
+    font-family: "Georgia", "Times New Roman", 'serif'
 
+#deleteModal .deleteAccBtn
+    background-color: transparent !important
+    color: #003366
 
-ul.navbar
-    list-style-type: none
-    overflow: hidden
-    margin-top: -5px
-    background-color: #FAFAF9
+#deleteModal .deleteAccBtn:hover
+    box-shadow: 2px 2px 5px red !important
+    color: red !important
 
-
-li.navbar
-    float: left
-    display: block
-    text-align: center
-    padding:  15px 40px
-    color: #124580
-
-
-li.navbarr
-    float: left
-    display: block
-    text-align: center
-    padding:  15px 40px
-    margin-left: 400px
-    color: #124580
-
-
-div.inUpper1, div.inUpper2
-    float: left
-    margin-left: 150px
-    margin-top: 30px
-    font-size: 25px
-
-
-div.inUpper1
-    margin-left: 430px
-    padding: 10px
-    border-radius: 10px
-    background-color: rgb(18, 69, 128)
-    color: white
-
-
-div.inUpper2
-    color: rgb(18, 69, 128)
-
-
-div.leftBox
-    position: absolute
-    left: 160px
-    width: 550px
-    height: 400px
-    margin-top: 100px
-
-
-div.title
-    margin-top: 10px
-    font-size: 12px
-
-
-div.name
-    font-size: 25px
-
-
-div.rightBox
-    position: absolute
-    right: 320px
-    width: 230px
-    height: 200px
-    margin-top: 190px
-
-
-div.deleteAcc, div.reset
-    margin-top: 20px
-    padding: 10px
-    border-radius: 10px
-    font-size: 25px
-    text-align: center
-    background-color: rgb(18, 69, 128)
-    color: white

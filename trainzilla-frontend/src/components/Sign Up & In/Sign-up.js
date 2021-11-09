@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Button, Card, Container, FormControl, IconButton, InputAdornment, Paper, TextField,} from '@mui/material'
+import {Button, Card, Container, FormControl, IconButton, InputAdornment, TextField,} from '@mui/material'
 import '../../styles/css/sign-in.sass'
 import {Visibility, VisibilityOff} from '@mui/icons-material'
 import $ from 'jquery'
@@ -21,6 +21,7 @@ const SignUP = () => {
     const history = useHistory()
     const [errorEmail, setErrorEmail] = useState('')
     const [errorContact, setErrorContact] = useState('')
+    const [errorDOB, setErrorDOB] = useState('')
     const [errorPW, setErrorPW] = useState('')
 
     const handleMouseDownPassword = (event) => {
@@ -46,6 +47,13 @@ const SignUP = () => {
                 setErrorContact("Wrong phone number format! eg: 01XXXXXXXX");
             } else {
                 setErrorContact("");
+            }
+
+            if( (dob < "1900-01-01") || (dob > "2015-12-31") ) {
+                error++;
+                setErrorDOB("Date must between 01-01-1900 and 31-12-2015");
+            } else {
+                setErrorDOB("");
             }
 
             if(password.length < 8) {
@@ -104,6 +112,8 @@ const SignUP = () => {
                                     type="date"
                                     variant="filled"
                                     inputProps={{ min: "1900-01-01", max: "2015-12-31" }}
+                                    error={(errorDOB !== "")}
+                                    helperText={errorDOB}
                                     InputLabelProps={{shrink: true}}
                                     onChange={(e) => {
                                         setDOB(e.target.value)

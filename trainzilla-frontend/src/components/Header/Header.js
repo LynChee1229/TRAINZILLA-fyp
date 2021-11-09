@@ -10,20 +10,27 @@ import { NavLink } from 'react-router-dom'
 import * as Icon from 'react-bootstrap-icons'
 import '../../styles/css/header.sass'
 import 'bootstrap/dist/css/bootstrap.css'
-import $ from 'jquery'
 
 function Header() {
     const user = JSON.parse(localStorage.getItem('user-info'))
+    const currentPath = window.location.pathname
     // const theme = localStorage.getItem('Default Theme') === 'true'
 
     function logOut() {
         localStorage.clear()
-        window.location.reload(false)
+        if(currentPath === "/profile") {
+            window.location.replace("/home");
+        } else {
+            window.location.reload(false);
+        }     
     }
 
-    $(document).on('click', '.navbar-collapse a', function(){
-        $('.navbar-collapse').removeClass('show');
-    });
+    var dot = "";
+    if(user) {
+        if(user.userName.length > 15) {
+            dot = "...";
+        }
+    }
 
     return (
         <div>
@@ -72,16 +79,17 @@ function Header() {
                             {user ? (
                                 <>
                                     <NavDropdown
-                                        title={"Hi, " + (user.userName).charAt(0).toUpperCase() + (user.userName).slice(1)}
+                                        title={"Hi, " + ((user.userName).charAt(0).toUpperCase() + (user.userName).slice(1)).substring(0, 15) + dot}
                                         id="navDD"
                                     >
                                         <NavDropdown.Item className="ddItem">
-                                            <NavLink to="/profile">
+                                            <NavLink to="/profile" className="profileHead">
                                                 <Icon.PersonFill size={24} />
                                             </NavLink>
                                         </NavDropdown.Item>
                                         <NavDropdown.Item
                                             className="ddItem"
+                                            id="logoutBtn"
                                             onClick={logOut}
                                         >
                                             Logout

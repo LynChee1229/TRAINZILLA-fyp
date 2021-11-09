@@ -72,6 +72,59 @@ class UserController extends Controller
         return $user;
     }
 
+    function updateProfile(Request $req)
+    {
+        $res = [];
+        if($req->infoType === "email") {
+            $existing = User::where('userEmail', "==", $req->infoValue)->first();
+            if($existing) {
+                $res["error"] = "Existing email address!";
+                return $res;
+            } else {
+                User::where('userID', $req->uID)->update(['userEmail' => $req->infoValue]);
+            }
+        }
+
+        if($req->infoType === "contact") {
+            $existing = User::where('userContact', "==" , $req->infoValue)->first();
+            if($existing) {
+                $res["error"] = "Existing contact number!";
+                return $res;
+            }
+            else {
+                User::where('userID', $req->uID)->update(['userContact' => $req->infoValue]);
+            }
+        }
+
+        if($req->infoType === "dob") {
+            User::where('userID', $req->uID)->update(['userDOB' => $req->infoValue]);
+        }
+        
+        return User::where('userID', $req->uID)->first();
+    }
+
+    function resetPassword(Request $req)
+    {
+        $data = [];
+        if($req->uID) {
+            $user = User::where('userID', $req->uID)->first();
+            if(isset($user)) {
+                if(!Hash::check($req->oldPassword, $user->userPassword)) {
+                    $data['fail'] = "Old password does not match! Please try again";
+                    return $data;
+                } else {
+                    $new = Hash::make($req->newPassword);
+                    User::where('userID', "=", $req->uID)->update(['userPassword' => $new ]);
+                    $data['success'] = "Password has been updated successfully.";
+                    return $data;
+                }
+            }
+            
+        }
+        $data['fail'] = "Failed to reset password. Please try again";
+        return $data;
+    }
+
     function getAvailableStation()
     {
         $data = Route::join('routes_stations', function ($join) {

@@ -31,8 +31,17 @@ const AnnouncementBar = () => {
             >
                 {
                     data.map((item) => {
-                        var ttl = 85 - item.reportTitle.length;
                         var dot = "";
+                        var ttl;
+                        if(window.innerWidth > 1000) {
+                            ttl = 85 - item.reportTitle.length;
+                        } else if(window.innerWidth > 420){
+                            ttl = 50 - item.reportTitle.length;
+                        } else {
+                            item.reportTitle = item.reportTitle.substring(0, 29);
+                            ttl = 0;
+                        }
+
                         if(item.reportDetails.length >= ttl) {
                             dot = "...";
                         }
