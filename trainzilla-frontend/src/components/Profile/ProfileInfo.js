@@ -189,32 +189,33 @@ const ProfileInfo = () => {
         
     }
 
-    const confirmDltAcc = () => {
+    async function confirmDltAcc () {
         if(dltPW === "") {
             setErrorDltPW("Please fill out this field.");
         } else {
             setErrorDltPW("");
+
+            let item = {
+                uID: user.userID,
+                password: dltPW,
+            };
+    
+            let res = await fetch("http://localhost:8000/api/deleteUserAccount", {
+                method: 'POST',
+                body: JSON.stringify(item),
+                headers: {
+                    "Content-Type": 'application/json',
+                    "Accept": 'application/json'
+                }
+            });
+            res = await res.json();
+            if(res.success == "Success") {
+                localStorage.clear()
+                window.location.replace("/home");
+            } else if(res.fail) {
+                $('#deleteModal').find('.failMsg').html(res.fail);
+            }
         }
-
-        // let item = {
-        //     uID: user.userID,
-        //     password: dltPW,
-        // };
-
-        // let res = fetch("http://localhost:8000/api/deleteUserAccount", {
-        //     method: 'POST',
-        //     body: JSON.stringify(item),
-        //     headers: {
-        //         "Content-Type": 'application/json',
-        //         "Accept": 'application/json'
-        //     }
-        // });
-        // res = res.json();
-        // if(res.success) {
-            
-        // } else if(res.fail) {
-        //     $('#deleteModal').find('.text-danger').html(res.fail);
-        // }
     }
 
     return (
@@ -331,6 +332,7 @@ const ProfileInfo = () => {
                 <Modal.Body style={{textAlign:'center'}}>
                     <div className="deleteTitle">Are you sure to delete your account? </div>
                     <div className="text-primary">Please enter your account password for verification purpose.</div>
+                    <div className="text-danger failMsg" style={{fontWeight:'bold'}}></div>
                     <div>
                         <TextField
                         id="dltPW"
@@ -346,7 +348,7 @@ const ProfileInfo = () => {
                         error={(errordltPW !== "")}
                         helperText={errordltPW}
                     /></div>
-                    <div className="text-danger">Warning: The account will be permanently deleted, and all points and coupons will become invalid.</div>
+                    <div className="text-danger">Warning: The account will be permanently deleted, and all points and coupons will become invalid. If the account is deleted successfully, you will be logged out!</div>
                     <Button className="deleteAccBtn" onClick={confirmDltAcc}>CONFIRM DELETE ACCOUNT</Button>
                     <Button onClick={closeModal} className="closeBtn">
                         Close

@@ -125,6 +125,27 @@ class UserController extends Controller
         return $data;
     }
 
+    function deleteUserAccount(Request $req)
+    {
+        $data = [];
+        if($req->uID) {
+            $user = User::where('userID', $req->uID)->first();
+            if(isset($user)) {
+                if(!Hash::check($req->password, $user->userPassword)) {
+                    $data['fail'] = "Password does not match!";
+                    return $data;
+                } else {
+                    User::where('userID', $req->uID)->delete();
+                    $data['success'] = "Success";
+                    return $data;
+                }
+            }
+            
+        }
+        $data['fail'] = "Failed to delete account. Please try again";
+        return $data;
+    }
+
     function getAvailableStation()
     {
         $data = Route::join('routes_stations', function ($join) {
