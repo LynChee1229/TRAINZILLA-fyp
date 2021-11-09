@@ -9,6 +9,7 @@ import { createTheme, ThemeProvider } from '@mui/material'
 import { useEffect, useState } from 'react'
 import ThemeEnabler from '../components/ThemeEnabler'
 import SignUP from "../components/Sign Up & In/Sign-up";
+import ForgetPassword from '../components/Sign Up & In/ForgetPassword'
 
 function App() {
     //this is the main file
@@ -83,6 +84,12 @@ function App() {
                         path={'/sign-up'}
                         exact
                         component={() => <SignUP />}
+                    />
+
+                    <Route
+                        path={'/forget-password'}
+                        exact
+                        component={() => <ForgetPassword />}
                     />
 
                     <Route

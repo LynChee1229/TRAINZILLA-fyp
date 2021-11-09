@@ -37,6 +37,7 @@ const ProfileInfo = () => {
     $(document).on('click', '.discardBtn', function() {
         $(this).closest('.wrapInfo').find('.inputContainer').addClass('d-none');
         $(this).closest('.wrapInfo').find('.profileInfo').removeClass('d-none');
+        $(this).closest('.wrapInfo').find('.alertMsg').html("");
     });
 
     $(document).on('click', '.saveInfo', async function() {
@@ -50,7 +51,7 @@ const ProfileInfo = () => {
                 if(value == user.userEmail) {
                     $(this).closest('.wrapInfo').find('.inputContainer').addClass('d-none');
                     $(this).closest('.wrapInfo').find('.profileInfo').removeClass('d-none');
-                    return true;
+                    return false;
                 }
                 var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
                 if (!pattern.test(value)) {
@@ -63,7 +64,7 @@ const ProfileInfo = () => {
                 if(value == user.userContact) {
                     $(this).closest('.wrapInfo').find('.inputContainer').addClass('d-none');
                     $(this).closest('.wrapInfo').find('.profileInfo').removeClass('d-none');
-                    return true;
+                    return false;
                 }
                 var phone = /^([1]{1}[0-9]{8})$|^([1]{1}[0-9]{9})$|^([0]{1}[1]{1}[0-9]{8})$|^([0]{1}[1]{1}[0-9]{9})$/;
                 if(!phone.test(value)) {
@@ -76,7 +77,7 @@ const ProfileInfo = () => {
                 if(value == user.userDOB) {
                     $(this).closest('.wrapInfo').find('.inputContainer').addClass('d-none');
                     $(this).closest('.wrapInfo').find('.profileInfo').removeClass('d-none');
-                    return true;
+                    return false;
                 }
                 if( (value < "1900-01-01") || (value > "2015-12-31") ) {
                     error++;
@@ -86,7 +87,7 @@ const ProfileInfo = () => {
 
             if(error === 0) {
                 let item = {
-                    uID: user.userID,
+                    uUC: user.userUniqueCode,
                     infoType: type,
                     infoValue: value,
                 };
@@ -106,8 +107,10 @@ const ProfileInfo = () => {
                     $(this).closest('.wrapInfo').find('.alertMsg').html(result.error);
                 } 
                 else {
+                    localStorage.clear();
                     localStorage.setItem("user-info", JSON.stringify(result));
                     window.location.reload(false);
+                    return false;
                 }
             } 
         } else {
@@ -116,14 +119,14 @@ const ProfileInfo = () => {
 
     });
 
-    function submitPW() {
+    async function submitPW() {
         let item = {
-            uID: user.userID,
+            uUC: user.userUniqueCode,
             oldPassword: currentPassword,
             newPassword: password,
         };
 
-        let res = fetch("http://localhost:8000/api/resetPassword", {
+        let res = await fetch("http://localhost:8000/api/resetPassword", {
             method: 'POST',
             body: JSON.stringify(item),
             headers: {
@@ -131,7 +134,7 @@ const ProfileInfo = () => {
                 "Accept": 'application/json'
             }
         });
-        res = res.json();
+        res = await res.json();
         if(res.success) {
             handleClose();
             $(window).scrollTop(0);
@@ -196,7 +199,7 @@ const ProfileInfo = () => {
             setErrorDltPW("");
 
             let item = {
-                uID: user.userID,
+                uUC: user.userUniqueCode,
                 password: dltPW,
             };
     

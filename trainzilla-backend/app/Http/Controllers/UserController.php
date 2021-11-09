@@ -13,6 +13,7 @@ use App\Models\Stos;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -75,46 +76,46 @@ class UserController extends Controller
     function updateProfile(Request $req)
     {
         $res = [];
-        if($req->infoType === "email") {
-            $existing = User::where('userEmail', "==", $req->infoValue)->first();
+        if($req->infoType == "email") {
+            $existing = User::where('userEmail', $req->infoValue)->first();
             if($existing) {
                 $res["error"] = "Existing email address!";
                 return $res;
             } else {
-                User::where('userID', $req->uID)->update(['userEmail' => $req->infoValue]);
+                User::where('userUniqueCode', $req->uUC)->update(['userEmail' => $req->infoValue]);
             }
         }
 
-        if($req->infoType === "contact") {
-            $existing = User::where('userContact', "==" , $req->infoValue)->first();
+        if($req->infoType == "contact") {
+            $existing = User::where('userContact', $req->infoValue)->first();
             if($existing) {
                 $res["error"] = "Existing contact number!";
                 return $res;
             }
             else {
-                User::where('userID', $req->uID)->update(['userContact' => $req->infoValue]);
+                User::where('userUniqueCode', $req->uUC)->update(['userContact' => $req->infoValue]);
             }
         }
 
-        if($req->infoType === "dob") {
-            User::where('userID', $req->uID)->update(['userDOB' => $req->infoValue]);
+        if($req->infoType == "dob") {
+            User::where('userUniqueCode', $req->uUC)->update(['userDOB' => $req->infoValue]);
         }
         
-        return User::where('userID', $req->uID)->first();
+        return User::where('userUniqueCode', $req->uUC)->first();
     }
 
     function resetPassword(Request $req)
     {
         $data = [];
-        if($req->uID) {
-            $user = User::where('userID', $req->uID)->first();
+        if($req->uUC) {
+            $user = User::where('userUniqueCode', $req->uUC)->first();
             if(isset($user)) {
                 if(!Hash::check($req->oldPassword, $user->userPassword)) {
                     $data['fail'] = "Old password does not match! Please try again";
                     return $data;
                 } else {
                     $new = Hash::make($req->newPassword);
-                    User::where('userID', "=", $req->uID)->update(['userPassword' => $new ]);
+                    User::where('userUniqueCode', $req->uUC)->update(['userPassword' => $new ]);
                     $data['success'] = "Password has been updated successfully.";
                     return $data;
                 }
@@ -125,17 +126,49 @@ class UserController extends Controller
         return $data;
     }
 
+    function forgetPassword(Request $req)
+    {
+        $result = [];
+        if($req->userEmail) {
+            $user = User::where('userEmail', $req->userEmail)->first();
+            if(isset($user) && ($user->userStatus == 1)) {
+                $newPassword = uniqid();
+                User::where('userUniqueCode', "=", $user->userUniqueCode)->update(['userPassword'=>Hash::make($newPassword)]);
+
+                $data = ['content'=>"Hi ".$user->userName.", \n\nYour account password has been reset to ".$newPassword.".\nPlease log in and reset your new password."];
+
+                Mail::send(['text'=>'email'], $data, function($message) use ($req, $user) {
+                    $message->to($req->userEmail, $user->userName)
+                    ->subject('TRAINZILLA Account Reset Password')
+                    ->from('trainzilla@helpdesk.com','TRAINZILLA DEVELOPMENT TEAM');
+                });
+
+                $result['success'] = "An email has been sent to you, please check your mailbox to reset your password.";
+                return $result;
+            } 
+            else if(!$user) {
+                $result['fail'] = "Record is not found.";
+            } 
+            else if($user->userStatus == 0) {
+                $result['fail'] = "Your account is inactive. Please contact customerservice@trainzilla.com for help or register a new account.";
+            }
+        } else {
+            $result['fail'] = "Failed to reset password. Please try again";
+        }
+        return $result;
+    }
+
     function deleteUserAccount(Request $req)
     {
         $data = [];
-        if($req->uID) {
-            $user = User::where('userID', $req->uID)->first();
+        if($req->uUC) {
+            $user = User::where('userUniqueCode', $req->uUC)->first();
             if(isset($user)) {
                 if(!Hash::check($req->password, $user->userPassword)) {
                     $data['fail'] = "Password does not match!";
                     return $data;
                 } else {
-                    User::where('userID', $req->uID)->delete();
+                    User::where('userUniqueCode', $req->uUC)->delete();
                     $data['success'] = "Success";
                     return $data;
                 }

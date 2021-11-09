@@ -4,6 +4,7 @@ import '../../styles/css/announcement.sass';
 import Header from "../Header/Header";
 import Footer from '../Footer/Footer';
 import ProfileInfo from './ProfileInfo';
+import ProfileTicket from './ProfileTicket';
 import $ from 'jquery'
 
 
@@ -41,7 +42,7 @@ const Profile = () => {
                     </button>
 
                     <ProfileInfo/>
-
+                    <ProfileTicket/>
                     <Footer />
                 </div>
             </div>

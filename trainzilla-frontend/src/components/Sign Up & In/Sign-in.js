@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {Button, Card, CardContent, Container, IconButton, Paper, TextField,} from '@mui/material'
+import {Button, Card, CardContent, Container, IconButton, TextField,} from '@mui/material'
 import {NavLink, useHistory} from 'react-router-dom'
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow'
 import AppleIcon from '@mui/icons-material/Apple'
@@ -107,6 +107,8 @@ const SignIn = () => {
                                 <DoubleArrowIcon/>
                             </Button>
                         </CardContent>
+
+                        <NavLink to="/forget-password" className="forgetLink">Forget Password?</NavLink>
 
                         <Container className="orTitle">OR : </Container>
 

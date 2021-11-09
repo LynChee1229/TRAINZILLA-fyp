@@ -32,7 +32,7 @@ class ProfileTicket extends Component {
 
     render() {
         return(
-            <div id="ProfileTicketComponent">
+            <div id="ticketComponent" className="d-none">
                 <div className="top">
                     <div class="currPoint">
                         <div class="curr1">Your Current Point: 3450</div>

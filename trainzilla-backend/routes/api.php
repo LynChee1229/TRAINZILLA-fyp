@@ -23,6 +23,7 @@ Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
 Route::post('updateProfile', [UserController::class, 'updateProfile']);
 Route::post('resetPassword', [UserController::class, 'resetPassword']);
+Route::post('forgetPassword', [UserController::class, 'forgetPassword']);
 Route::post('deleteUserAccount', [UserController::class, 'deleteUserAccount']);
 Route::get('getAvailableStation', [UserController::class, 'getAvailableStation']);
 Route::get('announcementList', [UserController::class, 'announcementList']);
