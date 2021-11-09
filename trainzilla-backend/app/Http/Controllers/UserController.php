@@ -197,6 +197,26 @@ class UserController extends Controller
         return $data;
     }
 
+    function getRouteData()
+    {
+        $data = Route::where('routes.routeStatus', '=', 1)->get();
+
+        foreach ($data as $d) {
+            $routeStation = RouteStation::where('routeID', $d->routeID)->get();
+            if($routeStation) {
+                $d['station'] = $routeStation;
+                foreach($routeStation as $rs) {
+                    $station = Station::where('stationID', $rs->stationID)->first();
+                    if($station) {
+                        $rs->stationName = $station->stationName;
+                        $rs->stationDeparture = $station->stationDeparture;
+                    }
+                }
+            }
+        }
+        return $data;
+    }
+
     function announcementList()
     {
         return Announcement::where('reportStatus', '1')->get();
