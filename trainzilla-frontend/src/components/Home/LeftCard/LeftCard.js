@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Card, CardContent, IconButton } from '@mui/material'
+import {Box, Card, CardContent, IconButton} from '@mui/material'
 import ImportExportIcon from '@mui/icons-material/ImportExport'
 import TicketDetails from "./TicketDetails";
 import '../../../styles/css/homepage.sass'
@@ -15,8 +15,11 @@ const LeftCard = (props) => {
         ticketNum,
         setTicketNum,
         showTicketDetails,
-        stations
+        stations1,
+        stations2,
+        // setStationList
     } = props
+
 
     const stationSwitching = () => {
         let arrive = arriveStation
@@ -25,10 +28,16 @@ const LeftCard = (props) => {
     }
 
     const departCallback = (depart) => {
+        // setStationList(depart);
         setDepartStation(depart);
+
+        // console.log(stationList)
     }
     const arriveCallback = (arrive) => {
+        // setStationList(arrive);
         setArriveStation(arrive);
+
+        // console.log(stationList)
     }
     const ticketNumCallback = (ticketNum) => {
         setTicketNum(ticketNum);
@@ -41,31 +50,31 @@ const LeftCard = (props) => {
         >
             <CardContent className="default-font blueFont">
                 <Box
-                    sx={{ mb: 13 }}
+                    sx={{mb: 13}}
                 >
                     <Box className="bold">DEPARTURE STATION</Box>
                     <StationSelection
                         stationName={departStation}
                         setStationName={departCallback}
-                        stations={stations}
+                        stations={stations1}
                     />
 
                     <Box className="center">
-                        <Box className="bold" sx={{ flexGrow: 1 }}>
+                        <Box className="bold" sx={{flexGrow: 1}}>
                             ARRIVAL STATION
                         </Box>
                         <IconButton
                             color="primary"
-                            sx={{ p: '5px', m: '-10px 0 -10px 0' }}
+                            sx={{p: '5px', m: '-10px 0 -10px 0'}}
                             onClick={stationSwitching}
                         >
-                            <ImportExportIcon />
+                            <ImportExportIcon/>
                         </IconButton>
                     </Box>
                     <StationSelection
                         stationName={arriveStation}
                         setStationName={arriveCallback}
-                        stations={stations}
+                        stations={stations2}
                     />
                 </Box>
 

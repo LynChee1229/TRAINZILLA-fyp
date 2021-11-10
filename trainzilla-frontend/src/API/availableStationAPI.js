@@ -8,7 +8,7 @@ export function getStationData() {
 
     // Make a request for a user with a given ID
 
-    axios
+     axios
         .get(`${baseURL}/getAvailableStation`)
         .then(function (response) {
             // handle success

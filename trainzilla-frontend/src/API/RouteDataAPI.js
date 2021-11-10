@@ -1,8 +1,12 @@
-import axios from "axios";
+import axios from 'axios';
 
-export function getRouteData() {
-    return axios.get("http://localhost:8000/api/getRouteData")
-        .catch(function (error){
-            console.log(error)
-        })
-}
+export const getRouteData = () => {
+    const URL = `http://localhost:8000/api/getRouteData`;
+    return axios(URL, {
+        method: 'GET'
+    })
+        .then(response => response.data)
+        .catch(error => {
+            throw error;
+        });
+};

@@ -1,6 +1,6 @@
 import '../../styles/css/mapRoute.sass';
 import Header from '../Header/Header'
-import {Box, Container, Paper} from "@mui/material";
+import {Container, Paper} from "@mui/material";
 import NavCard from "./LeftNavCard/NavCard";
 import Footer from "../Footer/Footer";
 import React, {useState} from "react";
