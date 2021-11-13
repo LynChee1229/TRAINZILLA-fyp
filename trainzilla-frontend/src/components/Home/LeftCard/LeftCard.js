@@ -52,7 +52,7 @@ const LeftCard = (props) => {
                 <Box
                     sx={{mb: 13}}
                 >
-                    <Box className="bold">DEPARTURE STATION</Box>
+                    <Box className="bold" style={{fontSize:"16px"}}>DEPARTURE STATION</Box>
                     <StationSelection
                         stationName={departStation}
                         setStationName={departCallback}
@@ -60,7 +60,7 @@ const LeftCard = (props) => {
                     />
 
                     <Box className="center">
-                        <Box className="bold" sx={{flexGrow: 1}}>
+                        <Box className="bold" sx={{flexGrow: 1}} style={{fontSize:"16px"}}>
                             ARRIVAL STATION
                         </Box>
                         <IconButton

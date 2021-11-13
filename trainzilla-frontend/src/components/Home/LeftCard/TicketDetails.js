@@ -22,7 +22,7 @@ const TicketDetails = (props) => {
     if (showTicketDetails) {
         return (
             <Box className="ticketDetailBox">
-                <Box sx={{mb: 5}} className="bold center">
+                <Box sx={{mb: 5}} className="bold center" style={{fontSize:"16px"}}>
                     <Box sx={{flexGrow: 1}}>Price per ticket:</Box>
                     <Box>RM 0.00</Box>
                 </Box>
@@ -33,7 +33,7 @@ const TicketDetails = (props) => {
                     // }}
                     className="bold center"
                 >
-                    <Box sx={{flexGrow: 1}}>Ticket Amount:</Box>
+                    <Box sx={{flexGrow: 1}} style={{fontSize:"16px"}}>Ticket Amount:</Box>
                     <Box className="center">
                         <IconButton
                             onClick={() => {
@@ -48,7 +48,7 @@ const TicketDetails = (props) => {
                             sx={{height: 20, m: '0 10px 0 10px'}}
                             orientation="vertical"
                         />
-                        <span className="center" style={{width: 30}}>
+                        <span className="center" style={{fontSize:"21px", paddingTop:"8px"}}>
                             {ticketNum}
                         </span>
                         <Divider
