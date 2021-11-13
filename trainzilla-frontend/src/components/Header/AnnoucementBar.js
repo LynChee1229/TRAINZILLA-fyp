@@ -30,9 +30,9 @@ const AnnouncementBar = () => {
                 indicators={false}
             >
                 {
-                    data.map((item) => {
-                        var dot = "";
-                        var ttl;
+                    data.map((item, index) => {
+                        let dot = "";
+                        let ttl;
                         if(window.innerWidth > 1000) {
                             ttl = 85 - item.reportTitle.length;
                         } else if(window.innerWidth > 420){
@@ -45,7 +45,7 @@ const AnnouncementBar = () => {
                         if(item.reportDetails.length >= ttl) {
                             dot = "...";
                         }
-                        return  <Carousel.Item>
+                        return  <Carousel.Item key={index}>
                                     <a href="/announcements" >
                                         <span className="aRT mr-5">{item.reportTitle} : </span>
                                         {item.reportDetails.substring(0, ttl)} {dot} 

@@ -1,12 +1,15 @@
-import axios from 'axios';
+import axios from "axios";
 
-export const getRouteData = () => {
-    const URL = `http://localhost:8000/api/getRouteData`;
-    return axios(URL, {
-        method: 'GET'
-    })
-        .then(response => response.data)
+export async function getRouteData() {
+    let result = [];
+    await axios.get('http://localhost:8000/api/getRouteData')
+        .then (res => {
+            result = res
+        })
         .catch(error => {
             throw error;
         });
-};
+
+    // console.log(result);
+    return (result.data);
+}

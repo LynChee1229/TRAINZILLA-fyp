@@ -42,18 +42,18 @@ const ProfileInfo = () => {
 
     $(document).on('click', '.saveInfo', async function() {
         $(this).closest('.wrapInfo').find('.alertMsg').html("");
-        var type = $(this).val();
-        var value = $(this).closest('.wrapInfo').find('input').val();
+        const type = $(this).val();
+        const value = $(this).closest('.wrapInfo').find('input').val();
 
         if( (value!=="") && (value!=="undefined") ) {
-            var error = 0;
+            let error = 0;
             if (type === "email") {
-                if(value == user.userEmail) {
+                if(value === user.userEmail) {
                     $(this).closest('.wrapInfo').find('.inputContainer').addClass('d-none');
                     $(this).closest('.wrapInfo').find('.profileInfo').removeClass('d-none');
                     return false;
                 }
-                var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+                const pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
                 if (!pattern.test(value)) {
                     error++;
                     $(this).closest('.wrapInfo').find('.alertMsg').html("Invalid email address format!");
@@ -61,12 +61,12 @@ const ProfileInfo = () => {
             }
             
             if(type === "contact") {
-                if(value == user.userContact) {
+                if(value === user.userContact) {
                     $(this).closest('.wrapInfo').find('.inputContainer').addClass('d-none');
                     $(this).closest('.wrapInfo').find('.profileInfo').removeClass('d-none');
                     return false;
                 }
-                var phone = /^([1]{1}[0-9]{8})$|^([1]{1}[0-9]{9})$|^([0]{1}[1]{1}[0-9]{8})$|^([0]{1}[1]{1}[0-9]{9})$/;
+                const phone = /^([1][0-9]{8})$|^([1][0-9]{9})$|^([0][1][0-9]{8})$|^([0][1][0-9]{9})$/;
                 if(!phone.test(value)) {
                     error++;
                     $(this).closest('.wrapInfo').find('.alertMsg').html("Invalid phone number format! eg: 01XXXXXXXX");
@@ -74,7 +74,7 @@ const ProfileInfo = () => {
             }
 
             if(type === "dob") {
-                if(value == user.userDOB) {
+                if(value === user.userDOB) {
                     $(this).closest('.wrapInfo').find('.inputContainer').addClass('d-none');
                     $(this).closest('.wrapInfo').find('.profileInfo').removeClass('d-none');
                     return false;
@@ -149,21 +149,21 @@ const ProfileInfo = () => {
     }
 
     const handleResetPW = () => {
-        var err = 0;
+        let err = 0;
 
-        if(currentPassword == "") {
+        if(currentPassword === "") {
             err++;
             setErrorCurrentPW("Please fill out this field.");
         } else {
             setErrorCurrentPW("");
         }
-        if(password == "") {
+        if(password === "") {
             err++;
             setErrorNewPW("Please fill out this field.");
         } else {
             setErrorNewPW("");
         }
-        if(confirmPassword == "") {
+        if(confirmPassword === "") {
             err++;
             setErrorConfirmPW("Please fill out this field.");
         } else {
@@ -212,7 +212,7 @@ const ProfileInfo = () => {
                 }
             });
             res = await res.json();
-            if(res.success == "Success") {
+            if(res.success === "Success") {
                 localStorage.clear()
                 window.location.replace("/home");
             } else if(res.fail) {
@@ -224,7 +224,7 @@ const ProfileInfo = () => {
     return (
         <div id="infoComponent">
             <div class="userDetails">
-                <Alert variant="success" className="pwSuccess d-none"></Alert>
+                <Alert variant="success" className="pwSuccess d-none"/>
                 
                 <div>
                     <span className="infoLabel">Username</span>
@@ -233,7 +233,7 @@ const ProfileInfo = () => {
 
                 <div className="wrapInfo">
                     <span className="infoLabel">Date of Birth</span>
-                    <span className="alertMsg text-danger"></span>
+                    <span className="alertMsg text-danger"/>
                     <p className="profileInfo">{user.userDOB} 
                         <FaEdit className="editIcon"/> 
                     </p>
@@ -246,7 +246,7 @@ const ProfileInfo = () => {
 
                 <div className="wrapInfo">
                     <span className="infoLabel">Email Address</span>
-                    <span className="alertMsg text-danger"></span>
+                    <span className="alertMsg text-danger"/>
                     <p className="profileInfo">{user.userEmail} 
                         <FaEdit className="editIcon"/> 
                     </p>
@@ -259,7 +259,7 @@ const ProfileInfo = () => {
 
                 <div className="wrapInfo">
                     <span className="infoLabel">Contact Number (+60)</span>
-                    <span className="alertMsg text-danger"></span>
+                    <span className="alertMsg text-danger"/>
                     <p className="profileInfo">{user.userContact} 
                         <FaEdit className="editIcon"/> 
                     </p>
@@ -277,7 +277,7 @@ const ProfileInfo = () => {
             <Modal show={show} onHide={handleClose}  size="md" aria-labelledby="contained-modal-title-vcenter" id="resetModal" centered>
                 <Modal.Body style={{textAlign:'center'}}>
                     <div className="resetModalTitle">RESET PASSWORD</div>
-                    <div className="text-danger"></div>
+                    <div className="text-danger"/>
                     <div>
                         <TextField
                         id="currentPW"
@@ -335,7 +335,7 @@ const ProfileInfo = () => {
                 <Modal.Body style={{textAlign:'center'}}>
                     <div className="deleteTitle">Are you sure to delete your account? </div>
                     <div className="text-primary">Please enter your account password for verification purpose.</div>
-                    <div className="text-danger failMsg" style={{fontWeight:'bold'}}></div>
+                    <div className="text-danger failMsg" style={{fontWeight: 'bold'}}/>
                     <div>
                         <TextField
                         id="dltPW"

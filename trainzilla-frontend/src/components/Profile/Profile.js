@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import '../../styles/css/profile-user.sass'
 import '../../styles/css/announcement.sass';
 import Header from "../Header/Header";
@@ -10,7 +10,7 @@ import $ from 'jquery'
 
 const Profile = () => {
 
-    $(document).on('click', '#infoBtn', function() {
+    $(document).on('click', '#infoBtn', function () {
         $(this).addClass('actList');
         $(this).removeClass('inactList');
         $('#ticketBtn').addClass('inactList');
@@ -19,7 +19,7 @@ const Profile = () => {
         $('#ticketComponent').addClass('d-none');
     });
 
-    $(document).on('click', '#ticketBtn', function() {
+    $(document).on('click', '#ticketBtn', function () {
         $(this).addClass('actList');
         $(this).removeClass('inactList');
         $('#infoBtn').addClass('inactList');
@@ -27,11 +27,11 @@ const Profile = () => {
         $('#ticketComponent').removeClass('d-none');
         $('#infoComponent').addClass('d-none');
     });
-    
+
 
     return (
         <div>
-            <Header />
+            <Header/>
             <div id="profileOuter">
                 <div id="profileBG">
                     <button className="btn tabBtn actList" id="infoBtn">
@@ -43,7 +43,7 @@ const Profile = () => {
 
                     <ProfileInfo/>
                     <ProfileTicket/>
-                    <Footer />
+                    <Footer/>
                 </div>
             </div>
         </div>
