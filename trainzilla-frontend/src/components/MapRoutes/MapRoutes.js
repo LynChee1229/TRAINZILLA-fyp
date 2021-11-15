@@ -13,6 +13,7 @@ import RightContent from "./RightContentCard/RightContent";
 
 function MapRoute() {
     const [content, setContent] = useState('map');
+
     // const maps = [
     //     {id: 1, mapIMG: <img src={transit} alt="transit map"/>},
     //     {id: 2, mapIMG: <img src={kelana} alt="transit map"/>},
@@ -40,7 +41,8 @@ function MapRoute() {
 
                 <NavCard rightContent={rightContentCallback}/>
 
-                <RightContent contentKey={content}/>
+                <RightContent contentKey={content} />
+
             </Container>
             <Footer/>
         </Paper>

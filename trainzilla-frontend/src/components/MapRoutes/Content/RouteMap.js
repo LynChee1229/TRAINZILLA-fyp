@@ -1,8 +1,7 @@
-import React, {useRef} from 'react'
-import Highcharts from 'highcharts/highstock'
+import React, {useEffect, useRef, useState} from 'react'
+import Highcharts, {chart} from 'highcharts/highstock'
 import HighchartsReact from 'highcharts-react-official'
 import networkgraph from 'highcharts/modules/networkgraph'
-import InterchangePic from '../../../styles/Images/interchange.png'
 
 require('highcharts/modules/exporting')(Highcharts);
 require('highcharts/modules/export-data')(Highcharts);
@@ -11,70 +10,92 @@ if (typeof Highcharts === "object") {
     networkgraph(Highcharts);
 }
 
-Highcharts.addEvent(
-    Highcharts.Series,
-    'afterSetOptions',
-    function (e) {
-        let colors = Highcharts.getOptions().colors,
-            i = 0,
-            nodes = {};
-
-        if (
-            this instanceof Highcharts.seriesTypes.networkgraph &&
-            e.options.id === 'lang-tree' &&
-            e.options.data !== undefined
-        ) {
-            let lastSecond = '', arry = []
-            e.options.data.forEach(function (link) {
-
-                if (lastSecond !== link [0]) {
-                    nodes[link[0]] = {
-                        id: link[0],
-                        color: colors[++i]
-                    }
-                } else if (lastSecond === link [0]) {
-                    nodes[link[0]] = {
-                        id: link[0],
-                        color: colors[i]
-                    }
-                    nodes[link[1]] = {
-                        id: link[1],
-                        color: colors[i]
-                    }
-                    arry.push(link[0])
-                }
-                lastSecond = link[1];
-
-            });
-
-            const exchangeStation = arry.filter((item, index) => arry.indexOf(item) !== index)
-            exchangeStation.forEach((station) =>{
-                nodes[station] = {
-                    id: station,
-                    marker:{
-                        radius: 20
-                    },
-                    name: 'Interchange: ' + station
-                }
-            })
-
-            e.options.nodes = Object.keys(nodes).map(function (id) {
-                return nodes[id];
-            });
-
-        }
-    }
-);
-
 const RouteMap = ({mapRouteData}) => {
+
+    const [seriesData, setSeriesData] = useState(mapRouteData.data);
+    const [centralStation, setCentralStation] = useState(mapRouteData.centralStation);
+
+    useEffect(()=>{
+        setSeriesData(mapRouteData.data);
+        setCentralStation(mapRouteData.centralStation);
+    },[mapRouteData])
+
+    Highcharts.addEvent(
+        Highcharts.Series,
+        'afterSetOptions',
+        function (e) {
+            let colors = Highcharts.getOptions().colors,
+                i = 0,
+                nodes = {};
+
+            if (
+                this instanceof Highcharts.seriesTypes.networkgraph &&
+                e.options.id === 'lang-tree' &&
+                e.options.data !== undefined
+            ) {
+                let lastSecond = '', arry = []
+                e.options.data.forEach(function (link) {
+
+                    if (lastSecond !== link [0]) {
+                        nodes[link[0]] = {
+                            id: link[0],
+                            color: colors[++i]
+                        }
+                    } else if (lastSecond === link [0]) {
+                        nodes[link[0]] = {
+                            id: link[0],
+                            color: colors[i]
+                        }
+                        nodes[link[1]] = {
+                            id: link[1],
+                            color: colors[i]
+                        }
+                        arry.push(link[0])
+                    }
+                    lastSecond = link[1];
+
+                });
+
+                const exchangeStation = arry.filter((item, index) => arry.indexOf(item) !== index);
+                i += 1;
+                exchangeStation.forEach((station) => {
+                    nodes[station] = {
+                        id: station,
+                        marker: {
+                            radius: 18
+                        },
+                        name: 'Interchange: ' + station,
+                        color: colors[i]
+                    }
+                })
+
+                nodes[centralStation] = {
+                    id: centralStation,
+                    name: 'Sentral Station: ' + centralStation,
+                    marker: {
+                        radius: 25
+                    },
+                    color: colors[++i]
+                }
+
+
+                e.options.nodes = Object.keys(nodes).map(function (id) {
+                    return nodes[id];
+                });
+
+            }
+        }
+    );
 
     const options = {
         chart: {
             type: 'networkgraph',
-            height: '100%',
         },
         title: {
             text: 'The Route Map'
+        },
+        caption: {
+            text: "Click the button at top right for more options."
         },
         credits: {
             enabled: false
@@ -102,13 +123,14 @@ const RouteMap = ({mapRouteData}) => {
                     allowOverlap: false
                 },
                 id: "lang-tree",
-                data: mapRouteData.data
+                data: seriesData
             }
         ]
     };
 
     return <HighchartsReact
         ref={useRef()}
+        containerProps={{ style: { height: "100%", width: "100%"} }}
         highcharts={Highcharts}
         allowChartUpdate={false}
         immutable={false}

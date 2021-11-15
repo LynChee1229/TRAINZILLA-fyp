@@ -2,10 +2,12 @@ import React, {useEffect, useState} from 'react';
 import {Box} from "@mui/material";
 import RouteMap from "../Content/RouteMap";
 import {getRouteData} from "../../../API/RouteDataAPI"
+import Timetable from "../Content/Timetable";
+import _ from 'lodash';
 
 function RightContent({contentKey}) {
 
-    const [routeData, setRouteData] = useState([])
+    const [routeData, setRouteData] = useState([]);
 
     useEffect(() => {
         getRouteData().then(res => setRouteData(res));
@@ -13,7 +15,6 @@ function RightContent({contentKey}) {
 
     const mapStation = () => {
         let arr = [], routeMapData = {}
-
 
         if (routeData.length !== 0) {
             for (let i = 0; i < routeData.length; i++) {
@@ -29,6 +30,7 @@ function RightContent({contentKey}) {
                 }
             }
             routeMapData.data = arr;
+            routeMapData.centralStation = "KL Sentral"
         }
 
         return routeMapData;
@@ -54,12 +56,20 @@ function RightContent({contentKey}) {
 
 
     const content = (key) => {
-        if (key === "map") {
+
+        const availableRoute = routeData.map(route => route.routeTitle);
+
+        if (key === 'map' && !_.isEmpty(mapStation())){
+            // console.log('here', mapRouteData)
             return <RouteMap mapRouteData={mapStation()}/>;
         }
 
-        // {mapStation()}
-        return null;
+        else if (availableRoute.includes(key)) {
+            return <Timetable routeData={routeData} currentRoute={key}/>
+        } else {
+            return null;
+        }
+
     }
 
     return (
