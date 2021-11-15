@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {Box} from "@mui/material";
-import RouteMap from "../Content/RouteMap";
+import RouteMap from "./Content/RouteMap";
 import {getRouteData} from "../../../API/RouteDataAPI"
-import Timetable from "../Content/Timetable";
+import Timetable from "./Content/Timetable";
 import _ from 'lodash';
 
 function RightContent({contentKey}) {
@@ -14,7 +14,7 @@ function RightContent({contentKey}) {
     }, [])
 
     const mapStation = () => {
-        let arr = [], routeMapData = {}
+        let arr = [], allStation = [], routeMapData = {}
 
         if (routeData.length !== 0) {
             for (let i = 0; i < routeData.length; i++) {
@@ -24,12 +24,14 @@ function RightContent({contentKey}) {
                     const firstStation = station[j];
                     const nextStation = station[j + 1];
 
+                    allStation.push(firstStation.stationName)
                     if (nextStation) {
                         arr.push([firstStation.stationName, nextStation.stationName])
                     }
                 }
             }
             routeMapData.data = arr;
+            routeMapData.allStation = allStation;
             routeMapData.centralStation = "KL Sentral"
         }
 
@@ -42,10 +44,9 @@ function RightContent({contentKey}) {
     //         arr.push(res.flatMap(({station}) => {
     //             return station.reduce((segments, current, i, stations) => {
     //                 if (stations[i + 1]) {
-    //                     segments.push([
+    //                     segments.push(
     //                         current.stationName,
-    //                         stations[i + 1].stationName
-    //                     ]);
+    //                     );
     //                 }
     //                 return segments;
     //             }, []);
@@ -63,7 +64,6 @@ function RightContent({contentKey}) {
             // console.log('here', mapRouteData)
             return <RouteMap mapRouteData={mapStation()}/>;
         }
-
         else if (availableRoute.includes(key)) {
             return <Timetable routeData={routeData} currentRoute={key}/>
         } else {

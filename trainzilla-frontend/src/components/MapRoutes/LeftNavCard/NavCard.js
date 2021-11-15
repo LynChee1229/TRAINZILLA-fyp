@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Box, Button, Card, CardContent, Divider, Paper} from "@mui/material";
+import {Box, Button, Card, CardContent, Divider} from "@mui/material";
 import "../../../styles/css/mapRoute.sass"
 import "../../../styles/Font/fonts.sass"
 import {getRouteData} from "../../../API/RouteDataAPI";
@@ -29,7 +29,7 @@ function NavCard({rightContent}) {
                     onClick={() => {
                         rightContent('map')
                     }}
-                    sx={{ color: '#004684' }}
+                    sx={{color: '#004684'}}
                 >
                     Train Route Map
                 </Button>
@@ -47,10 +47,10 @@ function NavCard({rightContent}) {
                                 <Button
                                     key={i}
                                     className="buttonNav default-font bold"
-                                    onClick={()=>{
+                                    onClick={() => {
                                         rightContent(name)
                                     }}
-                                    sx={{ color: '#004684' }}
+                                    sx={{color: '#004684'}}
                                 >
                                     {name}
                                 </Button>
