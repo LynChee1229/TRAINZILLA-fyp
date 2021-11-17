@@ -22,57 +22,47 @@ const TicketDetails = (props) => {
     if (showTicketDetails) {
         return (
             <Box className="ticketDetailBox">
-                <Box sx={{mb: 5}} className="bold center" style={{fontSize:"16px"}}>
-                    <Box sx={{flexGrow: 1}}>Price per ticket:</Box>
+                <Box className="center" style={{fontSize:"1.2vw", marginBottom:'1vw'}}>
+                    <Box sx={{flexGrow: 1}} className="bold">Price per ticket:</Box>
                     <Box>RM 0.00</Box>
                 </Box>
 
-                <Box
-                    // sx={{
-                    //     pb: '5px',
-                    // }}
-                    className="bold center"
-                >
-                    <Box sx={{flexGrow: 1}} style={{fontSize:"16px"}}>Ticket Amount:</Box>
+                <Box className="center">
+                    <Box className="bold" sx={{flexGrow: 1}} style={{fontSize:"1.2vw"}}>Ticket Amount:</Box>
                     <Box className="center">
                         <IconButton
                             onClick={() => {
                                 if (ticketNum !== 0) setTicketNum(ticketNum -1)
                             }}
                             color="primary"
-                            sx={{p: '5px', m: '-5px 0 -5px 0'}}
+                            sx={{p: '1vw', m: '-1vw 0 -1vw 0'}}
                         >
-                            <RemoveIcon/>
+                            <RemoveIcon sx={{fontSize: '1.5vw'}}/>
                         </IconButton>
-                        <Divider
-                            sx={{height: 20, m: '0 10px 0 10px'}}
-                            orientation="vertical"
-                        />
-                        <span className="center" style={{fontSize:"21px", paddingTop:"8px"}}>
+
+                        <span className="center" style={{width: '1.5vw', fontSize:"1.2vw"}}>
                             {ticketNum}
                         </span>
-                        <Divider
-                            sx={{height: 20, m: '0 10px 0 10px'}}
-                            orientation="vertical"
-                        />
+
                         <IconButton
                             onClick={() => {
                                 setTicketNum(ticketNum +1)
                             }}
                             color="primary"
-                            sx={{p: '5px', m: '-5px 0 -5px 0'}}
+                            sx={{p: '1vw', m: '-1vw -1vw -1vw 0'}}
                         >
-                            <AddIcon/>
+                            <AddIcon sx={{fontSize: '1.5vw'}}/>
                         </IconButton>
                     </Box>
                 </Box>
 
                 <Button
                     variant="contained"
-                    className="center bookingButton"
+                    className="bookingButton"
                     onClick={handleBookTicketButton}
+                    sx={{fontSize:'1vw'}}
                 >
-                    <ShoppingCartIcon/>
+                    <ShoppingCartIcon sx={{mr:"1vw", fontSize: '1.5vw'}}/>
                     Book Ticket
                 </Button>
             </Box>

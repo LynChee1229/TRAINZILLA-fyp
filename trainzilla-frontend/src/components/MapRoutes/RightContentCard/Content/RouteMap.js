@@ -101,6 +101,13 @@ const RouteMap = ({mapRouteData}) => {
         caption: {
             text: "Click the button at top right for more options."
         },
+        exporting:{
+            buttons: {
+                contextButton: {
+                    menuItems: ["viewFullscreen", "separator", 'downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG'],
+                },
+            },
+        },
         credits: {
             enabled: false
         },

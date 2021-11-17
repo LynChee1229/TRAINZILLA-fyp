@@ -26,7 +26,11 @@ const StationSelection = ({stationName, setStationName, stations}) => {
 
     let menuStationList = stations
         ? stations.map((current, index) => (
-            <MenuItem key={index} onClick={handleStationChange}>
+            <MenuItem
+                key={index}
+                onClick={handleStationChange}
+                sx={{fontSize: '1vw', p: '0.5vw'}}
+            >
                 {' '}
                 {current}
                 {' '}
@@ -39,30 +43,30 @@ const StationSelection = ({stationName, setStationName, stations}) => {
             component="form"
             elevation={5}
             sx={{
-                m: '10px 0 30px 5px',
-                p: '2px 4px',
+                m: '0.5vw 0.3vw 3vw 0',
+                p: '0.3vw 0.6vw',
                 display: 'flex',
                 alignItems: 'center',
                 width: '100%',
             }}
         >
             <InputBase
-                sx={{ml: 1, flex: 1}}
+                sx={{ml: '0.5vw', flex: 1, fontSize: '1.1vw'}}
                 placeholder="Please select a station."
                 value={stationName}
                 onChange={handleStationChange}
             />
 
-            <Divider sx={{height: 28, m: 0.5}} orientation="vertical"/>
             <IconButton
                 color="primary"
-                sx={{p: '10px'}}
+                sx={{p: '0.5vw'}}
                 aria-label="directions"
                 aria-expanded={open ? 'true' : undefined}
                 onClick={handleClick}
             >
-                <ArrowDropDownCircleOutlinedIcon/>
+                <ArrowDropDownCircleOutlinedIcon sx={{fontSize: '1.5vw'}}/>
             </IconButton>
+
             <Menu
                 id="basic-menu"
                 anchorEl={anchorEl}
@@ -70,16 +74,15 @@ const StationSelection = ({stationName, setStationName, stations}) => {
                 onClose={handleStationChange}
                 anchorOrigin={{
                     vertical: 'bottom',
-                    horizontal: 'center',
+                    horizontal: 'left',
                 }}
                 transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 260,
+                    horizontal: 240,
                 }}
                 style={{top: 5}}
                 PaperProps={{
                     style: {
-                        maxHeight: '30vh',
+                        maxHeight: '20vw',
                         width: '20vw',
                     },
                 }}

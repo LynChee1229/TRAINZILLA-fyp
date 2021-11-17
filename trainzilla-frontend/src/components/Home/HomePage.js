@@ -17,7 +17,7 @@ const MyComponent = () => {
     const [stations, setStations] = useState([])
     const [stationsList, setStationsList] = useState([])
     const [stationsList2, setStationsList2] = useState([])
-    const [routes, setRoutes] = useState({})
+    // const [routes, setRoutes] = useState({})
     // const containerRef = React.useRef(null);
 
     useEffect(() => {
@@ -26,19 +26,19 @@ const MyComponent = () => {
         setStationsList2(getStationData())
     }, [])
 
-    useEffect(() => {
-        if (departStation !== '' && arriveStation !== '') {
-            setShowTicketDetails(true)
-
-            setRoutes(
-                getRoutesDetails(
-                    departStation,
-                    arriveStation,
-                    Math.floor(Date.now() / 1000)
-                ).routes
-            )
-        } else setShowTicketDetails(false)
-    }, [departStation, arriveStation])
+    // useEffect(() => {
+    //     if (departStation !== '' && arriveStation !== '') {
+    //         setShowTicketDetails(true)
+    //
+    //         setRoutes(
+    //             getRoutesDetails(
+    //                 departStation,
+    //                 arriveStation,
+    //                 Math.floor(Date.now() / 1000)
+    //             ).routes
+    //         )
+    //     } else setShowTicketDetails(false)
+    // }, [departStation, arriveStation])
 
     const departCallback = (depart) => {
         setDepartStation(depart)
@@ -54,40 +54,37 @@ const MyComponent = () => {
         setTicketNum(ticketNum)
     }
 
-    // const stationCallback = (name) => {
-    //
-    //
-    // }
+    const showTicketDetailsCallback = (bool) => {
+        setShowTicketDetails(bool);
+    }
 
     return (
         <Stack spacing={3} className="bgBody bgImg">
             <Header/>
-            <Container className="default-font blueFont" style={{fontSize:"1.6em"}}>
-                <Box className="bold">CHOOSE YOUR DESTINATION</Box>
+
+            <Container className="default-font blueFont">
+                <Box className="bold title">CHOOSE YOUR DESTINATION</Box>
             </Container>
 
-            <Container className="flex" maxWidth="xl">
-                <Box className="center">
-                    <LeftCard
-                        departStation={departStation}
-                        setDepartStation={departCallback}
-                        arriveStation={arriveStation}
-                        setArriveStation={arriveCallback}
-                        showTicketDetails={showTicketDetails}
-                        ticketNum={ticketNum}
-                        setTicketNum={ticketNumCallback}
-                        stations1={stationsList}
-                        stations2={stationsList2}
-                        // setStationList={stationCallback}
-                    />
-                </Box>
+            <Box className="default-font flexContainer">
+                <LeftCard
+                    departStation={departStation}
+                    setDepartStation={departCallback}
+                    arriveStation={arriveStation}
+                    setArriveStation={arriveCallback}
+                    showTicketDetails={showTicketDetails}
+                    ticketNum={ticketNum}
+                    setTicketNum={ticketNumCallback}
+                    stations1={stationsList}
+                    stations2={stationsList2}
+                    // setStationList={stationCallback}
+                />
 
-                <Box>
-                    <Collapse orientation="horizontal" in={showTicketDetails}>
-                        <RightCard routes={routes}/>
-                    </Collapse>
-                </Box>
-            </Container>
+                <Collapse orientation="horizontal" in={showTicketDetails} >
+                    <RightCard depart={departStation} arrival={arriveStation} setShowTicketDetailsCallback={showTicketDetailsCallback}/>
+                </Collapse>
+            </Box>
+
             <Footer/>
         </Stack>
     )
