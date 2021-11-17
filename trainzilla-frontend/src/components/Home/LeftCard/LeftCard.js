@@ -48,11 +48,11 @@ const LeftCard = (props) => {
             elevation={20}
             className="leftCard"
         >
-            <CardContent className="default-font blueFont">
+            <CardContent className="blueFont">
                 <Box
                     sx={{mb: 13}}
                 >
-                    <Box className="bold" style={{fontSize:"16px"}}>DEPARTURE STATION</Box>
+                    <Box className="bold" style={{fontSize: "1vw"}}>DEPARTURE STATION</Box>
                     <StationSelection
                         stationName={departStation}
                         setStationName={departCallback}
@@ -60,7 +60,7 @@ const LeftCard = (props) => {
                     />
 
                     <Box className="center">
-                        <Box className="bold" sx={{flexGrow: 1}} style={{fontSize:"16px"}}>
+                        <Box className="bold" sx={{flexGrow: 1}} style={{fontSize: "1vw"}}>
                             ARRIVAL STATION
                         </Box>
                         <IconButton
