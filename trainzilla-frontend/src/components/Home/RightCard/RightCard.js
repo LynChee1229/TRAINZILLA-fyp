@@ -13,7 +13,7 @@ const RightCard = ({ routes }) => {
     // console.log(pathArr.toString())
     const routeDetail = (routePath) => (
         <Box className="default-font routeBox">
-            <Card className="center routeDetails">{routePath}</Card>
+            <Paper className="center routeDetails">{routePath}</Paper>
             <Button
                 variant="outlined"
                 className="button default-font bold"
@@ -25,7 +25,7 @@ const RightCard = ({ routes }) => {
     )
 
     return (
-        <Card elevation={15} className="rightCard">
+        <Card elevation={15} className="default-font rightCard">
             <CardContent>
                 <Stack>{routeDetail('llalal')}</Stack>
             </CardContent>
