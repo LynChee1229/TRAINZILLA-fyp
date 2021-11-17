@@ -15,11 +15,13 @@ const RouteMap = ({mapRouteData}) => {
     const [seriesData, setSeriesData] = useState(mapRouteData.data);
     const [centralStation, setCentralStation] = useState(mapRouteData.centralStation);
     const [allStation, setAllStation] = useState(mapRouteData.allStation);
+    const [routeNameStation, setRouteNameStation] = useState(mapRouteData.routeNameStation);
 
     useEffect(() => {
         setSeriesData(mapRouteData.data);
         setCentralStation(mapRouteData.centralStation);
         setAllStation(mapRouteData.allStation);
+        setRouteNameStation(mapRouteData.routeNameStation)
     }, [mapRouteData])
 
     Highcharts.addEvent(
@@ -107,9 +109,8 @@ const RouteMap = ({mapRouteData}) => {
                 keys: ['from', 'to'],
                 layoutAlgorithm: {
                     enableSimulation: true,
-                    // linkLength: 7
                 }
-            }
+            },
         },
         series: [
             {
@@ -127,7 +128,29 @@ const RouteMap = ({mapRouteData}) => {
                 id: "lang-tree",
                 data: seriesData
             }
-        ]
+        ],
+        tooltip:
+            {
+                enabled: true,
+                formatter: function () {
+                    let nameArr = undefined;
+
+                    for (let key in routeNameStation) {
+                        if (!routeNameStation.hasOwnProperty(key)) continue;
+
+                        let arr = routeNameStation[key];
+                        if(arr.includes(this.point.name)){
+                            nameArr = key;
+                        };
+                    }
+                    if (nameArr){
+                        return nameArr + ": " + this.point.name;
+                    }else{
+                        return this.point.name;
+                    }
+
+                }
+            }
     };
 
     return <HighchartsReact

@@ -28,6 +28,9 @@ const RightCard = ({ routes }) => {
         <Card elevation={15} className="rightCard">
             <CardContent>
                 <Stack>{routeDetail('llalal')}</Stack>
+                <Stack>{routeDetail('huhu')}</Stack>
+                <Stack>{routeDetail('gaagag')}</Stack>
+                <Stack>{routeDetail('yeye')}</Stack>
             </CardContent>
         </Card>
     )
