@@ -84,6 +84,7 @@ class RouteController extends Controller
                 $arriveID[] = $a->routeID;
             }
 
+            // both stations cannot interchange , and both are in the same route
             if( (count($departLine) == 1) && (count($arriveLine) == 1) && ($departID == $arriveID) )
             {
                 $temp = $fullRoute->whereIn('routeID', $departID);
@@ -105,6 +106,13 @@ class RouteController extends Controller
                 $suggestion[0] = $tempSuggest;
             }
             
+            // both stations' line has the cross over stations
+            // if(array_intersect($departID, $arriveID) && ($departID != $arriveID) ) {
+            //     foreach
+            // }
+
+
+
             foreach($suggestion as $sug) {
                 $prev = null;
                 $disTemp = $timeTemp = 0;
@@ -135,9 +143,9 @@ class RouteController extends Controller
             if(!empty($distance)) {
                 $longDist = max($distance);
                 if($longDist <= 30) {
-                    $ticketPrice = $longDist * 0.30;
+                    $ticketPrice = $longDist * 30/100;
                 } else {
-                    $ticketPrice = (30*0.30) + (($longDist-30)*0.20);
+                    $ticketPrice = (30*30/100) + (($longDist-30)*20/100);
                 }
             }
 
@@ -154,6 +162,7 @@ class RouteController extends Controller
                 'num' => count($suggestion) , 
                 'dID' => $departID,
                 'aID' => $arriveID,
+                'temp' => array_intersect($departID, $arriveID) ,
             ];
         }
         return $data;

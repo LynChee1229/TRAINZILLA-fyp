@@ -62,30 +62,32 @@ const MyComponent = () => {
     return (
         <Stack spacing={3} className="bgBody bgImg">
             <Header/>
-
-            <Container className="default-font blueFont">
-                <Box className="bold title">CHOOSE YOUR DESTINATION</Box>
+            <Container className="default-font blueFont" style={{fontSize:"1.6em"}}>
+                <Box className="bold">CHOOSE YOUR DESTINATION</Box>
             </Container>
 
-            <Box className="default-font flexContainer">
-                <LeftCard
-                    departStation={departStation}
-                    setDepartStation={departCallback}
-                    arriveStation={arriveStation}
-                    setArriveStation={arriveCallback}
-                    showTicketDetails={showTicketDetails}
-                    ticketNum={ticketNum}
-                    setTicketNum={ticketNumCallback}
-                    stations1={stationsList}
-                    stations2={stationsList2}
-                    // setStationList={stationCallback}
-                />
+            <Container className="flex" maxWidth="xl">
+                <Box className="center">
+                    <LeftCard
+                        departStation={departStation}
+                        setDepartStation={departCallback}
+                        arriveStation={arriveStation}
+                        setArriveStation={arriveCallback}
+                        showTicketDetails={showTicketDetails}
+                        ticketNum={ticketNum}
+                        setTicketNum={ticketNumCallback}
+                        stations1={stationsList}
+                        stations2={stationsList2}
+                        // setStationList={stationCallback}
+                    />
+                </Box>
 
-                <Collapse orientation="horizontal" in={showTicketDetails} >
-                    <RightCard routes={routes}/>
-                </Collapse>
-            </Box>
-
+                <Box>
+                    <Collapse orientation="horizontal" in={showTicketDetails}>
+                        <RightCard routes={routes}/>
+                    </Collapse>
+                </Box>
+            </Container>
             <Footer/>
         </Stack>
     )
