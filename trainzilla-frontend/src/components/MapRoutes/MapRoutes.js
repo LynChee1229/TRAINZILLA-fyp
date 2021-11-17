@@ -16,7 +16,7 @@ function MapRoute() {
     return (
         <Paper className="bgImg">
             <Header/>
-            <Container className="flex box" maxWidth="xl">
+            <Container className="box center" maxWidth="xl">
 
                 <NavCard rightContent={rightContentCallback}/>
 

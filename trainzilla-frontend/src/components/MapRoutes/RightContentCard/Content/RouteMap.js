@@ -135,6 +135,8 @@ const RouteMap = ({mapRouteData}) => {
         containerProps={{style: {height: "100%", width: "100%"}}}
         highcharts={Highcharts}
         options={options}
+        imutable={false}
+        allowChartUpdate={false}
     />;
 }
 

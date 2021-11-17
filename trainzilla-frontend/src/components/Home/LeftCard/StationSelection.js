@@ -70,16 +70,15 @@ const StationSelection = ({stationName, setStationName, stations}) => {
                 onClose={handleStationChange}
                 anchorOrigin={{
                     vertical: 'bottom',
-                    horizontal: 'center',
+                    horizontal: 'left',
                 }}
                 transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 260,
+                    horizontal: 240,
                 }}
                 style={{top: 5}}
                 PaperProps={{
                     style: {
-                        maxHeight: '30vh',
+                        maxHeight: '20vw',
                         width: '20vw',
                     },
                 }}

@@ -60,7 +60,10 @@ function RightContent({contentKey}) {
 
         const availableRoute = routeData.map(route => route.routeTitle);
 
-        if (key === 'map' && !_.isEmpty(mapStation())){
+        if (
+            key === 'map'
+            && !_.isEmpty(mapStation())
+        ){
             // console.log('here', mapRouteData)
             return <RouteMap mapRouteData={mapStation()}/>;
         }
@@ -73,7 +76,7 @@ function RightContent({contentKey}) {
     }
 
     return (
-        <Box className="rightPaper center">
+        <Box className="rightPaper">
             {content(contentKey)}
         </Box>
     );
