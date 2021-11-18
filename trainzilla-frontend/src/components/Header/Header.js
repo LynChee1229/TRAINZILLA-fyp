@@ -34,7 +34,7 @@ function Header() {
 
     return (
         <div>
-            <AnnouncementBar />
+            <AnnouncementBar/>
             <Navbar variant="light" expand="xl" id="navBar">
                 <Container>
                     <NavbarBrand className="mx-8">
@@ -43,7 +43,8 @@ function Header() {
                         </NavLink>
                     </NavbarBrand>
 
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Toggle aria-controls="basic-navbar-nav"/>
+
 
                     <Navbar.Collapse className="basic-navbar-nav">
                         <Nav className="m-auto">
@@ -84,7 +85,7 @@ function Header() {
                                     >
                                         <NavDropdown.Item className="ddItem">
                                             <NavLink to="/profile" className="profileHead">
-                                                <Icon.PersonFill size={24} />
+                                                <Icon.PersonFill size={24}/>
                                             </NavLink>
                                         </NavDropdown.Item>
                                         <NavDropdown.Item
@@ -108,7 +109,7 @@ function Header() {
                 </Container>
             </Navbar>
         </div>
-    )
+)
 }
 
 export default Header

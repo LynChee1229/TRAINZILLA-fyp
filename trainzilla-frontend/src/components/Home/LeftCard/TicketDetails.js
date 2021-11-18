@@ -1,5 +1,5 @@
 import React from 'react'
-import {Box, Button, Divider, IconButton} from '@mui/material'
+import {Box, Button, IconButton} from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
@@ -10,6 +10,7 @@ const TicketDetails = (props) => {
     const {
         ticketNum,
         setTicketNum,
+        ticketPrice,
         showTicketDetails,
         departStation,
         arriveStation,
@@ -22,17 +23,17 @@ const TicketDetails = (props) => {
     if (showTicketDetails) {
         return (
             <Box className="ticketDetailBox">
-                <Box className="center" style={{fontSize:"1.2vw", marginBottom:'1vw'}}>
+                <Box className="center" style={{fontSize: "1.2vw", marginBottom: '1vw'}}>
                     <Box sx={{flexGrow: 1}} className="bold">Price per ticket:</Box>
-                    <Box>RM 0.00</Box>
+                    <Box>RM {ticketPrice}</Box>
                 </Box>
 
                 <Box className="center">
-                    <Box className="bold" sx={{flexGrow: 1}} style={{fontSize:"1.2vw"}}>Ticket Amount:</Box>
+                    <Box className="bold" sx={{flexGrow: 1}} style={{fontSize: "1.2vw"}}>Ticket Amount:</Box>
                     <Box className="center">
                         <IconButton
                             onClick={() => {
-                                if (ticketNum !== 0) setTicketNum(ticketNum -1)
+                                if (ticketNum !== 0) setTicketNum(ticketNum - 1)
                             }}
                             color="primary"
                             sx={{p: '1vw', m: '-1vw 0 -1vw 0'}}
@@ -40,13 +41,13 @@ const TicketDetails = (props) => {
                             <RemoveIcon sx={{fontSize: '1.5vw'}}/>
                         </IconButton>
 
-                        <span className="center" style={{width: '1.5vw', fontSize:"1.2vw"}}>
+                        <span className="center" style={{width: '1.5vw', fontSize: "1.2vw"}}>
                             {ticketNum}
                         </span>
 
                         <IconButton
                             onClick={() => {
-                                setTicketNum(ticketNum +1)
+                                setTicketNum(ticketNum + 1)
                             }}
                             color="primary"
                             sx={{p: '1vw', m: '-1vw -1vw -1vw 0'}}
@@ -60,9 +61,9 @@ const TicketDetails = (props) => {
                     variant="contained"
                     className="bookingButton"
                     onClick={handleBookTicketButton}
-                    sx={{fontSize:'1vw'}}
+                    sx={{fontSize: '1vw'}}
                 >
-                    <ShoppingCartIcon sx={{mr:"1vw", fontSize: '1.5vw'}}/>
+                    <ShoppingCartIcon sx={{mr: "1vw", fontSize: '1.5vw'}}/>
                     Book Ticket
                 </Button>
             </Box>

@@ -1,57 +1,67 @@
-import React, {useEffect, useState} from 'react'
+import React, {useState} from 'react'
 import {Box, Button, Card, CardContent, Paper, Stack} from '@mui/material'
 import '../../../styles/css/homepage.sass'
 import '../../../styles/Font/fonts.sass'
-import {getRoutesDetails} from "../../../API/routeDetailsAPI";
+import _ from "lodash";
+import RouteDetails from "./RouteDetails";
 
-const RightCard = ({depart, arrival, setShowTicketDetailsCallback}) => {
+const RightCard = ({routes}) => {
 
-    const [routes, setRoutes] = useState({})
+    const [openRouteDetail, setOpenRouteDetail] = useState(false);
 
-    useEffect(() => {
-        if (depart !== '' && arrival !== '') {
-            setShowTicketDetailsCallback(true)
+    const handleClickOpen = () => {
+        setOpenRouteDetail(true);
+    };
 
-            setRoutes(
-                getRoutesDetails(
-                    depart,
-                    arrival,
-                    Math.floor(Date.now() / 1000)
-                ).routes
-            )
+    const setOpenDialogCallback = (bool) => {
+        setOpenRouteDetail(bool)
+    }
 
-        } else setShowTicketDetailsCallback(false)
-    }, [depart, arrival, setShowTicketDetailsCallback])
+    const routeDetail = (suggestion) => {
+        let path = "", routePath;
 
-    // let pathArr
-    // routes.map((path) => {
-    //     path.timeArrivalByStation.map((station) =>
-    //         pathArr.push(station.stationName)
-    //     )
-    // })
-    // console.log(pathArr.toString())
+        routePath = suggestion.routePassing;
+        for (let i = 0; i < routePath.length; i++) {
+            if (_.isEmpty(path)) {
+                path = routePath[i];
+            } else {
+                path += " >> " + routePath[i];
+            }
+        }
 
-    console.log(routes)
-    const routeDetail = (routePath) => (
-        <Box className="default-font routeBox">
-            <Paper className="center routeDetails">{routePath}</Paper>
+        return <Box className="default-font routeBox">
+            <Paper className="center routeDetails">{path.toUpperCase()}</Paper>
             <Button
                 variant="outlined"
                 className="button default-font bold"
                 sx={{color: '#004684', fontSize: '1vw'}}
+                onClick={handleClickOpen}
             >
                 View Route Details
             </Button>
         </Box>
-    )
+
+
+    }
 
     return (
         <Card elevation={15} className="default-font rightCard">
             <CardContent>
-                <Stack>{routeDetail('llalal')}</Stack>
-                <Stack>{routeDetail('huhu')}</Stack>
-                <Stack>{routeDetail('gaagag')}</Stack>
-                <Stack>{routeDetail('yeye')}</Stack>
+                {
+                    routes.map((suggestion, i) =>
+                        (
+                            <Stack key={i}>
+                                {routeDetail(suggestion)}
+                                <RouteDetails
+                                    openDialog={openRouteDetail}
+                                    setOpenDialog={setOpenDialogCallback}
+                                    routes={suggestion}
+                                />
+                            </Stack>
+                        )
+                    )
+                }
+
             </CardContent>
         </Card>
     )

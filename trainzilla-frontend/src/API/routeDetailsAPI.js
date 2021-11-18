@@ -1,4 +1,4 @@
-export async function getRoutesDetails( departStation, arriveStation, currentTimestamp) 
+export async function getRoutesDetails( departStation, arriveStation )
 {
     let item = {
         departStation: departStation,

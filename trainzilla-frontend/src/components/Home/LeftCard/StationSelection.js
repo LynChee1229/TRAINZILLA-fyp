@@ -1,12 +1,5 @@
 import React from 'react'
-import {
-    Divider,
-    IconButton,
-    InputBase,
-    Menu,
-    MenuItem,
-    Paper,
-} from '@mui/material'
+import {IconButton, InputBase, Menu, MenuItem, Paper,} from '@mui/material'
 import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined'
 import '../../../styles/css/homepage.sass'
 import '../../../styles/Font/fonts.sass'
@@ -19,6 +12,7 @@ const StationSelection = ({stationName, setStationName, stations}) => {
     }
 
     const handleStationChange = (e) => {
+        console.log(e.target.value)
         setStationName(e.target.innerText)
         setAnchorEl(null)
     }
@@ -30,6 +24,7 @@ const StationSelection = ({stationName, setStationName, stations}) => {
                 key={index}
                 onClick={handleStationChange}
                 sx={{fontSize: '1vw', p: '0.5vw'}}
+                value={current}
             >
                 {' '}
                 {current}
@@ -77,7 +72,8 @@ const StationSelection = ({stationName, setStationName, stations}) => {
                     horizontal: 'left',
                 }}
                 transformOrigin={{
-                    horizontal: 240,
+                    horizontal: 245,
+                    vertical: -5
                 }}
                 style={{top: 5}}
                 PaperProps={{

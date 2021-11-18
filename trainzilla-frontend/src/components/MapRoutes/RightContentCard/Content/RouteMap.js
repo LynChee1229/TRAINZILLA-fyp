@@ -130,7 +130,7 @@ const RouteMap = ({mapRouteData}) => {
                 dataLabels: {
                     enabled: true,
                     linkFormat: "",
-                    allowOverlap: false
+                    allowOverlap: true
                 },
                 id: "lang-tree",
                 data: seriesData

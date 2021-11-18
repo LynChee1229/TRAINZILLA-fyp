@@ -14,6 +14,7 @@ const LeftCard = (props) => {
         setArriveStation,
         ticketNum,
         setTicketNum,
+        ticketPrice,
         showTicketDetails,
         stations1,
         stations2,
@@ -83,6 +84,7 @@ const LeftCard = (props) => {
                     showTicketDetails={showTicketDetails}
                     ticketNum={ticketNum}
                     setTicketNum={ticketNumCallback}
+                    ticketPrice={ticketPrice}
                 />
             </CardContent>
         </Card>

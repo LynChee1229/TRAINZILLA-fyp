@@ -6,8 +6,9 @@ import LeftCard from './LeftCard/LeftCard'
 import RightCard from './RightCard/RightCard'
 import Header from "../Header/Header";
 import {getStationData} from '../../API/availableStationAPI'
-import {getRoutesDetails} from '../../API/routeDetailsAPI'
 import Footer from "../Footer/Footer";
+import {getRoutesDetails} from "../../API/routeDetailsAPI";
+import _ from "lodash";
 
 const MyComponent = () => {
     const [departStation, setDepartStation] = useState('')
@@ -17,8 +18,8 @@ const MyComponent = () => {
     const [stations, setStations] = useState([])
     const [stationsList, setStationsList] = useState([])
     const [stationsList2, setStationsList2] = useState([])
-    // const [routes, setRoutes] = useState({})
-    // const containerRef = React.useRef(null);
+    const [routes, setRoutes] = useState([])
+    const [ticketPrice, setTicketPrice] = useState()
 
     useEffect(() => {
         setStations(getStationData())
@@ -26,19 +27,38 @@ const MyComponent = () => {
         setStationsList2(getStationData())
     }, [])
 
-    // useEffect(() => {
-    //     if (departStation !== '' && arriveStation !== '') {
-    //         setShowTicketDetails(true)
-    //
-    //         setRoutes(
-    //             getRoutesDetails(
-    //                 departStation,
-    //                 arriveStation,
-    //                 Math.floor(Date.now() / 1000)
-    //             ).routes
-    //         )
-    //     } else setShowTicketDetails(false)
-    // }, [departStation, arriveStation])
+    useEffect(() => {
+        if (departStation !== '' && arriveStation !== '') {
+            setShowTicketDetails(true)
+
+            getRoutesDetails(departStation, arriveStation)
+                .then(res => {
+                    console.log(res)
+                    let arr = [];
+
+                    for (let i = 0; i < res.num; i++) {
+                        let currentRouteSuggestion = res.routeSuggestion[i], routePassThrough = [];
+
+                        currentRouteSuggestion.forEach(stations => {
+                            if (_.isEmpty(routePassThrough) || !routePassThrough.includes(stations.routeTitle)){
+                                routePassThrough.push(stations.routeTitle)
+                            }
+                        })
+
+                        arr.push({
+                            routePassing: routePassThrough,
+                            suggestRoute: currentRouteSuggestion,
+                            distance: res.routeDistance[i],
+                            timeTaken: res.routeTimeTaken[i]
+                        })
+                    }
+
+                    setRoutes(arr);
+                    setTicketPrice(res.ticketPrice);
+                })
+
+        } else setShowTicketDetails(false)
+    }, [departStation, arriveStation, setShowTicketDetails])
 
     const departCallback = (depart) => {
         setDepartStation(depart)
@@ -54,16 +74,12 @@ const MyComponent = () => {
         setTicketNum(ticketNum)
     }
 
-    const showTicketDetailsCallback = (bool) => {
-        setShowTicketDetails(bool);
-    }
-
     return (
         <Stack spacing={3} className="bgBody bgImg">
             <Header/>
 
             <Container className="default-font blueFont">
-                <Box className="bold title">CHOOSE YOUR DESTINATION</Box>
+                <Box className="default-font blueFont bold title">CHOOSE YOUR DESTINATION</Box>
             </Container>
 
             <Box className="default-font flexContainer">
@@ -75,13 +91,13 @@ const MyComponent = () => {
                     showTicketDetails={showTicketDetails}
                     ticketNum={ticketNum}
                     setTicketNum={ticketNumCallback}
+                    ticketPrice={ticketPrice}
                     stations1={stationsList}
                     stations2={stationsList2}
-                    // setStationList={stationCallback}
                 />
 
                 <Collapse orientation="horizontal" in={showTicketDetails} >
-                    <RightCard depart={departStation} arrival={arriveStation} setShowTicketDetailsCallback={showTicketDetailsCallback}/>
+                    <RightCard routes={routes}/>
                 </Collapse>
             </Box>
 
