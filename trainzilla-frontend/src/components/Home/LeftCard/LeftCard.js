@@ -48,11 +48,9 @@ const LeftCard = (props) => {
             elevation={20}
             className="leftCard"
         >
-            <CardContent className="default-font blueFont">
-                <Box
-                    sx={{mb: 13}}
-                >
-                    <Box className="bold" style={{fontSize:"16px"}}>DEPARTURE STATION</Box>
+            <CardContent className="blueFont" >
+                <Box>
+                    <Box className="bold" sx={{fontSize: "1vw"}}>DEPARTURE STATION</Box>
                     <StationSelection
                         stationName={departStation}
                         setStationName={departCallback}
@@ -60,17 +58,18 @@ const LeftCard = (props) => {
                     />
 
                     <Box className="center">
-                        <Box className="bold" sx={{flexGrow: 1}} style={{fontSize:"16px"}}>
+                        <Box className="bold" sx={{flexGrow: 1, fontSize: "1vw"}} >
                             ARRIVAL STATION
                         </Box>
                         <IconButton
                             color="primary"
-                            sx={{p: '5px', m: '-10px 0 -10px 0'}}
+                            sx={{m: '-1vw 0 -1vw 0'}}
                             onClick={stationSwitching}
                         >
-                            <ImportExportIcon/>
+                            <ImportExportIcon sx={{fontSize: '1.5vw'}}/>
                         </IconButton>
                     </Box>
+
                     <StationSelection
                         stationName={arriveStation}
                         setStationName={arriveCallback}
@@ -79,7 +78,6 @@ const LeftCard = (props) => {
                 </Box>
 
                 <TicketDetails
-
                     departStation={departStation}
                     arriveStation={arriveStation}
                     showTicketDetails={showTicketDetails}

@@ -14,17 +14,23 @@ function RightContent({contentKey}) {
     }, [])
 
     const mapStation = () => {
-        let arr = [], allStation = [], routeMapData = {}
+        let arr = [], allStation = [], routeMapData = {}, routesNameStation = {};
 
         if (routeData.length !== 0) {
             for (let i = 0; i < routeData.length; i++) {
+                const title = routeData[i].routeTitle;
                 const station = routeData[i].station;
+                const routeStation = [];
 
                 for (let j = 0; j < station.length; j++) {
                     const firstStation = station[j];
                     const nextStation = station[j + 1];
 
-                    allStation.push(firstStation.stationName)
+                    allStation.push(firstStation.stationName);
+
+                    routeStation.push(firstStation.stationName);
+                    routesNameStation[title] = routeStation;
+
                     if (nextStation) {
                         arr.push([firstStation.stationName, nextStation.stationName])
                     }
@@ -32,6 +38,7 @@ function RightContent({contentKey}) {
             }
             routeMapData.data = arr;
             routeMapData.allStation = allStation;
+            routeMapData.routeNameStation = routesNameStation;
             routeMapData.centralStation = "KL Sentral"
         }
 

@@ -29,7 +29,7 @@ function NavCard({rightContent}) {
                     onClick={() => {
                         rightContent('map')
                     }}
-                    sx={{color: '#004684'}}
+                    sx={{color: '#004684', fontSize: "1.3vw"}}
                 >
                     Train Route Map
                 </Button>
@@ -50,7 +50,7 @@ function NavCard({rightContent}) {
                                     onClick={() => {
                                         rightContent(name)
                                     }}
-                                    sx={{color: '#004684'}}
+                                    sx={{color: '#004684', fontSize: "1.3vw"}}
                                 >
                                     {name}
                                 </Button>
