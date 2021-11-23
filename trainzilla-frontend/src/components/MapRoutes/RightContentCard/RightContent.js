@@ -27,21 +27,20 @@ function RightContent({contentKey}) {
                     const nextStation = station[j + 1];
 
                     allStation.push(firstStation.stationName);
-
                     routeStation.push(firstStation.stationName);
-                    routesNameStation[title] = routeStation;
 
                     if (nextStation) {
                         arr.push([firstStation.stationName, nextStation.stationName])
                     }
                 }
+                routesNameStation[title] = routeStation;
             }
             routeMapData.data = arr;
             routeMapData.allStation = allStation;
             routeMapData.routeNameStation = routesNameStation;
             routeMapData.centralStation = "KL Sentral"
         }
-
+        console.log(routeMapData)
         return routeMapData;
     }
 
