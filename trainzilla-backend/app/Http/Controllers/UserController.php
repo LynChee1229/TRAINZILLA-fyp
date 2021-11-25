@@ -168,6 +168,7 @@ class UserController extends Controller
                     $data['fail'] = "Password does not match!";
                     return $data;
                 } else {
+                    Ticket::where('userUniqueCode', $req->uUC)->delete();
                     User::where('userUniqueCode', $req->uUC)->delete();
                     $data['success'] = "Success";
                     return $data;
@@ -209,4 +210,94 @@ class UserController extends Controller
         }
         return null;
     }
+
+    function bookingDetails(Request $req)
+    {
+        if($req->uUC) {
+            $data = User::select('userVoucher', 'userPoint')->where('userUniqueCode', $req->uUC)->first();
+            if(isset($data)) {
+                $payment = $req->ticketNum * $req->ticketPrice;
+                $point = $payment * 100;
+
+                if(intval($data->userVoucher) > 0) {
+                    $total = round($req->ticketPrice * 0.90, 2);
+                    $total = round($total * $req->ticketNum, 2);
+                } else {
+                    $total = $payment;
+                }
+
+                $data->payment = $payment;
+                $data->point = $point;
+                $data->total = $total;
+                return $data;
+            }
+        }
+        return NULL;
+    }
+
+    function proceedToPayment(Request $req)
+    {
+        $result['status'] = 'failed';
+        $date = date('Y-m-d H:i:s');
+        $ticketCode = $method = "";
+        if($req->uUC) {
+            $user = User::where('userUniqueCode', $req->uUC)->first();
+            if($user) {
+                for( $i=1; $i<=$req->ticketNum; $i++ ){
+                    $ticket = new Ticket;
+                    $id = Ticket::max("ticketID") ? (Ticket::max("ticketID") + 1) : 1;
+                    $ticket->ticketUniqueCode = "ticket".$id.uniqid().$id;
+                    $ticket->ticketID = $id;
+
+                    $ticketCode .= "\n   ".$ticket->ticketUniqueCode; 
+
+                    if(intval($req->userVoucher) > 0) {
+                        $ticket->ticketPrice = $req->total / $req->ticketNum;
+                        User::where('userUniqueCode', $req->uUC)->update(['userVoucher' => ($user->userVoucher - 1)]);
+                    } else {
+                        $ticket->ticketPrice = $req->ticketPrice;
+                    }
+
+                    $depart = Station::where('stationName', $req->departStation)->first();
+                    $arrive = Station::where('stationName', $req->arriveStation)->first();
+                    $ticket->ticketDeparture = $depart->stationID;
+                    $ticket->ticketArrival = $arrive->stationID;
+
+                    if($req->paymentMethod == "banking") {
+                        $method = "Online Banking";
+                    } else if($req->paymentMethod == "tngo") {
+                        $method = "Touch N' Go";
+                    } else if($req->paymentMethod == "grab") {
+                        $method = "Grab Pay";
+                    } else if($req->paymentMethod == "card") {
+                        $method = "Credit / Debit Card";
+                    } else {
+                        $method = "Others";
+                    }
+
+                    $ticket->ticketPaymentMethod = $method; 
+                    $ticket->ticketStatus = 1;
+                    $ticket->ticketPurchaseDate = $date;
+                    $ticket->ticketExpiryDate = date('Y-m-d H:i:s', strtotime($date. ' + 90 days'));
+                    $ticket->userUniqueCode = $user->userUniqueCode;
+                    $ticket->save();      
+                    
+                    User::where('userUniqueCode', $req->uUC)->update(['userPoint' => ($user->userPoint + $req->earnedPoint)]);
+                }
+                $temp = (intval($req->userVoucher) > 0) ? "1 voucher has been applied automatically" : "";
+
+                $msg = ['content'=>"Dear ".$user->userName.", \n\n\t\t:: Trainzilla Ticket E-Receipt ::" ."\n\nDeparture Station: \t".$req->departStation ."\nArrival Station: \t".$req->arriveStation ."\nEach Ticket Fares: \tRM ".$req->ticketPrice ."\nNumber of Tickets: \t".$req->ticketNum ."\nPayment: \t\tRM ".$req->payment ."\nPayment Method: \t".$method ."\nEarned Points: \t\t".$req->earnedPoint ."\nTotal Reward Points: \t".$user->userPoint."\n\n".$temp ."Final Payment: \t\tRM ".$req->total ."\n\n\nTicket Code : ".$ticketCode."\n\n\nPlease feel free to contact us if you have any questions.\n\nWebsite: http://trainzilla.com.my\nEmail: customerservice@trainzilla.com" ];
+
+                Mail::send(['text'=>'email'], $msg, function($message) use ($user) {
+                    $message->to($user->userEmail, $user->userName)
+                    ->subject('Your Ticket E-Receipt from Trainzilla')
+                    ->from('receipt@trainzilla.com','TRAINZILLA');
+                });
+                $result['status'] = 'success';
+            }
+        }
+        return $result;
+    }
+
+
 }

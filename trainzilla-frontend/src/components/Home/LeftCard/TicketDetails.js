@@ -1,10 +1,12 @@
 import React from 'react'
+import {useHistory} from 'react-router-dom'
 import {Box, Button, IconButton} from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import RemoveIcon from '@mui/icons-material/Remove'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import '../../../styles/css/homepage.sass'
 import '../../../styles/Font/fonts.sass'
+import $ from 'jquery'
 
 const TicketDetails = (props) => {
     const {
@@ -16,9 +18,25 @@ const TicketDetails = (props) => {
         arriveStation,
     } = props
 
+    const history = useHistory()
+    const user = JSON.parse(localStorage.getItem('user-info'))
+
     const handleBookTicketButton = () => {
-        console.log('here', departStation, arriveStation)
+        if(ticketNum == 0) {
+            $('.ticketError').html('Please select the number of tickets.');
+        } else if (!user) {
+            history.push('/sign-in');
+        } else {
+            history.push( {pathname: "/booking-confirmation",
+            state: {
+                ticketNum: ticketNum , 
+                ticketPrice: ticketPrice ,
+                departStation: departStation ,
+                arriveStation: arriveStation ,
+            }});
+        }
     }
+
 
     if (showTicketDetails) {
         return (
@@ -33,7 +51,10 @@ const TicketDetails = (props) => {
                     <Box className="center">
                         <IconButton
                             onClick={() => {
-                                if (ticketNum !== 0) setTicketNum(ticketNum - 1)
+                                if (ticketNum !== 0) {
+                                    setTicketNum(ticketNum - 1);
+                                    $('.ticketError').html('');
+                                }
                             }}
                             color="primary"
                             sx={{p: '1vw', m: '-1vw 0 -1vw 0'}}
@@ -46,8 +67,10 @@ const TicketDetails = (props) => {
                         </span>
 
                         <IconButton
+                            className="numBtn"
                             onClick={() => {
-                                setTicketNum(ticketNum + 1)
+                                setTicketNum(ticketNum + 1);
+                                $('.ticketError').html('');
                             }}
                             color="primary"
                             sx={{p: '1vw', m: '-1vw -1vw -1vw 0'}}
@@ -56,6 +79,8 @@ const TicketDetails = (props) => {
                         </IconButton>
                     </Box>
                 </Box>
+
+                <div className="text-danger ticketError"></div>
 
                 <Button
                     variant="contained"

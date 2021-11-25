@@ -11,14 +11,14 @@ class ProfileTicket extends Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:8000/api/profileticket')
-        .then(res => {
-            const data = res.data
-            this.setState({ data });
-        })
-        .catch(function (error) {
-            console.log(error);
-        }); 
+        // axios.get('http://localhost:8000/api/profileticket')
+        // .then(res => {
+        //     const data = res.data
+        //     this.setState({ data });
+        // })
+        // .catch(function (error) {
+        //     console.log(error);
+        // }); 
         
         $(document).ready(function () {
             setTimeout(function(){

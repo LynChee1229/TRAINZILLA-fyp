@@ -1,15 +1,17 @@
 import {BrowserRouter, Redirect, Route, Switch} from 'react-router-dom'
 import SignIn from '../components/Sign Up & In/Sign-in'
 import HomePage from '../components/Home/HomePage'
+import BookingConfirmation from '../components/Home/BookingConfirmation'
 import MapRoutes from '../components/MapRoutes/MapRoutes'
 import Announcement from '../components/Announcement/Annoucement'
 import AboutUs from '../components/AboutUs/AboutUs'
-import Profile from "../components/Profile/Profile";
+import Profile from "../components/Profile/Profile"
+import SignUP from "../components/Sign Up & In/Sign-up"
+import ForgetPassword from '../components/Sign Up & In/ForgetPassword'
 import { createTheme, ThemeProvider } from '@mui/material'
 import { useEffect, useState } from 'react'
 import ThemeEnabler from '../components/ThemeEnabler'
-import SignUP from "../components/Sign Up & In/Sign-up";
-import ForgetPassword from '../components/Sign Up & In/ForgetPassword'
+
 
 function App() {
     //this is the main file
@@ -90,6 +92,12 @@ function App() {
                         path={'/forget-password'}
                         exact
                         component={() => <ForgetPassword />}
+                    />
+
+                    <Route
+                        path={'/booking-confirmation'}
+                        exact
+                        component={() => <BookingConfirmation />}
                     />
 
                     <Route
