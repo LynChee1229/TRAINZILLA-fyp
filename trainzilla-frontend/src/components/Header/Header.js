@@ -10,6 +10,7 @@ import { NavLink } from 'react-router-dom'
 import * as Icon from 'react-bootstrap-icons'
 import '../../styles/css/header.sass'
 import 'bootstrap/dist/css/bootstrap.css'
+import { BiLogOut } from "react-icons/bi"
 
 function Header() {
     const user = JSON.parse(localStorage.getItem('user-info'))
@@ -93,7 +94,7 @@ function Header() {
                                             id="logoutBtn"
                                             onClick={logOut}
                                         >
-                                            Logout
+                                                <BiLogOut size={24}/> <span className="ml-2">Logout</span>
                                         </NavDropdown.Item>
                                     </NavDropdown>
                                 </>
@@ -109,7 +110,7 @@ function Header() {
                 </Container>
             </Navbar>
         </div>
-)
+    )
 }
 
 export default Header
