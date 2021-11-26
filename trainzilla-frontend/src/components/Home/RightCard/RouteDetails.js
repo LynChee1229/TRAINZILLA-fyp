@@ -3,8 +3,13 @@ import {useEffect, useRef, useState} from "react";
 import Highcharts from 'highcharts/highstock'
 import HighchartsReact from 'highcharts-react-official'
 import timeline from 'highcharts/modules/timeline'
-import dayjs from "dayjs";
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
 
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault('Australia/Sydney');
 
 if (typeof Highcharts === "object") {
     timeline(Highcharts);
@@ -12,7 +17,6 @@ if (typeof Highcharts === "object") {
 
 export default function RouteDetails({openDialog, setOpenDialog, routes}) {
 
-    const [suggestionRoute, setSuggestionRoute] = useState([]);
     const [options, setOptions] = useState({
         chart: {
             zoomType: 'x',
@@ -55,7 +59,7 @@ export default function RouteDetails({openDialog, setOpenDialog, routes}) {
             dataLabels: {
                 allowOverlap: false,
                 format: '<span style="color:{point.color}">● </span><span style="font-weight: bold;" > ' +
-                    '{point.x:%d %b %Y}</span><br/>{point.label}'
+                    '{point.x: %l:%M %p}</span><br/>{point.label}'
             },
             marker: {
                 symbol: 'circle'
@@ -70,10 +74,10 @@ export default function RouteDetails({openDialog, setOpenDialog, routes}) {
 
     useEffect(() => {
         let arr = [], timestamp = dayjs().valueOf();
-        setSuggestionRoute(routes.suggestRoute)
+        // setSuggestionRoute(routes.suggestRoute)
         routes.suggestRoute.forEach(suggestion => {
             arr.push({
-                x: timestamp,
+                x: timestamp + 28800000, //28800000 is local timezone (GMT +08:00)
                 name: suggestion.routeTitle,
                 label: suggestion.stationName
             });
@@ -122,7 +126,7 @@ export default function RouteDetails({openDialog, setOpenDialog, routes}) {
                 dataLabels: {
                     allowOverlap: false,
                     format: '<span style="color:{point.color}">● </span><span style="font-weight: bold;" > ' +
-                        '{point.x:%d %b %Y}</span><br/>{point.label}'
+                        '{point.x: %l:%M %p}</span><br/>{point.label}'
                 },
                 marker: {
                     symbol: 'circle'
