@@ -180,41 +180,41 @@ class RouteController extends Controller
 
             
 
-            // foreach($suggestion as $sug) {
-            //     $prev = null;
-            //     $disTemp = $timeTemp = 0;
-            //     foreach($sug as $curr) {
-            //         if($prev != null) {
-            //             $A = Station::where('stationID', $prev)->first();
-            //             $B = Station::where('stationID', $curr->stationID)->first();
+            foreach($suggestion as $sug) {
+                $prev = null;
+                $disTemp = $timeTemp = 0;
+                foreach($sug as $curr) {
+                    if($prev != null) {
+                        $A = Station::where('stationID', $prev)->first();
+                        $B = Station::where('stationID', $curr->stationID)->first();
 
-            //             $rsTemp = Stos::where([
-            //                 ['stationA', '=', $A->stationName],
-            //                 ['stationB', '=', $B->stationName],
-            //             ])->orWhere([
-            //                 ['stationA', '=', $B->stationName],
-            //                 ['stationB', '=', $A->stationName],
-            //             ])->first();
+                        $rsTemp = Stos::where([
+                            ['stationA', '=', $A->stationName],
+                            ['stationB', '=', $B->stationName],
+                        ])->orWhere([
+                            ['stationA', '=', $B->stationName],
+                            ['stationB', '=', $A->stationName],
+                        ])->first();
 
-            //             if($rsTemp) {
-            //                 $disTemp += $rsTemp->stationDistance;
-            //                 $timeTemp += $rsTemp->stationTimeTaken;
-            //             }
-            //         }
-            //         $prev = $curr->stationID;
-            //     }
-            //     $distance[] = $disTemp;
-            //     $timeTaken[] = $timeTemp;
-            // }
+                        if($rsTemp) {
+                            $disTemp += $rsTemp->stationDistance;
+                            $timeTemp += $rsTemp->stationTimeTaken;
+                        }
+                    }
+                    $prev = $curr->stationID;
+                }
+                $distance[] = $disTemp;
+                $timeTaken[] = $timeTemp;
+            }
 
-            // if(!empty($distance)) {
-            //     $longDist = max($distance);
-            //     if($longDist <= 30) {
-            //         $ticketPrice = $longDist * 30/100;
-            //     } else {
-            //         $ticketPrice = (30*30/100) + (($longDist-30)*20/100);
-            //     }
-            // }
+            if(!empty($distance)) {
+                $longDist = max($distance);
+                if($longDist <= 30) {
+                    $ticketPrice = $longDist * 30/100;
+                } else {
+                    $ticketPrice = (30*30/100) + (($longDist-30)*20/100);
+                }
+            }
 
             $data = [
                 'status' => True ,
