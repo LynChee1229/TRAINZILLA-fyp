@@ -85,7 +85,7 @@ function Header() {
                                     >
                                         <NavDropdown.Item className="ddItem">
                                             <NavLink to="/profile" className="profileHead">
-                                                <Icon.PersonFill size={24}/>
+                                                <Icon.PersonFill size={24}/> Profile
                                             </NavLink>
                                         </NavDropdown.Item>
                                         <NavDropdown.Item

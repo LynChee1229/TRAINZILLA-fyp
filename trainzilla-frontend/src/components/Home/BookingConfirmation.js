@@ -5,6 +5,8 @@ import Footer from '../Footer/Footer';
 import '../../styles/css/booking_confirmation.sass'
 import $ from 'jquery'
 import { BsBagCheckFill } from "react-icons/bs"
+import axios from "axios";
+import _ from "lodash";
 
 const BookingConfirmation = () => {
     const location = useLocation()
@@ -29,40 +31,37 @@ const BookingConfirmation = () => {
         setTicketPrice(location.state.ticketPrice);
         setDepartStation(location.state.departStation);
         setArriveStation(location.state.arriveStation);
+        loadPage();
     }, [arriveStation, departStation, location, ticketNum, ticketPrice]);
 
-    loadPage();
 
     async function loadPage()
     {
         if(!user) {
             history.push('/sign-in');
         } else {
-            let item = { 
+            let result = {};
+            await axios.post("http://localhost:8000/api/bookingDetails", {
                 uUC: user.userUniqueCode ,
                 ticketNum: ticketNum ,
-                ticketPrice: ticketPrice , 
-            };
-            let res = await fetch("http://localhost:8000/api/bookingDetails", {
-                method: 'POST',
-                body: JSON.stringify(item),
-                headers: {
-                    "Content-Type": 'application/json',
-                    "Accept": 'application/json'
-                }
-            });
-            res = await res.json();
-            if(res) {
-                setVoucher(res.userVoucher);
-                setPoint(res.point);
-                setPayment(res.payment);
-                setTotal(res.total);
+                ticketPrice: ticketPrice
+            })
+                .then(res => {
+                    result = (res.data);
+                })
+
+            if(!_.isEmpty(result)) {
+                console.log(result)
+                setVoucher(result.userVoucher);
+                setPoint(result.point);
+                setPayment(result.payment);
+                setTotal(result.total);
             }
         }
     }
 
     const handleChange = () => {
-        var method = $('.form-select').val();
+        const method = $('.form-select').val();
         setMethod(method);
     }
 

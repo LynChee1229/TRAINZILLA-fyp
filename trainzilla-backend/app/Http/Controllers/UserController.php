@@ -100,7 +100,7 @@ class UserController extends Controller
         if($req->infoType == "dob") {
             User::where('userUniqueCode', $req->uUC)->update(['userDOB' => $req->infoValue]);
         }
-        
+
         return User::where('userUniqueCode', $req->uUC)->first();
     }
 
@@ -120,7 +120,7 @@ class UserController extends Controller
                     return $data;
                 }
             }
-            
+
         }
         $data['fail'] = "Failed to reset password. Please try again";
         return $data;
@@ -145,10 +145,10 @@ class UserController extends Controller
 
                 $result['success'] = "An email has been sent to you, please check your mailbox to reset your password.";
                 return $result;
-            } 
+            }
             else if(!$user) {
                 $result['fail'] = "Record is not found.";
-            } 
+            }
             else if($user->userStatus == 0) {
                 $result['fail'] = "Your account is inactive. Please contact customerservice@trainzilla.com for help or register a new account.";
             }
@@ -174,7 +174,7 @@ class UserController extends Controller
                     return $data;
                 }
             }
-            
+
         }
         $data['fail'] = "Failed to delete account. Please try again";
         return $data;
@@ -249,7 +249,7 @@ class UserController extends Controller
                     $ticket->ticketUniqueCode = "ticket".$id.uniqid().$id;
                     $ticket->ticketID = $id;
 
-                    $ticketCode .= "\n   ".$ticket->ticketUniqueCode; 
+                    $ticketCode .= "\n   ".$ticket->ticketUniqueCode;
 
                     if(intval($req->userVoucher) > 0) {
                         $ticket->ticketPrice = $req->total / $req->ticketNum;
@@ -275,13 +275,13 @@ class UserController extends Controller
                         $method = "Others";
                     }
 
-                    $ticket->ticketPaymentMethod = $method; 
+                    $ticket->ticketPaymentMethod = $method;
                     $ticket->ticketStatus = 1;
                     $ticket->ticketPurchaseDate = $date;
                     $ticket->ticketExpiryDate = date('Y-m-d H:i:s', strtotime($date. ' + 90 days'));
                     $ticket->userUniqueCode = $user->userUniqueCode;
-                    $ticket->save();      
-                    
+                    $ticket->save();
+
                     User::where('userUniqueCode', $req->uUC)->update(['userPoint' => ($user->userPoint + $req->earnedPoint)]);
                 }
                 $temp = (intval($req->userVoucher) > 0) ? "1 voucher has been applied automatically" : "";

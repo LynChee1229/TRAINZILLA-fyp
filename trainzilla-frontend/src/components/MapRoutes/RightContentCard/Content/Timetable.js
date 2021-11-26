@@ -1,24 +1,23 @@
 import React, {useEffect, useState} from 'react';
 import {Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from '@mui/material';
-import dayjs from 'dayjs';
 
 function Timetable({routeData, currentRoute}) {
 
     const [routeObj, setRouteObj] = useState({});
     const [routeTrainNum, setRouteTrainNum] = useState();
     const [routeStations, setRouteStations] = useState([]);
-    const [durationSToS, setDurationSToS] = useState();
-    const [trainInterval, setTrainInterval] = useState();
+    // const [durationSToS, setDurationSToS] = useState();
+    // const [trainInterval, setTrainInterval] = useState();
 
     useEffect(() => {
         let arr = (routeData.filter(route => route['routeTitle'] === currentRoute));
         let stations = [];
         stations.push(arr.flatMap(({station}) => {
             return station.reduce((segments, current,) => {
-                    segments.push({
-                        name: current.stationName,
-                        departTime: current.stationDeparture
-                    });
+                segments.push({
+                    name: current.stationName,
+                    departTime: current.stationDeparture
+                });
                 return segments;
             }, []);
         }))
@@ -26,8 +25,8 @@ function Timetable({routeData, currentRoute}) {
         setRouteObj(arr[0]);
         setRouteTrainNum(arr[0].routeTrainNum);
         setRouteStations(stations[0]);
-        setDurationSToS(5)
-        setTrainInterval(5)
+        // setDurationSToS(5)
+        // setTrainInterval(5)
     }, [routeData, currentRoute])
 
     console.log(routeObj, routeTrainNum, routeStations)

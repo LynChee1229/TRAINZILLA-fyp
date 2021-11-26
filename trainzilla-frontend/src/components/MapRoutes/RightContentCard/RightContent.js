@@ -40,7 +40,7 @@ function RightContent({contentKey}) {
             routeMapData.routeNameStation = routesNameStation;
             routeMapData.centralStation = "KL Sentral"
         }
-        console.log(routeMapData)
+        // console.log(routeMapData)
         return routeMapData;
     }
 

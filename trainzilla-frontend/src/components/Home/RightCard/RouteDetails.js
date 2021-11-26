@@ -83,7 +83,7 @@ export default function RouteDetails({openDialog, setOpenDialog, routes}) {
             });
             timestamp += Math.random() * (600000 - 600) + 600
         })
-        console.log(arr)
+
         setOptions({
             chart: {
                 zoomType: 'x',

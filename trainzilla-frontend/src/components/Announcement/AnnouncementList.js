@@ -34,7 +34,7 @@ class AnnouncementList extends Component {
     render() {
         return(
             <div id="announceComponent">
-                <table class="table table-bordered table-striped" id="announcementTable">
+                <table className="table table-bordered table-striped" id="announcementTable">
                     <thead>
                         <tr>
                             <th className="aDate">Date</th>
@@ -44,8 +44,8 @@ class AnnouncementList extends Component {
                     </thead>
                     <tbody id="announcementTableBody">
                     {
-                        this.state.data.map((aitem) => 
-                        <tr>
+                        this.state.data.map((aitem, key) =>
+                        <tr key={key}>
                             <td>
                                 <div className="aDate">{aitem.reportDate}</div>
                             </td>

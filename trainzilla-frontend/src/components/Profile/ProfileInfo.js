@@ -223,7 +223,7 @@ const ProfileInfo = () => {
 
     return (
         <div id="infoComponent">
-            <div class="userDetails">
+            <div className="userDetails">
                 <Alert variant="success" className="pwSuccess d-none"/>
                 
                 <div>
@@ -251,7 +251,7 @@ const ProfileInfo = () => {
                         <FaEdit className="editIcon"/> 
                     </p>
                     <p className="inputContainer d-none">
-                        <input type="email" defaultValue={user.userEmail} size="50" maxlength="40"/>
+                        <input type="email" defaultValue={user.userEmail} size="50" maxLength="40"/>
                         <button className="btn discardBtn"><BsXCircle/> CANCEL </button>
                         <button className="btn saveInfo" value="email"><FaRegCheckCircle/> SAVE </button>
                     </p>
@@ -264,7 +264,7 @@ const ProfileInfo = () => {
                         <FaEdit className="editIcon"/> 
                     </p>
                     <p className="inputContainer d-none">
-                        <input type="tel" defaultValue={user.userContact} size="50" maxlength="40" pattern="([1]{1}[0-9]{8})|([1]{1}[0-9]{9}|[0]{1}[1]{1}[0-9]{8})|([0]{1}[1]{1}[0-9]{9})"/>
+                        <input type="tel" defaultValue={user.userContact} size="50" maxLength="40" pattern="([1]{1}[0-9]{8})|([1]{1}[0-9]{9}|[0]{1}[1]{1}[0-9]{8})|([0]{1}[1]{1}[0-9]{9})"/>
                         <button className="btn discardBtn"><BsXCircle/> CANCEL </button>
                         <button className="btn saveInfo" value="contact"><FaRegCheckCircle/> SAVE </button>
                     </p>

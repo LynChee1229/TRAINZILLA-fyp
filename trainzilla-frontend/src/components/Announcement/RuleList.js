@@ -34,7 +34,7 @@ class RuleList extends Component {
     render() {
         return(
             <div id="ruleComponent" className="d-none">
-                <table class="table table-bordered table-striped" id="ruleTable">
+                <table className="table table-bordered table-striped" id="ruleTable">
                     <thead>
                         <tr>
                             <th className="rDate">Date</th>
@@ -44,8 +44,8 @@ class RuleList extends Component {
                     </thead>
                     <tbody id="ruleTableBody">
                     {
-                        this.state.list.map((ritem) => 
-                        <tr>
+                        this.state.list.map((ritem, key) =>
+                        <tr key={key}>
                             <td>
                                 <div className="rDate">{ritem.ruleDate}</div>
                             </td>

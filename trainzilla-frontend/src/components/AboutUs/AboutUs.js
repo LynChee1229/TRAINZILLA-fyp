@@ -123,7 +123,7 @@ class AboutUs extends Component {
                                     <img
                                         src={supervisor}
                                         alt="ms suraya"
-                                        class="mdmPic"
+                                        className="mdmPic"
                                     />
                                 </div>
                                 <div className="col">
