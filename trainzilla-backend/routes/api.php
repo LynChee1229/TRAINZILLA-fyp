@@ -28,6 +28,9 @@ Route::post('resetPassword', [UserController::class, 'resetPassword']);
 Route::post('forgetPassword', [UserController::class, 'forgetPassword']);
 Route::post('deleteUserAccount', [UserController::class, 'deleteUserAccount']);
 
+Route::post('userTicketDetails', [UserController::class, 'userTicketDetails']);
+Route::post('redeemPoint', [UserController::class, 'redeemPoint']);
+
 Route::get('announcementList', [UserController::class, 'announcementList']);
 Route::get('ruleList', [UserController::class, 'ruleList']);
 Route::get('announcementBar', [UserController::class, 'announcementBar']);

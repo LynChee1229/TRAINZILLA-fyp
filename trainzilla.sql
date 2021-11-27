@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 29, 2021 at 12:29 AM
+-- Generation Time: Nov 27, 2021 at 05:48 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -44,10 +44,14 @@ CREATE TABLE `admins` (
 INSERT INTO `admins` (`adminUniqueCode`, `adminID`, `adminName`, `adminEmail`, `adminPassword`, `adminContact`, `adminStatus`) VALUES
 ('admin106170f60d821d810', 10, 'Dummy 10', '10@gmail.com', '$2y$10$NeR4Q6Jki6h/w.f.uAUkz.VpssK1l/ZR4JmDtXpLxKjaAFqblQDlO', 123456789, 0),
 ('admin116170f6214ea3f11', 11, 'Dummy 11', '11@gmail.com', '$2y$10$nmqz7BPzHLIVNFNS.wbXdeLGJKTk1Ttp8AQasrSAgKqLBAXOx7z1S', 123456789, 0),
-('admin190qknrtas671', 1, 'Chan Lin Chee', 'lyn@gmail.com', '$2y$10$PaUOde/XObsDeSjJeUbKQOq3ZbCoP2kl2NhaAs6btG.Q/HpXLFpWi', 1231231234, 1),
-('admin2rtmokas67890', 2, 'Test 222', '111@gmail.com', '$2y$10$XOs.T6yN0jXNOZ094TzaWO.fBOHWb/Whh3G5RJqAVpbPG5bAwvW3y', 123123123, 1),
+('admin12617b5c7dde11012', 12, 'Dummy 12', 'dummy12@test.com', '$2y$10$XKZ8cRmVDz49Vlu7XVxQgepePFNpWRtnSYajqoHJbkKVE3V8p9qdq', 1212121212, 0),
+('admin13617c12e9ab43b13', 13, 'Dummy 13', 'dummy13@test.com', '$2y$10$5bDiyyuEcHfzBtI5vFqcQ.GoLELZVvl0wsj3DqmxShiLFRzhbnKO6', 131313133, 1),
+('admin1461817d7daccd514', 14, 'Admin 14', 'admin14@test.com', '$2y$10$9YSt95R/dCwB0RRuas0Xqelm0qD5GW6DugDNJl38y6WKUV3O2gXkG', 1923423456, 1),
+('admin15618a33003e72615', 15, 'new admin', 'newadd@gmail.com', '$2y$10$KPEJMK5.lhYw0uQyZsv0aO67/nxI2EBofvPyp2Xn4cGFJguchs19m', 112345675, 1),
+('admin190qknrtas671', 1, 'Chan Lin Chee', 'lyn@gmail.com', '$2y$10$7MKVYoAI1DCvwN.vom89Ku.YRWA1qbHw4yHzJZ8SDk62BF8I2Upba', 1231231234, 1),
+('admin2rtmokas67890', 2, 'Test 222', '111@gmail.com', '$2y$10$UgMVkyaqfY5oXrlyHzGqp.L1Ex2DuPu4NW5.1RwdlAFmf8mj7pLhq', 123123123, 1),
 ('admin36170f07ee3c893', 3, 'Evan Lin Yan Jun', 'evan@icloud.com', '$2y$10$zGqImflYALFc8l0wkFiY1OG.bUhfDW.U5Gh0vvJ6pKtbzFTzYzy7K', 163577219, 1),
-('admin46170f348c527f4', 4, 'Dummy 4', '4@gmail.com', '$2y$10$0YZmInVGDHPmdW31ZFbtgufB9UUmi38c6ICKIF0b3VtselImzStSS', 123456789, 0),
+('admin46170f348c527f4', 4, 'Dummy 4', '4@gmail.com', '$2y$10$0YZmInVGDHPmdW31ZFbtgufB9UUmi38c6ICKIF0b3VtselImzStSS', 123456789, 1),
 ('admin56170f362340665', 5, 'Dummy 5', '5@gmail.com', '$2y$10$oSPltEAUwy26N.wf3B6Q5ee4PV44rQw16xJU2kmi31cKmLvTeZ6oq', 123456789, 0),
 ('admin66170f39ce8d726', 6, 'Dummy 6', '6@gmail.com', '$2y$10$psax5vKxJNE5uPC2JhlLZO9232e8jFpwX0yTz5v5tzv0hGkjcilUe', 123456789, 0),
 ('admin76170f3c1c0dd47', 7, 'Dummy 7', '7@gmail.com', '$2y$10$m.skMzUpLnqQeuhIP3EoMuVLdm7NHimOM5Lxxc/x5WCQZDqGSMMq.', 123456789, 0),
@@ -74,12 +78,12 @@ CREATE TABLE `announcements` (
 --
 
 INSERT INTO `announcements` (`reportID`, `reportTitle`, `reportDetails`, `reportDate`, `reportStatus`, `adminUniqueCode`) VALUES
-(1, 'Looooooooooooooooooooooooooooooooong Title', 'Loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong Details', '2021-10-21', 1, 'admin190qknrtas671'),
+(1, 'Looooooooooooooooooooooooooooooooong Title', 'Loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong Details', '2021-11-07', 1, 'admin190qknrtas671'),
 (2, 'Title 2', 'Details 2 - mediummmmmmmmmmmmmmmmmmm leeeeeeeength', '2021-10-22', 1, 'admin190qknrtas671'),
 (3, 'Title 3', 'Details 3', '2021-10-21', 1, 'admin190qknrtas671'),
 (4, 'Title 4', 'Details 4', '2021-10-22', 0, 'admin2rtmokas67890'),
-(5, 'Title 5', 'Details testing 555', '2021-10-22', 0, 'admin2rtmokas67890'),
-(6, 'Title 6', 'Details 6', '2021-10-22', 0, 'admin2rtmokas67890'),
+(5, 'Title 5', 'Details testing 555', '2021-11-06', 1, 'admin190qknrtas671'),
+(6, 'Title 6', 'Details 6', '2021-11-06', 1, 'admin190qknrtas671'),
 (7, 'Title 7', 'Details 7', '2021-10-21', 0, 'admin2rtmokas67890'),
 (8, 'Title 888888', 'Details 8888', '2021-10-21', 1, 'admin2rtmokas67890'),
 (9, 'Title 9', 'Details 9', '2021-10-21', 0, 'admin2rtmokas67890'),
@@ -92,7 +96,7 @@ INSERT INTO `announcements` (`reportID`, `reportTitle`, `reportDetails`, `report
 (16, 'Test 16', 'Test 16666', '2021-10-21', 0, 'admin2rtmokas67890'),
 (17, 'Test 17', 'Test 17', '2021-10-21', 0, 'admin2rtmokas67890'),
 (18, 'Test 18', 'Test 18\r\nTest', '2021-10-21', 0, 'admin2rtmokas67890'),
-(19, 'Test 19', 'Test 19999', '2021-10-21', 0, 'admin2rtmokas67890'),
+(19, 'Test 19', 'Test 19999', '2021-11-06', 1, 'admin190qknrtas671'),
 (20, 'Test 2000', 'Test 20000', '2021-10-21', 0, 'admin2rtmokas67890'),
 (21, 'Title 21', 'Details 21', '2021-10-21', 0, 'admin2rtmokas67890'),
 (22, 'Title 22', 'Details 22', '2021-10-21', 0, 'admin2rtmokas67890'),
@@ -100,7 +104,7 @@ INSERT INTO `announcements` (`reportID`, `reportTitle`, `reportDetails`, `report
 (24, 'Title 24 :D', 'Details 24 ^^ Hi August', '2021-10-21', 1, 'admin36170f07ee3c893'),
 (25, 'test 25', 'test 25', '2021-10-21', 0, 'admin2rtmokas67890'),
 (26, 'test 26', 'test 26', '2021-10-22', 0, 'admin190qknrtas671'),
-(29, 'Announcement Title test', 'Announcement Details test', '2021-10-22', 0, 'admin190qknrtas671');
+(29, 'Announcement Title test', 'Announcement Details test', '2021-11-06', 1, 'admin190qknrtas671');
 
 -- --------------------------------------------------------
 
@@ -120,9 +124,9 @@ CREATE TABLE `routes` (
 --
 
 INSERT INTO `routes` (`routeID`, `routeTitle`, `routeStatus`, `routeTrainNum`) VALUES
-(1, 'Ampang Line', 1, 10),
+(1, 'Ampang Line', 1, 14),
 (2, 'Sungai Buloh Line', 1, 10),
-(3, 'Port Klang Line', 0, 10),
+(3, 'Port Klang Line', 1, 10),
 (4, 'Kelana Jaya Line', 1, 10);
 
 -- --------------------------------------------------------
@@ -143,15 +147,6 @@ CREATE TABLE `routes_stations` (
 --
 
 INSERT INTO `routes_stations` (`route_station_ID`, `route_station_sequence`, `routeID`, `stationID`) VALUES
-(1, 1, 1, 1),
-(2, 2, 1, 2),
-(3, 3, 1, 3),
-(4, 4, 1, 4),
-(5, 5, 1, 5),
-(6, 6, 1, 6),
-(7, 7, 1, 7),
-(8, 8, 1, 8),
-(9, 9, 1, 9),
 (18, 1, 3, 18),
 (19, 4, 3, 10),
 (20, 10, 3, 13),
@@ -175,18 +170,24 @@ INSERT INTO `routes_stations` (`route_station_ID`, `route_station_sequence`, `ro
 (161, 6, 2, 15),
 (162, 7, 2, 16),
 (163, 8, 2, 17),
-(262, 1, 4, 32),
-(263, 2, 4, 34),
-(264, 3, 4, 35),
-(265, 4, 4, 36),
-(266, 5, 4, 37),
-(267, 6, 4, 38),
-(268, 7, 4, 6),
-(269, 8, 4, 14),
-(270, 9, 4, 13),
-(271, 10, 4, 39),
-(272, 11, 4, 40),
-(273, 12, 4, 33);
+(406, 1, 4, 32),
+(407, 2, 4, 34),
+(408, 3, 4, 35),
+(409, 4, 4, 36),
+(410, 5, 4, 37),
+(411, 6, 4, 38),
+(412, 7, 4, 6),
+(413, 8, 4, 14),
+(414, 9, 4, 13),
+(415, 10, 4, 39),
+(416, 11, 4, 40),
+(417, 12, 4, 33),
+(593, 1, 1, 1),
+(594, 2, 1, 2),
+(595, 3, 1, 3),
+(596, 4, 1, 4),
+(597, 5, 1, 5),
+(598, 6, 1, 9);
 
 -- --------------------------------------------------------
 
@@ -209,9 +210,9 @@ CREATE TABLE `rules` (
 
 INSERT INTO `rules` (`ruleID`, `ruleTitle`, `ruleDetails`, `ruleDate`, `ruleStatus`, `adminUniqueCode`) VALUES
 (1, 'Social Distancing', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi. Sem ligula. Cubilia ipsum nostra montes quam habitasse urna mus porta iaculis gravida natoque odio parturient. Non sociis montes aenean. Parturient mi leo nisi consectetuer facilisis integer dictum maecenas nascetur amet class bibendum auctor. Ut eleifend nisi nulla consequat rhoncus ultrices torquent tempu.', '2021-10-22', 1, 'admin190qknrtas671'),
-(2, 'Keep Back from The Platform Edge', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.', '2021-10-22', 0, 'admin190qknrtas671'),
+(2, 'Keep Back from The Platform Edge', 'At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.', '2021-11-07', 1, 'admin190qknrtas671'),
 (4, 'Do not eat on the trains.', 'Omnicos directe al desirabilite de un nov lingua franca: On refusa continuar payar custosi traductores. At solmen va esser necessi far uniform grammatica.', '2021-10-22', 0, 'admin190qknrtas671'),
-(6, 'Travel Guideline', 'Passengers will have to arrive at the departure station at least 90 minutes before the departure time of the train. All the passengers will have to wear face cover in the station premises and during train travel.', '2021-10-22', 0, 'admin36170f07ee3c893');
+(6, 'Travel Guideline', 'Passengers will have to arrive at the departure station at least 90 minutes before the departure time of the train. All the passengers will have to wear face cover in the station premises and during train travel.', '2021-11-07', 1, 'admin190qknrtas671');
 
 -- --------------------------------------------------------
 
@@ -334,7 +335,9 @@ INSERT INTO `stoss` (`stosID`, `stationA`, `stationB`, `stationDistance`, `stati
 (42, 'Masjid Jamek', 'Pasar Seni', 1.8, 108),
 (43, 'KL Sentral', 'Kelana Jaya', 14, 840),
 (44, 'Kelana Jaya', 'Subang Jaya', 12, 720),
-(45, 'Subang Jaya', 'Subang Alam', 8.1, 486);
+(45, 'Subang Jaya', 'Subang Alam', 8.1, 486),
+(46, 'Masjid Jamek', 'Sultan Ismail', 2.4, 144),
+(47, 'Plaza Rakyat', 'Sentul Timur', 4, 240);
 
 -- --------------------------------------------------------
 
@@ -352,8 +355,27 @@ CREATE TABLE `tickets` (
   `ticketStatus` tinyint(1) NOT NULL DEFAULT 1,
   `ticketPurchaseDate` datetime NOT NULL,
   `ticketExpiryDate` datetime NOT NULL,
-  `userUniqueCode` varchar(20) NOT NULL
+  `userUniqueCode` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tickets`
+--
+
+INSERT INTO `tickets` (`ticketUniqueCode`, `ticketID`, `ticketPrice`, `ticketDeparture`, `ticketArrival`, `ticketPaymentMethod`, `ticketStatus`, `ticketPurchaseDate`, `ticketExpiryDate`, `userUniqueCode`) VALUES
+('ticket1061a00871eefbe10', 1, 3.11, 38, 35, 'Online Banking', 0, '2021-05-26 06:04:33', '2021-08-26 06:04:33', 'user16172e386084111'),
+('ticket1161a008b330d5c11', 5, 3.45, 38, 35, 'Online Banking', 0, '2021-05-26 06:04:33', '2021-08-26 06:04:33', 'user16172e386084111'),
+('ticket1261a008b3337b812', 8, 3.45, 38, 35, 'Online Banking', 0, '2021-05-26 06:04:33', '2021-08-26 06:04:33', 'user16172e386084111'),
+('ticket1361a008b3357f813', 12, 3.45, 38, 35, 'Online Banking', 0, '2021-05-26 06:04:33', '2021-08-26 06:04:33', 'user16172e386084111'),
+('ticket1461a008b3388fd14', 14, 3.45, 38, 35, 'Online Banking', 0, '2021-05-26 06:04:33', '2021-08-26 06:04:33', 'user16172e386084111'),
+('ticket161a007a0ad3041', 18, 3.11, 38, 35, 'Credit / Debit Card', 1, '2021-11-26 06:01:04', '2022-02-24 06:01:04', 'user16172e386084111'),
+('ticket2161a08616052e721', 21, 5.51, 1, 5, 'Grab Pay', 1, '2021-11-26 15:00:37', '2022-02-24 15:00:37', 'user16172e386084111'),
+('ticket2361a22acaecc8323', 23, 9.22, 13, 10, 'Credit / Debit Card', 1, '2021-11-27 20:55:38', '2022-02-25 20:55:38', 'user16172e386084111'),
+('ticket2461a25f5f254c724', 24, 9.22, 10, 13, 'Touch N\' Go', 1, '2021-11-28 00:39:59', '2022-02-26 00:39:59', 'user16172e386084111'),
+('ticket2561a25f5f2ce7625', 25, 9.22, 10, 13, 'Touch N\' Go', 1, '2021-11-28 00:39:59', '2022-02-26 00:39:59', 'user16172e386084111'),
+('ticket261a007a0b40f32', 19, 3.11, 38, 35, 'Credit / Debit Card', 1, '2021-11-26 06:01:04', '2022-02-24 06:01:04', 'user16172e386084111'),
+('ticket861a00871ebe338', 20, 3.11, 38, 35, 'Online Banking', 1, '2021-11-26 06:04:33', '2022-02-24 06:04:33', 'user16172e386084111'),
+('ticket961a00871ed9b99', 17, 3.11, 38, 35, 'Online Banking', 1, '2021-11-26 06:04:33', '2022-02-24 06:04:33', 'user16172e386084111');
 
 -- --------------------------------------------------------
 
@@ -379,13 +401,15 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userUniqueCode`, `userID`, `userName`, `userEmail`, `userPassword`, `userContact`, `userDOB`, `userStatus`, `userVoucher`, `userPoint`) VALUES
-('user16172e386084111', 1, 'lyn', 'lyn@gmail.com', '$2y$10$y/qUgGLbIXoEov7byeqVWOVKnfCX0GenPvLsKkrixKwIGbynELwzS', 123456789, '2000-01-01', 1, 5, 2400),
+('user10618a596826a0a10', 10, 'new user 5', 'new5@test.com', '$2y$10$9qOE0/bU2jv9PQDcBg9Cle1FbdQENHjzaTjaBAJQUt4yyOcvPmNtq', 123456785, '2005-05-05', 1, 0, 0),
+('user16172e386084111', 1, 'lyn', 'lyn@gmail.com', '$2y$10$EwBjjLQXygRDRrQqzffdmeJb777mva0rvzUZDtu/ICCyRw2VBvMxG', 123456789, '1995-08-24', 1, 6, 448),
 ('user26172e3ad9b2072', 2, 'lynchee', 'lynchee@icloud.com', '$2y$10$qHeUsPs3IxwLvfS8FkFEOeV3Ght6Y.dwUHh//0MQ/Q7y6rLXNd0IW', 111111111, '2000-01-01', 1, 0, 0),
 ('user36172e3dbe33ef3', 3, 'Testuser1', '1@test.com', '$2y$10$lOcWN9Y1VhWw5Ic5Q9Flyu25uz3PQvsu0l97mPxp3BvZyrnct3TM.', 122222222, '2000-01-01', 0, 0, 0),
 ('user46172e425adaf54', 4, 'testuser2', '2@gmail.com', '$2y$10$2OhSoRe9DUpEB9BQPu4je.BgVdJSlCBrNeONhyBrwc.VOj9yaNxhS', 1333333333, '1900-01-01', 0, 0, 0),
-('user56172e4494ee215', 5, 'testuser3', '3@gmail.com', '$2y$10$EXWIH6.vN5q.3B2ASAau1OppWoDwe75qtQFjEGUdJC4rEWy5vjZ3a', 144444444, '1994-01-01', 0, 0, 0),
 ('user66172e474e40406', 6, 'testuser5', '5@test.com', '$2y$10$uHz1VC5iwRQFA7cx/TdMWu5tfwGFYMMdo64GN29bBMFYw5z2kgRBe', 155555555, '1995-01-01', 0, 0, 0),
-('user76172ed253953d7', 7, 'Loooooooooooong Name', 'looooooong@email.com', '$2y$10$LFIYC7DhwigOHgzsmBpmceV8q80PVWjGGCdqmA0gAx4qN6eCvyL4C', 191234567, '1995-01-01', 1, 0, 0);
+('user76172ed253953d7', 7, 'Loooooooooooong Name', 'looooooong@email.com', '$2y$10$LFIYC7DhwigOHgzsmBpmceV8q80PVWjGGCdqmA0gAx4qN6eCvyL4C', 191234567, '1995-01-01', 1, 0, 0),
+('user86187733e506978', 8, 'lyn2', 'lyn2@gmail.com', '$2y$10$ngTpgYazUCjSbOPPBa6aceFEP6zAuvNKV1oqP8qiCpBFYZ0Fed34i', 123456782, '2000-12-29', 1, 0, 0),
+('user961893fd6353c89', 9, 'Test long nameeeeeeeeeeeeeeeeeeeeeeeeeee', 'longemail@test.com', '$2y$10$CAlFppmRixk536tdjGjpXetQRAEdefX.YQNUvkqUytXUHFem4.BdW', 121111111, '1999-05-05', 1, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -470,7 +494,7 @@ ALTER TABLE `routes`
 -- AUTO_INCREMENT for table `routes_stations`
 --
 ALTER TABLE `routes_stations`
-  MODIFY `route_station_ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=274;
+  MODIFY `route_station_ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=599;
 
 --
 -- AUTO_INCREMENT for table `rules`
@@ -488,7 +512,7 @@ ALTER TABLE `stations`
 -- AUTO_INCREMENT for table `stoss`
 --
 ALTER TABLE `stoss`
-  MODIFY `stosID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `stosID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- Constraints for dumped tables

@@ -63,3 +63,26 @@ a
     margin: auto
     padding: 0.4em 1em
     margin-bottom: 1em
+
+.loader 
+    border: 0.3em solid #dddddd
+    border-radius: 50%
+    border-top: 0.3em solid #3498db
+    width: 2em
+    height: 2em
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite
+    margin: 1.5em 
+
+/* Safari */
+@-webkit-keyframes spin 
+    0%
+        -webkit-transform: rotate(0deg)
+    100%
+        -webkit-transform: rotate(360deg)
+
+@keyframes spin
+    0%
+        transform: rotate(0deg)
+    100%
+        transform: rotate(360deg)

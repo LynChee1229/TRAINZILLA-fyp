@@ -21,14 +21,12 @@ class AnnouncementList extends Component {
             console.log(error);
         }); 
         
-        $(document).ready(function () {
-            setTimeout(function(){
-                $('#announcementTable').DataTable({
-                    "aaSorting": [],
-                    "order": [[ 0, 'desc' ]]
-                });
-            }, 1000);
-        });
+        setTimeout(function(){
+            $('#announcementTable').DataTable({
+                "aaSorting": [],
+                "order": [[ 0, 'desc' ]]
+            });
+        }, 1000);
     }
 
     render() {

@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import '../../styles/css/profile-user.sass'
+import '../../styles/css/profile.sass'
 import '../../styles/css/announcement.sass';
 import $ from 'jquery'
 import {FaEdit , FaRegCheckCircle} from 'react-icons/fa';

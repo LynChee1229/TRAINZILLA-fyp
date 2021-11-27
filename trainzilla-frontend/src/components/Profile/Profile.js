@@ -1,5 +1,6 @@
-import React from 'react'
-import '../../styles/css/profile-user.sass'
+import React , { useEffect , useState } from 'react'
+import { useLocation } from "react-router-dom";
+import '../../styles/css/profile.sass'
 import '../../styles/css/announcement.sass';
 import Header from "../Header/Header";
 import Footer from '../Footer/Footer';
@@ -9,6 +10,15 @@ import $ from 'jquery'
 
 
 const Profile = () => {
+    const location = useLocation()
+    const [tuc, setTUC] = useState([]);
+
+    useEffect(() => {
+        if( location.state  &&  location.state.tab == "ticket" ) {
+            setTUC(location.state.ticketUC);
+            $('#ticketBtn').click();
+        }
+    }, [ location ]);
 
     $(document).on('click', '#infoBtn', function () {
         $(this).addClass('actList');
@@ -42,7 +52,7 @@ const Profile = () => {
                     </button>
 
                     <ProfileInfo/>
-                    <ProfileTicket/>
+                    <ProfileTicket newTicket={tuc}/>
                     <Footer/>
                 </div>
             </div>

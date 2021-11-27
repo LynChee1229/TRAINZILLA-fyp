@@ -51,7 +51,6 @@ const BookingConfirmation = () => {
                 })
 
             if(!_.isEmpty(result)) {
-                console.log(result)
                 setVoucher(result.userVoucher);
                 setPoint(result.point);
                 setPayment(result.payment);
@@ -67,6 +66,7 @@ const BookingConfirmation = () => {
 
     async function proceedToPayment()
     {
+        $('.loader').removeClass('d-none');
         let item = { 
             uUC: user.userUniqueCode ,
             ticketNum: ticketNum ,
@@ -89,7 +89,11 @@ const BookingConfirmation = () => {
         });
         result = await result.json();
         if(result.status == "success") {
-            history.push('/profile');
+            history.push( {pathname: "/profile",
+                state: {
+                    tab: "ticket" ,
+                    ticketUC: result.tuc ,
+            }});
         } else {
             $('.dangerMsg').removeClass('d-none');
         }
@@ -232,10 +236,13 @@ const BookingConfirmation = () => {
                         Click here if you wish to change your default email / contact
                     </a>
 
-                    <div>
-                        <button className="btn paymentBtn" onClick={proceedToPayment}>
-                            <BsBagCheckFill className="icon"/> PROCEED  TO  PAYMENT
-                        </button>
+                    <div className="d-flex">
+                        <div>
+                            <button className="btn paymentBtn" onClick={proceedToPayment}>
+                                <BsBagCheckFill className="icon"/> PROCEED  TO  PAYMENT
+                            </button>
+                        </div>
+                        <div className="loader d-none"></div>
                     </div>
 
                     <div className="foot">

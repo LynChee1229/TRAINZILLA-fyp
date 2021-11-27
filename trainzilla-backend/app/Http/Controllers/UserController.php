@@ -243,6 +243,7 @@ class UserController extends Controller
         if($req->uUC) {
             $user = User::where('userUniqueCode', $req->uUC)->first();
             if($user) {
+                $tempTUC = [];
                 for( $i=1; $i<=$req->ticketNum; $i++ ){
                     $ticket = new Ticket;
                     $id = Ticket::max("ticketID") ? (Ticket::max("ticketID") + 1) : 1;
@@ -250,6 +251,7 @@ class UserController extends Controller
                     $ticket->ticketID = $id;
 
                     $ticketCode .= "\n   ".$ticket->ticketUniqueCode;
+                    array_push($tempTUC , $ticket->ticketUniqueCode);
 
                     if(intval($req->userVoucher) > 0) {
                         $ticket->ticketPrice = $req->total / $req->ticketNum;
@@ -286,7 +288,7 @@ class UserController extends Controller
                 }
                 $temp = (intval($req->userVoucher) > 0) ? "1 voucher has been applied automatically" : "";
 
-                $msg = ['content'=>"Dear ".$user->userName.", \n\n\t\t:: Trainzilla Ticket E-Receipt ::" ."\n\nDeparture Station: \t".$req->departStation ."\nArrival Station: \t".$req->arriveStation ."\nEach Ticket Fares: \tRM ".$req->ticketPrice ."\nNumber of Tickets: \t".$req->ticketNum ."\nPayment: \t\tRM ".$req->payment ."\nPayment Method: \t".$method ."\nEarned Points: \t\t".$req->earnedPoint ."\nTotal Reward Points: \t".$user->userPoint."\n\n".$temp ."Final Payment: \t\tRM ".$req->total ."\n\n\nTicket Code : ".$ticketCode."\n\n\nPlease feel free to contact us if you have any questions.\n\nWebsite: http://trainzilla.com.my\nEmail: customerservice@trainzilla.com" ];
+                $msg = ['content'=>"Dear ".$user->userName.", \n\n\t\t:: Trainzilla Ticket E-Receipt ::" ."\n\nDeparture Station: \t".$req->departStation ."\nArrival Station: \t".$req->arriveStation ."\nEach Ticket Fares: \tRM ".$req->ticketPrice ."\nNumber of Tickets: \t".$req->ticketNum ."\nPayment: \t\tRM ".$req->payment ."\nPayment Method: \t".$method ."\nEarned Points: \t\t".$req->earnedPoint ."\nTotal Reward Points: \t".$user->userPoint."\n\n".$temp ."\nFinal Payment: \t\tRM ".$req->total ."\n\n\nTicket Code : ".$ticketCode."\n\n\nPlease feel free to contact us if you have any questions.\n\nWebsite: http://trainzilla.com.my\nEmail: customerservice@trainzilla.com" ];
 
                 Mail::send(['text'=>'email'], $msg, function($message) use ($user) {
                     $message->to($user->userEmail, $user->userName)
@@ -294,10 +296,47 @@ class UserController extends Controller
                     ->from('receipt@trainzilla.com','TRAINZILLA');
                 });
                 $result['status'] = 'success';
+                $result['tuc'] = $tempTUC;
             }
         }
         return $result;
     }
 
+    function userTicketDetails(Request $req)
+    {
+        if($req->uUC) {
+            $user = User::select('userVoucher', 'userPoint')->where('userUniqueCode', $req->uUC)->first();
+            if(isset($user)) {
+                $ticket = Ticket::where('userUniqueCode', $req->uUC)->get();
+                if(isset($ticket) && count($ticket)>0) {
+                    foreach($ticket as $t) {
+                        $depart = Station::where('stationID', $t->ticketDeparture)->first();
+                        $arrive = Station::where('stationID', $t->ticketArrival)->first();
+                        $t->ticketDeparture = $depart->stationName;
+                        $t->ticketArrival = $arrive->stationName;
+                    }
+                }
+                $user->ticket = $ticket;
+                return $user;
+            }
+        }
+        return NULL;
+    }
+
+    function redeemPoint(Request $req)
+    {
+        if($req->uUC) {
+            $user = User::where('userUniqueCode', $req->uUC)->first();
+            if($user) {
+                if(intval($user->userPoint) >= 2000) {
+                    User::where('userUniqueCode', $req->uUC)->update(['userPoint' => ($user->userPoint - 2000)]);
+                    User::where('userUniqueCode', $req->uUC)->update(['userVoucher' => ($user->userVoucher + 1)]);
+
+                    return User::where('userUniqueCode', $req->uUC)->first();
+                }
+            }
+        }
+        return null;
+    }
 
 }
