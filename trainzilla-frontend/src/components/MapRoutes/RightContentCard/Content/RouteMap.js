@@ -24,13 +24,14 @@ const RouteMap = ({mapRouteData}) => {
         setRouteNameStation(mapRouteData.routeNameStation)
     }, [mapRouteData])
 
+
     Highcharts.addEvent(
         Highcharts.Series,
         'afterSetOptions',
         function (e) {
             let colors = Highcharts.getOptions().colors,
                 i = 0,
-                nodes = {};
+                nodes = {}
 
             if (
                 this instanceof Highcharts.seriesTypes.networkgraph &&
@@ -74,13 +75,12 @@ const RouteMap = ({mapRouteData}) => {
 
                 nodes[centralStation] = {
                     id: centralStation,
-                    name: 'Sentral Station: ' + centralStation,
+                    name: 'Central Station: ' + centralStation,
                     marker: {
                         radius: 25
                     },
                     color: colors[++i]
                 }
-
 
                 e.options.nodes = Object.keys(nodes).map(function (id) {
                     return nodes[id];
@@ -90,35 +90,10 @@ const RouteMap = ({mapRouteData}) => {
         }
     );
 
-    const options = {
-        chart: {
-            type: 'networkgraph',
-        },
-        title: {
-            text: 'The Route Map'
-        },
-        caption: {
-            text: "Click the button at top right for more options."
-        },
-        exporting:{
-            buttons: {
-                contextButton: {
-                    menuItems: ["viewFullscreen", "separator", 'downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG'],
-                },
-            },
-        },
-        credits: {
-            enabled: false
-        },
-        plotOptions: {
-            networkgraph: {
-                keys: ['from', 'to'],
-                layoutAlgorithm: {
-                    enableSimulation: true,
-                }
-            },
-        },
-        series: [
+    const [options, setOptions] = useState();
+
+    useEffect(() => {
+        let seriesDataInOption = [
             {
                 link: {
                     width: 4,
@@ -134,39 +109,96 @@ const RouteMap = ({mapRouteData}) => {
                 id: "lang-tree",
                 data: seriesData
             }
-        ],
-        tooltip:
-            {
-                enabled: true,
-                formatter: function () {
-                    let nameArr = undefined;
+        ], colors = Highcharts.getOptions().colors, arr = Object.keys(routeNameStation), i=1;
 
-                    for (let key in routeNameStation) {
-                        if (!routeNameStation.hasOwnProperty(key)) continue;
+        arr.push("Interchange", "Central Station")
 
-                        let arr = routeNameStation[key];
-                        if(arr.includes(this.point.name)){
-                            nameArr = key;
-                        }
-                    }
-                    if (nameArr){
-                        return nameArr + ": " + this.point.name;
-                    }else{
-                        return this.point.name;
-                    }
-
+        arr.forEach(routeName => {
+            seriesDataInOption.push({
+                showInLegend: true,
+                name: routeName,
+                color: colors[i],
+                events: {
+                    legendItemClick: () => false  // disable legend click
+                },
+                marker: {
+                    symbol: 'circle'
                 }
-            }
-    };
+            })
+            i += 1;
+        })
 
-    return <HighchartsReact
-        ref={useRef()}
-        containerProps={{style: {height: "100%", width: "100%"}}}
-        highcharts={Highcharts}
-        options={options}
-        imutable={false}
-        allowChartUpdate={false}
-    />;
+        setOptions({
+            chart: {
+                type: 'networkgraph',
+            },
+            title: {
+                text: 'The Route Map'
+            },
+            caption: {
+                text: "Click the button at top right for more options."
+            },
+            exporting: {
+                buttons: {
+                    contextButton: {
+                        menuItems: ["viewFullscreen", "separator", 'downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG'],
+                    },
+                },
+            },
+            credits: {
+                enabled: false
+            },
+            legend: {
+                layout: 'vertical',
+                floating: true,
+                align: 'right',
+                verticalAlign: 'bottom',
+                enabled: true
+            },
+            plotOptions: {
+                networkgraph: {
+                    keys: ['from', 'to'],
+                    layoutAlgorithm: {
+                        enableSimulation: true,
+                    }
+                },
+            },
+            series: seriesDataInOption,
+            tooltip:
+                {
+                    enabled: true,
+                    formatter: function () {
+                        let nameArr = undefined;
+
+                        for (let key in routeNameStation) {
+                            if (!routeNameStation.hasOwnProperty(key)) continue;
+
+                            let arr = routeNameStation[key];
+                            if (arr.includes(this.point.name)) {
+                                nameArr = key;
+                            }
+                        }
+                        if (nameArr) {
+                            return nameArr + ": " + this.point.name;
+                        } else {
+                            return this.point.name;
+                        }
+
+                    }
+                }
+        })
+    },[routeNameStation, seriesData])
+
+    return (
+
+        <HighchartsReact
+            ref={useRef()}
+            containerProps={{style: {height: "100%", width: "100%"}}}
+            highcharts={Highcharts}
+            options={options}
+        />
+
+    );
 }
 
 export default RouteMap;
