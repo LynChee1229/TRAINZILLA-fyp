@@ -256,3 +256,7 @@ table.dataTable tbody tr.odd {
     margin-top: 32px;
     margin-left: -24px;
 }
+
+#sb-content .modal.show .modal-dialog {
+    margin-left: 300px;
+}

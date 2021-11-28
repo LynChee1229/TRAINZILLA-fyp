@@ -29,9 +29,11 @@ Route::post('/newAdmin', [AdminController::class, 'newAdmin']);
 Route::post('/changeAdminStatus', [AdminController::class, 'changeAdminStatus']);
 
 Route::get('/ticketlist', [AdminController::class, 'ticketList']);
+Route::get('/getTicketList', [AdminController::class, 'getTicketList']);
 
 Route::get('/userlist', [AdminController::class, 'userList']);
 Route::get('/changeUserStatus', [AdminController::class, 'changeUserStatus']);
+Route::get('/getBookingHistory', [AdminController::class, 'getBookingHistory']);
 
 Route::get('/adminroute', [AdminController::class, 'adminRoute']);
 Route::get('/createroute', [AdminController::class, 'createRoute']);
