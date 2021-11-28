@@ -2466,7 +2466,7 @@ var RouteMap = function RouteMap(_ref) {
       });
       nodes[centralStation] = {
         id: centralStation,
-        name: 'Sentral Station: ' + centralStation,
+        name: 'Central Station: ' + centralStation,
         marker: {
           radius: 25
         },
@@ -2477,35 +2477,14 @@ var RouteMap = function RouteMap(_ref) {
       });
     }
   });
-  var options = {
-    chart: {
-      type: 'networkgraph'
-    },
-    title: {
-      text: 'The Route Map'
-    },
-    caption: {
-      text: "Click the button at top right for more options."
-    },
-    exporting: {
-      buttons: {
-        contextButton: {
-          menuItems: ["viewFullscreen", "separator", 'downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG']
-        }
-      }
-    },
-    credits: {
-      enabled: false
-    },
-    plotOptions: {
-      networkgraph: {
-        keys: ['from', 'to'],
-        layoutAlgorithm: {
-          enableSimulation: true
-        }
-      }
-    },
-    series: [{
+
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(),
+      _useState10 = _slicedToArray(_useState9, 2),
+      options = _useState10[0],
+      setOptions = _useState10[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var seriesDataInOption = [{
       link: {
         width: 4
       },
@@ -2520,28 +2499,86 @@ var RouteMap = function RouteMap(_ref) {
       id: "lang-tree",
       data: seriesData
     }],
-    tooltip: {
-      enabled: true,
-      formatter: function formatter() {
-        var nameArr = undefined;
+        colors = highcharts_highstock__WEBPACK_IMPORTED_MODULE_1___default().getOptions().colors,
+        arr = Object.keys(routeNameStation),
+        i = 1;
+    arr.push("Interchange", "Central Station");
+    arr.forEach(function (routeName) {
+      seriesDataInOption.push({
+        showInLegend: true,
+        name: routeName,
+        color: colors[i],
+        events: {
+          legendItemClick: function legendItemClick() {
+            return false;
+          } // disable legend click
 
-        for (var key in routeNameStation) {
-          if (!routeNameStation.hasOwnProperty(key)) continue;
-          var arr = routeNameStation[key];
-
-          if (arr.includes(this.point.name)) {
-            nameArr = key;
+        },
+        marker: {
+          symbol: 'circle'
+        }
+      });
+      i += 1;
+    });
+    setOptions({
+      chart: {
+        type: 'networkgraph'
+      },
+      title: {
+        text: 'The Route Map'
+      },
+      caption: {
+        text: "Click the button at top right for more options."
+      },
+      exporting: {
+        buttons: {
+          contextButton: {
+            menuItems: ["viewFullscreen", "separator", 'downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG']
           }
         }
+      },
+      credits: {
+        enabled: false
+      },
+      legend: {
+        layout: 'vertical',
+        floating: true,
+        align: 'right',
+        verticalAlign: 'bottom',
+        enabled: true
+      },
+      plotOptions: {
+        networkgraph: {
+          keys: ['from', 'to'],
+          layoutAlgorithm: {
+            enableSimulation: true
+          }
+        }
+      },
+      series: seriesDataInOption,
+      tooltip: {
+        enabled: true,
+        formatter: function formatter() {
+          var nameArr = undefined;
 
-        if (nameArr) {
-          return nameArr + ": " + this.point.name;
-        } else {
-          return this.point.name;
+          for (var key in routeNameStation) {
+            if (!routeNameStation.hasOwnProperty(key)) continue;
+            var _arr2 = routeNameStation[key];
+
+            if (_arr2.includes(this.point.name)) {
+              nameArr = key;
+            }
+          }
+
+          if (nameArr) {
+            return nameArr + ": " + this.point.name;
+          } else {
+            return this.point.name;
+          }
         }
       }
-    }
-  };
+    });
+  }, [routeNameStation, seriesData]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)((highcharts_react_official__WEBPACK_IMPORTED_MODULE_2___default()), {
     ref: (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)(),
     containerProps: {
@@ -2551,9 +2588,7 @@ var RouteMap = function RouteMap(_ref) {
       }
     },
     highcharts: (highcharts_highstock__WEBPACK_IMPORTED_MODULE_1___default()),
-    options: options,
-    imutable: false,
-    allowChartUpdate: false
+    options: options
   });
 };
 
