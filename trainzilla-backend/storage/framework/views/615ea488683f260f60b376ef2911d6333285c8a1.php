@@ -81,7 +81,7 @@
                     <p style="word-break: break-word;"><?php echo e($station[$index]['firstStation']); ?> --- <?php echo e($station[$index]['lastStation']); ?> <span class="ml-2 text-info">| <span class="ml-1"><?php echo e($station[$index]['stationNum']); ?> stations </span></span></p>
                 </td>
                 <td style="text-align:center;">
-                    <p><button type="button" class="btn timetableBtn mb-2 p-0" style="color:#516BEC;" data-toggle="modal" data-target="#" value="<?php echo e($l->routeID); ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar4 mr-2 mb-1" viewBox="0 0 16 16">
+                    <p><button type="button" class="btn timetableBtn mb-2 p-0" style="color:#516BEC;" value="<?php echo e($l->routeID); ?>" onclick="location.href='/timetable?id=<?php echo e($l->routeID); ?>'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar4 mr-2 mb-1" viewBox="0 0 16 16">
                     <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v1h14V3a1 1 0 0 0-1-1H2zm13 3H1v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V5z"/>
                     </svg>View Time Table</button></p>
                 </td>

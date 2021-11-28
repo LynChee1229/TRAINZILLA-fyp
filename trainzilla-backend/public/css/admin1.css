@@ -125,6 +125,7 @@
     border-radius: 12px;
     box-shadow: #999999 2px 2px 3px;
     min-width: 1020px;
+    margin-right: 58px !important;
 }
 
 #sb-content .cpr {

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2021 at 05:48 PM
+-- Generation Time: Nov 28, 2021 at 07:10 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -125,8 +125,8 @@ CREATE TABLE `routes` (
 
 INSERT INTO `routes` (`routeID`, `routeTitle`, `routeStatus`, `routeTrainNum`) VALUES
 (1, 'Ampang Line', 1, 14),
-(2, 'Sungai Buloh Line', 1, 10),
-(3, 'Port Klang Line', 1, 10),
+(2, 'Sungai Buloh Line', 1, 12),
+(3, 'Port Klang Line', 1, 20),
 (4, 'Kelana Jaya Line', 1, 10);
 
 -- --------------------------------------------------------
@@ -147,47 +147,50 @@ CREATE TABLE `routes_stations` (
 --
 
 INSERT INTO `routes_stations` (`route_station_ID`, `route_station_sequence`, `routeID`, `stationID`) VALUES
-(18, 1, 3, 18),
-(19, 4, 3, 10),
-(20, 10, 3, 13),
-(21, 2, 3, 19),
-(22, 3, 3, 20),
-(23, 5, 3, 21),
-(24, 6, 3, 22),
-(25, 7, 3, 23),
-(26, 8, 3, 24),
-(27, 9, 3, 25),
-(28, 11, 3, 26),
-(29, 12, 3, 27),
-(30, 13, 3, 28),
-(31, 14, 3, 29),
-(32, 15, 3, 30),
-(156, 1, 2, 10),
-(157, 2, 2, 11),
-(158, 3, 2, 12),
-(159, 4, 2, 13),
-(160, 5, 2, 14),
-(161, 6, 2, 15),
-(162, 7, 2, 16),
-(163, 8, 2, 17),
-(406, 1, 4, 32),
-(407, 2, 4, 34),
-(408, 3, 4, 35),
-(409, 4, 4, 36),
-(410, 5, 4, 37),
-(411, 6, 4, 38),
-(412, 7, 4, 6),
-(413, 8, 4, 14),
-(414, 9, 4, 13),
-(415, 10, 4, 39),
-(416, 11, 4, 40),
-(417, 12, 4, 33),
-(593, 1, 1, 1),
-(594, 2, 1, 2),
-(595, 3, 1, 3),
-(596, 4, 1, 4),
-(597, 5, 1, 5),
-(598, 6, 1, 9);
+(893, 1, 4, 32),
+(894, 2, 4, 34),
+(895, 3, 4, 35),
+(896, 4, 4, 36),
+(897, 5, 4, 37),
+(898, 6, 4, 38),
+(899, 7, 4, 6),
+(900, 8, 4, 14),
+(901, 9, 4, 13),
+(902, 10, 4, 39),
+(903, 11, 4, 40),
+(904, 12, 4, 33),
+(1266, 1, 1, 1),
+(1267, 2, 1, 2),
+(1268, 3, 1, 3),
+(1269, 4, 1, 4),
+(1270, 5, 1, 5),
+(1271, 6, 1, 6),
+(1272, 7, 1, 7),
+(1273, 8, 1, 8),
+(1274, 9, 1, 9),
+(1485, 1, 3, 18),
+(1486, 2, 3, 19),
+(1487, 3, 3, 20),
+(1488, 4, 3, 10),
+(1489, 5, 3, 21),
+(1490, 6, 3, 22),
+(1491, 7, 3, 23),
+(1492, 8, 3, 24),
+(1493, 9, 3, 25),
+(1494, 10, 3, 13),
+(1495, 11, 3, 26),
+(1496, 12, 3, 27),
+(1497, 13, 3, 28),
+(1498, 14, 3, 29),
+(1499, 15, 3, 30),
+(1556, 1, 2, 10),
+(1557, 2, 2, 11),
+(1558, 3, 2, 12),
+(1559, 4, 2, 13),
+(1560, 5, 2, 14),
+(1561, 6, 2, 15),
+(1562, 7, 2, 16),
+(1563, 8, 2, 17);
 
 -- --------------------------------------------------------
 
@@ -239,7 +242,7 @@ INSERT INTO `stations` (`stationID`, `stationName`, `stationDeparture`) VALUES
 (6, 'Masjid Jamek', NULL),
 (7, 'Bandaraya', NULL),
 (8, 'Sultan Ismail', NULL),
-(9, 'Sentul Timur', '08:00:00'),
+(9, 'Sentul Timur', '09:00:00'),
 (10, 'Sungai Buloh', '07:00:00'),
 (11, 'Bandar Utama', NULL),
 (12, 'Muzium Negara', '09:00:00'),
@@ -247,7 +250,7 @@ INSERT INTO `stations` (`stationID`, `stationName`, `stationDeparture`) VALUES
 (14, 'Pasar Seni', NULL),
 (15, 'Bukit Bintang', '09:00:00'),
 (16, 'Taman Connaught', NULL),
-(17, 'Kajang', '07:00:00'),
+(17, 'Kajang', '06:30:00'),
 (18, 'Batang Kali', '07:00:00'),
 (19, 'Rawang', NULL),
 (20, 'Kuang', NULL),
@@ -260,10 +263,10 @@ INSERT INTO `stations` (`stationID`, `stationName`, `stationDeparture`) VALUES
 (27, 'Setia Jaya', NULL),
 (28, 'Shah Alam', NULL),
 (29, 'Klang', NULL),
-(30, 'Port Klang', '07:00:00'),
+(30, 'Port Klang', '06:00:00'),
 (31, 'Temporarily Station', '05:00:00'),
 (32, 'Gombak', '06:00:00'),
-(33, 'Subang Alam', '06:00:00'),
+(33, 'Subang Alam', '06:30:00'),
 (34, 'Taman Melati', NULL),
 (35, 'Wangsa Maju', NULL),
 (36, 'Sri Rampai', NULL),
@@ -374,6 +377,9 @@ INSERT INTO `tickets` (`ticketUniqueCode`, `ticketID`, `ticketPrice`, `ticketDep
 ('ticket2461a25f5f254c724', 24, 9.22, 10, 13, 'Touch N\' Go', 1, '2021-11-28 00:39:59', '2022-02-26 00:39:59', 'user16172e386084111'),
 ('ticket2561a25f5f2ce7625', 25, 9.22, 10, 13, 'Touch N\' Go', 1, '2021-11-28 00:39:59', '2022-02-26 00:39:59', 'user16172e386084111'),
 ('ticket261a007a0b40f32', 19, 3.11, 38, 35, 'Credit / Debit Card', 1, '2021-11-26 06:01:04', '2022-02-24 06:01:04', 'user16172e386084111'),
+('ticket2661a339b9b220226', 26, 6.59, 1, 6, 'Touch N\' Go', 1, '2021-11-28 16:11:37', '2022-02-26 16:11:37', 'user961893fd6353c89'),
+('ticket2761a339b9b5fef27', 27, 6.59, 1, 6, 'Touch N\' Go', 1, '2021-11-28 16:11:37', '2022-02-26 16:11:37', 'user961893fd6353c89'),
+('ticket2861a339b9b765728', 28, 6.59, 1, 6, 'Touch N\' Go', 1, '2021-11-28 16:11:37', '2022-02-26 16:11:37', 'user76172ed253953d7'),
 ('ticket861a00871ebe338', 20, 3.11, 38, 35, 'Online Banking', 1, '2021-11-26 06:04:33', '2022-02-24 06:04:33', 'user16172e386084111'),
 ('ticket961a00871ed9b99', 17, 3.11, 38, 35, 'Online Banking', 1, '2021-11-26 06:04:33', '2022-02-24 06:04:33', 'user16172e386084111');
 
@@ -401,15 +407,15 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`userUniqueCode`, `userID`, `userName`, `userEmail`, `userPassword`, `userContact`, `userDOB`, `userStatus`, `userVoucher`, `userPoint`) VALUES
-('user10618a596826a0a10', 10, 'new user 5', 'new5@test.com', '$2y$10$9qOE0/bU2jv9PQDcBg9Cle1FbdQENHjzaTjaBAJQUt4yyOcvPmNtq', 123456785, '2005-05-05', 1, 0, 0),
+('user10618a596826a0a10', 10, 'new user 5', 'new5@test.com', '$2y$10$9qOE0/bU2jv9PQDcBg9Cle1FbdQENHjzaTjaBAJQUt4yyOcvPmNtq', 123456785, '2005-05-05', 1, 1, 29),
 ('user16172e386084111', 1, 'lyn', 'lyn@gmail.com', '$2y$10$EwBjjLQXygRDRrQqzffdmeJb777mva0rvzUZDtu/ICCyRw2VBvMxG', 123456789, '1995-08-24', 1, 6, 448),
-('user26172e3ad9b2072', 2, 'lynchee', 'lynchee@icloud.com', '$2y$10$qHeUsPs3IxwLvfS8FkFEOeV3Ght6Y.dwUHh//0MQ/Q7y6rLXNd0IW', 111111111, '2000-01-01', 1, 0, 0),
+('user26172e3ad9b2072', 2, 'lynchee', 'lynchee@icloud.com', '$2y$10$qHeUsPs3IxwLvfS8FkFEOeV3Ght6Y.dwUHh//0MQ/Q7y6rLXNd0IW', 111111111, '2000-01-01', 1, 1, 5),
 ('user36172e3dbe33ef3', 3, 'Testuser1', '1@test.com', '$2y$10$lOcWN9Y1VhWw5Ic5Q9Flyu25uz3PQvsu0l97mPxp3BvZyrnct3TM.', 122222222, '2000-01-01', 0, 0, 0),
 ('user46172e425adaf54', 4, 'testuser2', '2@gmail.com', '$2y$10$2OhSoRe9DUpEB9BQPu4je.BgVdJSlCBrNeONhyBrwc.VOj9yaNxhS', 1333333333, '1900-01-01', 0, 0, 0),
 ('user66172e474e40406', 6, 'testuser5', '5@test.com', '$2y$10$uHz1VC5iwRQFA7cx/TdMWu5tfwGFYMMdo64GN29bBMFYw5z2kgRBe', 155555555, '1995-01-01', 0, 0, 0),
-('user76172ed253953d7', 7, 'Loooooooooooong Name', 'looooooong@email.com', '$2y$10$LFIYC7DhwigOHgzsmBpmceV8q80PVWjGGCdqmA0gAx4qN6eCvyL4C', 191234567, '1995-01-01', 1, 0, 0),
-('user86187733e506978', 8, 'lyn2', 'lyn2@gmail.com', '$2y$10$ngTpgYazUCjSbOPPBa6aceFEP6zAuvNKV1oqP8qiCpBFYZ0Fed34i', 123456782, '2000-12-29', 1, 0, 0),
-('user961893fd6353c89', 9, 'Test long nameeeeeeeeeeeeeeeeeeeeeeeeeee', 'longemail@test.com', '$2y$10$CAlFppmRixk536tdjGjpXetQRAEdefX.YQNUvkqUytXUHFem4.BdW', 121111111, '1999-05-05', 1, 0, 0);
+('user76172ed253953d7', 7, 'Loooooooooooong Name', 'looooooong@email.com', '$2y$10$LFIYC7DhwigOHgzsmBpmceV8q80PVWjGGCdqmA0gAx4qN6eCvyL4C', 191234567, '1995-01-01', 1, 2, 2296),
+('user86187733e506978', 8, 'lyn2', 'lyn2@gmail.com', '$2y$10$ngTpgYazUCjSbOPPBa6aceFEP6zAuvNKV1oqP8qiCpBFYZ0Fed34i', 123456782, '2000-12-29', 1, 0, 540),
+('user961893fd6353c89', 9, 'Test long nameeeeeeeeeeeeeeeeeeeeeeeeeee', 'longemail@test.com', '$2y$10$CAlFppmRixk536tdjGjpXetQRAEdefX.YQNUvkqUytXUHFem4.BdW', 121111111, '1999-05-05', 1, 0, 4800);
 
 --
 -- Indexes for dumped tables
@@ -494,7 +500,7 @@ ALTER TABLE `routes`
 -- AUTO_INCREMENT for table `routes_stations`
 --
 ALTER TABLE `routes_stations`
-  MODIFY `route_station_ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=599;
+  MODIFY `route_station_ID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1564;
 
 --
 -- AUTO_INCREMENT for table `rules`

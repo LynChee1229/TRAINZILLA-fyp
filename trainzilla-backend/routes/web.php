@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TimeTableController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,6 +60,8 @@ Route::get('/changeRuleStatus', [AdminController::class, 'changeRuleStatus']);
 Route::get('/getRuleDetails', [AdminController::class, 'getRuleDetails']);
 Route::get('/editRule', [AdminController::class, 'editRule']);
 Route::get('/dltRule', [AdminController::class, 'dltRule']);
+
 Route::get('/routemap', function() {return view("routemap");});
+Route::get('/timetable', [TimeTableController::class, 'timetable']);
 
 
