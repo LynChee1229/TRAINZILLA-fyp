@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RouteController;
+use App\Http\Controllers\TimeTableController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,3 +42,5 @@ Route::post('proceedToPayment', [UserController::class, 'proceedToPayment']);
 Route::get('getAvailableStation', [RouteController::class, 'getAvailableStation']);
 Route::get('getRouteData', [RouteController::class, 'getRouteData']);
 Route::post('getRouteSuggestion', [RouteController::class, 'getRouteSuggestion']);
+
+Route::post('getTimeTable', [TimeTableController::class, 'TimeTableAPI']);

@@ -205,7 +205,40 @@ class AdminController extends Controller
     function ticketList()
     {
         $tab = "ticket";
-        return view('ticketlist', compact('tab'));
+        $list = Ticket::orderBy('ticketPurchaseDate', 'desc')->get();
+        foreach($list as $l) {
+            $depart = Station::where('stationID', $l->ticketDeparture)->first();
+            $arrive = Station::where('stationID', $l->ticketArrival)->first();
+            $l->ticketDeparture = $depart->stationName;
+            $l->ticketArrival = $arrive->stationName;
+            $user = User::where('userUniqueCode', $l->userUniqueCode)->first();
+            $l->userName = $user->userName;
+            $l->userContact = $user->userContact;
+            $l->userEmail = $user->userEmail;
+        }
+        return view('ticketlist', compact('tab' , 'list'));
+    }
+
+    function getTicketList()
+    {
+        if(request('ticketStatus') == "all") {
+            $list = Ticket::orderBy('ticketPurchaseDate', 'desc')->get();
+        } else if(request('ticketStatus') == "active") {
+            $list = Ticket::where('ticketStatus', '1')->orderBy('ticketPurchaseDate', 'desc')->get();
+        }else if(request('ticketStatus') == "invalid") {
+            $list = Ticket::where('ticketStatus', '0')->orderBy('ticketPurchaseDate', 'desc')->get();
+        }
+        foreach($list as $l) {
+            $depart = Station::where('stationID', $l->ticketDeparture)->first();
+            $arrive = Station::where('stationID', $l->ticketArrival)->first();
+            $l->ticketDeparture = $depart->stationName;
+            $l->ticketArrival = $arrive->stationName;
+            $user = User::where('userUniqueCode', $l->userUniqueCode)->first();
+            $l->userName = $user->userName;
+            $l->userContact = $user->userContact;
+            $l->userEmail = $user->userEmail;
+        }
+        return $list;
     }
 
 
@@ -236,6 +269,23 @@ class AdminController extends Controller
             }
         }
         return redirect('/userlist')->with('failed', "Failed to perform the action. Please try again.");
+    }
+
+    function getBookingHistory(Request $r)
+    {
+        if($r->userUC) {
+            $user = User::select('userName' , 'userUniqueCode')->where('userUniqueCode', $r->userUC)->first();
+            $ticket = Ticket::where('userUniqueCode', $user->userUniqueCode)->orderBy('ticketPurchaseDate', 'desc')->get();
+            foreach($ticket as $t) {
+                $depart = Station::where('stationID', $t->ticketDeparture)->first();
+                $arrive = Station::where('stationID', $t->ticketArrival)->first();
+                $t->ticketDeparture = $depart->stationName;
+                $t->ticketArrival = $arrive->stationName;
+            }
+            $user->ticket = $ticket;
+            return $user;
+        }
+        return NULL;
     }
 
 

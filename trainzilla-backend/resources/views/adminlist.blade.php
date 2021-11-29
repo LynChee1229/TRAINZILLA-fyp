@@ -117,8 +117,6 @@
             </td>
         </tr>
         @endforeach
-        @else
-            <td></td><td><p>No record.</p></td><td></td><td></td><td></td>
         @endif
         </tbody>
     </table>

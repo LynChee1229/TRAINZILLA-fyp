@@ -3,7 +3,7 @@ import '../../styles/css/profile_ticket.sass'
 import $ from 'jquery';
 import "datatables.net-dt/js/dataTables.dataTables"
 import "datatables.net-dt/css/jquery.dataTables.min.css"
-import { FiLink2 } from "react-icons/fi"
+import { BsLadder } from "react-icons/bs"
 import TicketQRcode from './TicketQRcode';
 import { Modal } from 'react-bootstrap';
 
@@ -119,7 +119,7 @@ const ProfileTicket = ({newTicket}) => {
                         <tr>
                             <th className="tDate">Purchase Date</th>
                             <th className="tCode">Ticket Code</th>
-                            <th className="tStation">Departure <span className="linkIcon"><FiLink2/><FiLink2/><FiLink2/></span> Arrival</th>
+                            <th className="tStation">Departure <span className="linkIcon"><BsLadder transform="rotate(90)"/><BsLadder transform="rotate(90)"/><BsLadder transform="rotate(90)"/></span> Arrival</th>
                         </tr>
                     </thead>
                     <tbody id="announcementTableBody">
@@ -147,7 +147,7 @@ const ProfileTicket = ({newTicket}) => {
                                 </div>
                             </td>
                             <td className="tStation">
-                                <div>{ item.ticketDeparture } <span className="linkIcon"><FiLink2/><FiLink2/><FiLink2/></span> { item.ticketArrival }</div>
+                                <div>{ item.ticketDeparture } <span className="linkIcon"><BsLadder transform="rotate(90)"/><BsLadder transform="rotate(90)"/><BsLadder transform="rotate(90)"/></span> { item.ticketArrival }</div>
                             </td>
                         </tr>
                         )

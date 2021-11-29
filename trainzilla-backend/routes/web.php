@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\TimeTableController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,9 +30,11 @@ Route::post('/newAdmin', [AdminController::class, 'newAdmin']);
 Route::post('/changeAdminStatus', [AdminController::class, 'changeAdminStatus']);
 
 Route::get('/ticketlist', [AdminController::class, 'ticketList']);
+Route::get('/getTicketList', [AdminController::class, 'getTicketList']);
 
 Route::get('/userlist', [AdminController::class, 'userList']);
 Route::get('/changeUserStatus', [AdminController::class, 'changeUserStatus']);
+Route::get('/getBookingHistory', [AdminController::class, 'getBookingHistory']);
 
 Route::get('/adminroute', [AdminController::class, 'adminRoute']);
 Route::get('/createroute', [AdminController::class, 'createRoute']);
@@ -57,6 +60,8 @@ Route::get('/changeRuleStatus', [AdminController::class, 'changeRuleStatus']);
 Route::get('/getRuleDetails', [AdminController::class, 'getRuleDetails']);
 Route::get('/editRule', [AdminController::class, 'editRule']);
 Route::get('/dltRule', [AdminController::class, 'dltRule']);
+
 Route::get('/routemap', function() {return view("routemap");});
+Route::get('/timetable', [TimeTableController::class, 'timetable']);
 
 

@@ -117,8 +117,6 @@
             </td>
         </tr>
         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-        <?php else: ?>
-            <td></td><td><p>No record.</p></td><td></td><td></td><td></td>
         <?php endif; ?>
         </tbody>
     </table>

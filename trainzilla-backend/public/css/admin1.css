@@ -125,6 +125,7 @@
     border-radius: 12px;
     box-shadow: #999999 2px 2px 3px;
     min-width: 1020px;
+    margin-right: 58px !important;
 }
 
 #sb-content .cpr {
@@ -255,4 +256,8 @@ table.dataTable tbody tr.odd {
     width: fit-content;
     margin-top: 32px;
     margin-left: -24px;
+}
+
+#sb-content .modal.show .modal-dialog {
+    margin-left: 300px;
 }
