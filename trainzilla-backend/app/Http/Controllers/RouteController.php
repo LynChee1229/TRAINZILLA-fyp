@@ -13,6 +13,8 @@ use App\Models\Stos;
 use App\Models\Ticket;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Collection;
+use DateTime;
 
 class RouteController extends Controller
 {
@@ -58,15 +60,15 @@ class RouteController extends Controller
     }
 
 
-    function tracingRoute($departLine, $arrive, $depart)
+    function tracingRoute($departLine, $arrive, $depart, $trace)
     {
-        $suggestion = $scanned = [];
-        $snum = Station::all();
-        $sNUM = count($snum) - 2;
-        while(count($scanned) != $sNUM) {
+        $totalCond = count(Route::all());
+        $suggestion = [];
+
+        if(count($trace) < $totalCond) {
             foreach($departLine as $dLine) {
                 $rid_temp = $dLine->routeID;
-    
+
                 // track smaller sequence
                 $temp = Route::join('routes_stations', function ($join) use ($rid_temp) {
                     $join->on('routes.routeID', '=', 'routes_stations.routeID')
@@ -74,36 +76,85 @@ class RouteController extends Controller
                     ->where('routes.routeID', $rid_temp);
                 })->orderBy('routes.routeID', 'asc')
                 ->orderBy('route_station_sequence' , 'desc')->get();
+
+                $prev = null;
+                $prevTime = null;
+                foreach($temp as $rs) {
+                    $station = Station::where('stationID', $rs->stationID)->first();
+                    if($station) {
+                        $rs->stationName = $station->stationName;
+                        $tempTime = new DateTime($station->stationDeparture);
+
+                        if($prev != null) {
+                            $prevSta = Station::where('stationID', $prev)->first();
     
+                            $rsTemp = Stos::where([
+                                ['stationA', '=', $station->stationName],
+                                ['stationB', '=', $prevSta->stationName],
+                            ])->orWhere([
+                                ['stationA', '=', $prevSta->stationName],
+                                ['stationB', '=', $station->stationName],
+                            ])->first();
+    
+                            if($rsTemp) {
+                                $rs->timeTaken += $rsTemp->stationTimeTaken;
+                            }
+                            $cal = ceil($rs->timeTaken / 60);
+                            $t = new DateTime($prevTime);
+                            $tempTime = $t->modify("+ ".$cal." minutes");
+                        }
+
+                        $rs->stationDeparture = $tempTime->format("H:i");
+                        $departTime = [$tempTime->format("H:i")];
+                        for($i=2; $i<=$rs->routeTrainNum; $i++) {
+                            array_push($departTime, $tempTime->modify("+ 15 minutes")->format("H:i"));
+                        }
+                        $rs->departTime = $departTime;
+
+                        $prev = $rs->stationID;
+                        $prevTime = $rs->stationDeparture;
+                    }
+                }
+
                 $found = false;
                 $tempSuggest = [];
+                // $num = 0;
                 foreach($temp as $t) {
-                    if( $t->route_station_sequence <= $dLine->route_station_sequence && 
-                        !in_array($t->stationID , $scanned) ) {
-    
+                    if( $t->route_station_sequence <= $dLine->route_station_sequence ) {
+                        // $num++;
                         $tempSuggest[] = $t;
-                        $s = Station::where('stationID', $t->stationID)->first();
-                        $t->stationName = $s->stationName;
+                        $tempSuggest = new Collection($tempSuggest);
+                        $tempSuggest = $tempSuggest->unique('stationID')->values();
+                        
                         if( $t->stationID == $arrive->stationID ) {
                             $found = true;
                             break;
                         }
-    
-                        $interChange = RouteStation::where('stationID', $t->stationID)->get();
-                        if(count($interChange) > 1) {
-                            $departLine = $interChange;
-                        }
 
-                        if( $t->stationID != $depart->stationID  &&  $t->stationID != $arrive->stationID  &&  count($interChange) == 1) {
-                            $scanned[] = $t->stationID;
+                        if(count($trace) < $totalCond) {
+                            $interChange = RouteStation::where('stationID', $t->stationID)->get();
+                            if(count($interChange) > 1) {
+                                $tempTrace = $trace;
+                                array_push($tempTrace, $rid_temp);
+                                $tempInter = $this->tracingRoute($interChange, $arrive, $depart, $tempTrace);
+                                if($tempInter != NULL) {
+                                    foreach($tempInter as $ti) {
+                                        $tempInter = new Collection($ti);
+                                        $tempSuggest = $tempSuggest->merge($ti);
+                                        $tempSuggest = $tempSuggest->unique('stationID')->values();
+                                    }
+                                    $found = true;
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
                 if($found) {
                     $suggestion[] = $tempSuggest;
                 }
-    
-    
+
+
                 // track larger sequence
                 $temp = Route::join('routes_stations', function ($join) use ($rid_temp) {
                     $join->on('routes.routeID', '=', 'routes_stations.routeID')
@@ -111,44 +162,95 @@ class RouteController extends Controller
                     ->where('routes.routeID', $rid_temp);
                 })->orderBy('routes.routeID', 'asc')
                 ->orderBy('route_station_sequence' , 'asc')->get();
+
+                $prev = null;
+                $prevTime = null;
+                foreach($temp as $rs) {
+                    $station = Station::where('stationID', $rs->stationID)->first();
+                    if($station) {
+                        $rs->stationName = $station->stationName;
+                        $tempTime = new DateTime($station->stationDeparture);
+
+                        if($prev != null) {
+                            $prevSta = Station::where('stationID', $prev)->first();
     
+                            $rsTemp = Stos::where([
+                                ['stationA', '=', $station->stationName],
+                                ['stationB', '=', $prevSta->stationName],
+                            ])->orWhere([
+                                ['stationA', '=', $prevSta->stationName],
+                                ['stationB', '=', $station->stationName],
+                            ])->first();
+    
+                            if($rsTemp) {
+                                $rs->timeTaken += $rsTemp->stationTimeTaken;
+                            }
+                            $cal = ceil($rs->timeTaken / 60);
+                            $t = new DateTime($prevTime);
+                            $tempTime = $t->modify("+ ".$cal." minutes");
+                        }
+
+                        $rs->stationDeparture = $tempTime->format("H:i");
+                        $departTime = [$tempTime->format("H:i")];
+                        for($i=2; $i<=$rs->routeTrainNum; $i++) {
+                            array_push($departTime, $tempTime->modify("+ 15 minutes")->format("H:i"));
+                        }
+                        $rs->departTime = $departTime;
+
+                        $prev = $rs->stationID;
+                        $prevTime = $rs->stationDeparture;
+                    }
+                }
+
                 $found = false;
                 $tempSuggest = [];
+                // $num = 0;
                 foreach($temp as $t) {
-                    if( ($t->route_station_sequence >= $dLine->route_station_sequence) && 
-                        !in_array($t->stationID , $scanned) ) {
-
+                    if( $t->route_station_sequence >= $dLine->route_station_sequence ) {
+                        // $num++;
                         $tempSuggest[] = $t;
-                        $s = Station::where('stationID', $t->stationID)->first();
-                        $t->stationName = $s->stationName;
+                        $tempSuggest = new Collection($tempSuggest);
+                        $tempSuggest = $tempSuggest->unique('stationID')->values();
+
                         if( $t->stationID == $arrive->stationID ) {
                             $found = true;
                             break;
                         }
-    
-                        $interChange = RouteStation::where('stationID', $t->stationID)->get();
-                        if(count($interChange) > 1) {
-                            $departLine = $interChange;
-                        }
 
-                        if( $t->stationID != $depart->stationID  &&  $t->stationID != $arrive->stationID  &&  count($interChange) == 1) {
-                            $scanned[] = $t->stationID;
+                        if(count($trace) < $totalCond) {
+                            $interChange = RouteStation::where('stationID', $t->stationID)->get();
+                            if(count($interChange) > 1) {
+                                $tempTrace = $trace;
+                                array_push($tempTrace, $rid_temp);
+                                $tempInter = $this->tracingRoute($interChange, $arrive, $depart, $tempTrace);
+                                if($tempInter != NULL) {
+                                    foreach($tempInter as $ti) {
+                                        $tempInter = new Collection($ti);
+                                        $tempSuggest = $tempSuggest->merge($ti);
+                                        $tempSuggest = $tempSuggest->unique('stationID')->values();
+                                    }
+                                    $found = true;
+                                    break;
+                                }
+                            }
                         }
                     }
                 }
                 if($found) {
                     $suggestion[] = $tempSuggest;
                 }
-    
+
+                array_push($trace, $rid_temp);
             }
             return $suggestion;
         }
+        return null;
     }
 
 
     function getRouteSuggestion(Request $item)
     {
-        $data = $suggestion = $distance = $timeTaken = [];
+        $data = $suggestion = $distance = $timeTaken = $suggestedTime = [];
         $data['status'] = False;
         $ticketPrice = 0;
 
@@ -159,30 +261,22 @@ class RouteController extends Controller
 
             if(isset($depart) && isset($arrive)) {
                 $departLine = RouteStation::where('stationID', $depart->stationID)->get();
-                $arriveLine = RouteStation::where('stationID', $arrive->stationID)->get();
             }
 
 
-                    // useless -----------------
-                    $departID = $arriveID = [];
-                    foreach($departLine as $d) {
-                        $departID[] = $d->routeID;
-                    }
-                    foreach($arriveLine as $a) {
-                        $arriveID[] = $a->routeID;
-                    }
-                    // useless -----------------
-
-            
-            $suggestion = $this->tracingRoute($departLine, $arrive, $depart);
-            
+            $departID = [];
+            foreach($departLine as $d) {
+                $departID[] = $d->routeID;
+            }
+            $trace[] = $departID[0];
+            $suggestion = $this->tracingRoute($departLine, $arrive, $depart, []);
 
 
-            
-
+            $currTime = new DateTime();
             foreach($suggestion as $sug) {
                 $prev = null;
                 $disTemp = $timeTemp = 0;
+                $temp_suggestedTime = [];
                 foreach($sug as $curr) {
                     if($prev != null) {
                         $A = Station::where('stationID', $prev)->first();
@@ -202,17 +296,25 @@ class RouteController extends Controller
                         }
                     }
                     $prev = $curr->stationID;
+                    foreach($curr->departTime as $dtime) {
+                        $lastTime = end($temp_suggestedTime);
+                        if( ($dtime > $currTime->format("H:i")) && ($dtime > $lastTime) ) {
+                            $temp_suggestedTime[] = $dtime;
+                            break;
+                        }
+                    }
                 }
                 $distance[] = $disTemp;
                 $timeTaken[] = $timeTemp;
+                $suggestedTime[] = $temp_suggestedTime;
             }
 
             if(!empty($distance)) {
                 $longDist = max($distance);
                 if($longDist <= 30) {
-                    $ticketPrice = $longDist * 30/100;
+                    $ticketPrice = round(($longDist * 30/100), 2);
                 } else {
-                    $ticketPrice = (30*30/100) + (($longDist-30)*20/100);
+                    $ticketPrice = round((30*30/100) + (($longDist-30)*20/100), 2);
                 }
             }
 
@@ -224,12 +326,7 @@ class RouteController extends Controller
                 'routeSuggestion' => $suggestion ,
                 'routeDistance' => $distance ,
                 'routeTimeTaken' => $timeTaken ,
-
-                // draft variables
-                'num' => count($suggestion) , 
-                'dID' => $departID,
-                'aID' => $arriveID,
-                // 'test' => $departLine , 
+                'suggestedTime' => $suggestedTime ,
             ];
         }
         return $data;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 28, 2021 at 07:10 PM
+-- Generation Time: Nov 29, 2021 at 04:29 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.4.8
 
@@ -70,7 +70,7 @@ CREATE TABLE `announcements` (
   `reportDetails` varchar(200) NOT NULL,
   `reportDate` date NOT NULL,
   `reportStatus` tinyint(1) NOT NULL DEFAULT 1,
-  `adminUniqueCode` varchar(20) NOT NULL
+  `adminUniqueCode` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -204,7 +204,7 @@ CREATE TABLE `rules` (
   `ruleDetails` varchar(500) NOT NULL,
   `ruleDate` date NOT NULL,
   `ruleStatus` tinyint(1) NOT NULL DEFAULT 1,
-  `adminUniqueCode` varchar(20) NOT NULL
+  `adminUniqueCode` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
