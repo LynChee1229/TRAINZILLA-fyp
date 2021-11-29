@@ -33,7 +33,6 @@ const MyComponent = () => {
 
             getRoutesDetails(departStation, arriveStation)
                 .then(res => {
-                    console.log(res)
                     let arr = [];
 
                     for (let i = 0; i < res.num; i++) {
