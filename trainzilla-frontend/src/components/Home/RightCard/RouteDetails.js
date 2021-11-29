@@ -1,4 +1,4 @@
-import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
+import {Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from '@mui/material';
 import {useEffect, useRef, useState} from "react";
 import Highcharts from 'highcharts/highstock'
 import HighchartsReact from 'highcharts-react-official'
@@ -73,6 +73,7 @@ export default function RouteDetails({openDialog, setOpenDialog, routes}) {
     };
 
     useEffect(() => {
+        console.log(routes)
         let arr = [], timestamp = dayjs().valueOf();
         // setSuggestionRoute(routes.suggestRoute)
         routes.suggestRoute.forEach(suggestion => {
@@ -123,6 +124,7 @@ export default function RouteDetails({openDialog, setOpenDialog, routes}) {
                 }
             },
             series: [{
+
                 dataLabels: {
                     allowOverlap: false,
                     format: '<span style="color:{point.color}">● </span><span style="font-weight: bold;" > ' +
@@ -157,6 +159,18 @@ export default function RouteDetails({openDialog, setOpenDialog, routes}) {
                         imutable={false}
                         allowChartUpdate={false}
                     />
+                    <Box className="default-font centerFont greyFont title" style={{padding: '0', paddingTop: '1.5vw'}}>
+                        Route Distance: {routes.distance} km
+                    </Box>
+                    <Box className="default-font centerFont greyFont title" style={{padding: '0'}}>
+                        {() => {
+                            let hour = dayjs(routes.timeTaken).format("h"),
+                                minute = dayjs(routes.timeTaken).format("m"),
+                                sec = dayjs(routes.timeTaken).format("s");
+
+                            return hour +' '+ minute +' '+ sec;
+                        }}
+                    </Box>
                 </DialogContentText>
             </DialogContent>
             <DialogActions>
