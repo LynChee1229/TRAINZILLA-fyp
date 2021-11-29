@@ -12,10 +12,11 @@ import Footer from "../Footer/Footer";
 import $ from 'jquery'
 
 const SignIn = () => {
+    const clientId = '853290800594-0r97u6c6olmb86jqjb8ia4pfd6dihul6.apps.googleusercontent.com';
+
     const [userKey, setUserKey] = useState('')
     const [userPass, setUserPass] = useState('')
     const history = useHistory()
-    
 
     const handleKeyChange = (e) => {
         setUserKey(e.target.value)
@@ -113,9 +114,10 @@ const SignIn = () => {
                         <Container className="orTitle">OR : </Container>
 
                         <CardContent className="flexDisplay">
+
                             <GoogleLogin
                                 className="icon"
-                                clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                                clientId={clientId}
                                 buttonText=""
                                 onSuccess={handleLogin}
                                 onFailure={handleLogin}
