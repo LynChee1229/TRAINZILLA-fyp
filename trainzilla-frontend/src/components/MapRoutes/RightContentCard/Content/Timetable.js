@@ -1,72 +1,128 @@
 import React, {useEffect, useState} from 'react';
 import {Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from '@mui/material';
+import {getTimeTable} from "../../../../API/getTimeTable";
+import _ from 'lodash';
 
 function Timetable({routeData, currentRoute}) {
 
-    const [routeObj, setRouteObj] = useState({});
-    const [routeTrainNum, setRouteTrainNum] = useState();
-    const [routeStations, setRouteStations] = useState([]);
-    // const [durationSToS, setDurationSToS] = useState();
-    // const [trainInterval, setTrainInterval] = useState();
+    const [currRouteId, setCurrRouteId] = useState();
+    const [timetableData, setTimetableData] = useState({});
 
     useEffect(() => {
         let arr = (routeData.filter(route => route['routeTitle'] === currentRoute));
-        let stations = [];
-        stations.push(arr.flatMap(({station}) => {
-            return station.reduce((segments, current,) => {
-                segments.push({
-                    name: current.stationName,
-                    departTime: current.stationDeparture
-                });
-                return segments;
-            }, []);
-        }))
+        setCurrRouteId(arr[0].routeID)
 
-        setRouteObj(arr[0]);
-        setRouteTrainNum(arr[0].routeTrainNum);
-        setRouteStations(stations[0]);
-        // setDurationSToS(5)
-        // setTrainInterval(5)
+        // let stations = [];
+        // stations.push(arr.flatMap(({station}) => {
+        //     return station.reduce((segments, current,) => {
+        //         segments.push({
+        //             name: current.stationName,
+        //             departTime: current.stationDeparture
+        //         });
+        //         return segments;
+        //     }, []);
+        // }))
     }, [routeData, currentRoute])
 
-    console.log(routeObj, routeTrainNum, routeStations)
+    useEffect(() => {
+        getTimeTable(currRouteId).then(res => setTimetableData(res))
+    }, [currRouteId])
 
-    return (
-        <TableContainer sx={{maxHeight: 440}} className="default-font">
-            <Box className="timetableCurrentTitle blueFont bold">
-                {currentRoute}
+    const header = (trainNum) => {
+        let arr = ['Station / Trip Order']
+        for (let i = 1; i <= trainNum; i++) {
+            arr.push(i.toString());
+        }
+        return (arr);
+    }
+
+    const row = (rowDatas) => {
+        if (!_.isEmpty(rowDatas)) {
+
+            let rows = []
+
+            rowDatas.forEach(rowData => {
+                let arr = [rowData.stationName], departTime = rowData.departTime;
+                departTime.forEach(time => {
+                    arr.push(time)
+                })
+                rows.push(arr);
+            })
+
+            return (rows)
+        }
+    }
+
+    if (!_.isEmpty(timetableData))
+        return (
+
+            <Box className="default-font">
+
+                <Box className="default-font blueFont bold timetableCurrentTitle">
+                    {currentRoute}
+                </Box>
+
+                <TableContainer className="TableContainer">
+                    <Table
+                        className="table"
+                    >
+                        <TableHead className="header">
+                            <TableRow className="row">
+                                {header(timetableData.routeTrainNum).map((cell, i) =>
+                                    <TableCell key={i} className="cell">{cell}</TableCell>
+                                )}
+                            </TableRow>
+                        </TableHead>
+
+                        <TableBody className="body">
+                            {
+                                row(timetableData.FirstTable).map((row, i) =>
+                                    <TableRow key={i} className="row">
+                                        {
+                                            row.map((cell, j) =>
+                                                <TableCell key={j} className="cell">{cell}</TableCell>
+                                            )
+                                        }
+                                    </TableRow>
+                                )
+                            }
+                        </TableBody>
+                    </Table>
+
+                    <Table
+                        className="table"
+                    >
+                        <TableHead className="header">
+                            <TableRow className="row">
+                                {header(timetableData.routeTrainNum).map((cell, i) =>
+                                    <TableCell key={i} className="cell">{cell}</TableCell>
+                                )}
+                            </TableRow>
+                        </TableHead>
+
+                        <TableBody className="body">
+                            {
+                                row(timetableData.SecondTable).map((row, i) =>
+                                    <TableRow key={i} className="row">
+                                        {
+                                            row.map((cell, j) =>
+                                                <TableCell key={j} className="cell">{cell}</TableCell>
+                                            )
+                                        }
+                                    </TableRow>
+                                )
+                            }
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+
+
             </Box>
 
-            <Table
-                // stickyHeader
-                // aria-label="sticky table"
-                size={'small'}
-            >
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Trip Order</TableCell>
-                        {/*{routes.map((item) => (*/}
-                        {/*    <TableCell key={item.id}>{item.id}</TableCell>*/}
-                        {/*))*/}
-                        {/*}*/}
-                        {/*<TableCell>Time taken(s)</TableCell>*/}
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {
-                        // station.map((item) => (
-                        //     <TableRow key={item.id}>
-                        //         <TableCell>{item.stationName}</TableCell>
-                        //         <TableCell>{item.stationDeparture}</TableCell>
-                        //         <TableCell>8:10:00</TableCell>
-                        //         <TableCell>8:20:00</TableCell>
-                        //     </TableRow>
-                        // ))
-                    }
-                </TableBody>
-            </Table>
-        </TableContainer>
-    );
+
+        );
+
+    else return null
 }
 
 export default Timetable;
