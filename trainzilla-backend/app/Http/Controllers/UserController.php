@@ -216,8 +216,8 @@ class UserController extends Controller
         if($req->uUC) {
             $data = User::select('userVoucher', 'userPoint')->where('userUniqueCode', $req->uUC)->first();
             if(isset($data)) {
-                $payment = $req->ticketNum * $req->ticketPrice;
-                $point = $payment * 100;
+                $payment = round(($req->ticketNum * $req->ticketPrice), 2);
+                $point = round($payment * 100);
 
                 if(intval($data->userVoucher) > 0) {
                     $total = round($req->ticketPrice * 0.90, 2);

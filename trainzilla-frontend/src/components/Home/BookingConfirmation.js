@@ -233,7 +233,8 @@ const BookingConfirmation = () => {
                     </div>
 
                     <a href="/profile" target="_blank" onClick={handleRefresh}>
-                        Click here if you wish to change your default email / contact
+                        <small>The E-Receipt will be sent to the email above. <br/>
+                        Click here if you wish to change your default email / contact</small>
                     </a>
 
                     <div className="d-flex">
