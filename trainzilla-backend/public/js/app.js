@@ -2489,7 +2489,10 @@ var RouteMap = function RouteMap(_ref) {
         width: 4
       },
       marker: {
-        radius: 10
+        radius: 10,
+        width: 50,
+        height: 1000,
+        enabledThreshold: 5
       },
       dataLabels: {
         enabled: true,
@@ -2531,20 +2534,23 @@ var RouteMap = function RouteMap(_ref) {
         text: "Click the button at top right for more options."
       },
       exporting: {
+        sourceWidth: 2800,
+        sourceHeight: 1900,
         buttons: {
           contextButton: {
             menuItems: ["viewFullscreen", "separator", 'downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG']
           }
+        },
+        chartOptions: {
+          caption: null
         }
       },
       credits: {
         enabled: false
       },
       legend: {
-        layout: 'vertical',
-        floating: true,
-        align: 'right',
-        verticalAlign: 'bottom',
+        layout: 'horizontal',
+        floating: false,
         enabled: true
       },
       plotOptions: {
