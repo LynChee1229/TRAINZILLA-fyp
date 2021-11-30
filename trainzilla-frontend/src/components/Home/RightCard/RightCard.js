@@ -11,6 +11,7 @@ const RightCard = ({routes}) => {
 
     const handleClickOpen = () => {
         setOpenRouteDetail(true);
+        // console.log(routes)
     };
 
     const setOpenDialogCallback = (bool) => {

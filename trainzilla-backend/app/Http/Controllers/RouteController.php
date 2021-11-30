@@ -59,10 +59,9 @@ class RouteController extends Controller
         return $data;
     }
 
-
     function tracingRoute($departLine, $arrive, $depart, $trace)
     {
-        $totalCond = count(Route::all());
+        $totalCond = count(Route::all()); //Total Routes, return int.
         $suggestion = [];
 
         if(count($trace) < $totalCond) {
@@ -260,10 +259,11 @@ class RouteController extends Controller
             $arrive = Station::where('stationName', $item->arriveStation)->first();
 
             if(isset($depart) && isset($arrive)) {
+                // Check depart station occurs in which routes, return array
                 $departLine = RouteStation::where('stationID', $depart->stationID)->get();
             }
 
-
+            // The routeID in departLine
             $departID = [];
             foreach($departLine as $d) {
                 $departID[] = $d->routeID;
@@ -271,6 +271,9 @@ class RouteController extends Controller
             $trace[] = $departID[0];
             $suggestion = $this->tracingRoute($departLine, $arrive, $depart, []);
 
+            // if(isset($depart) && isset($arrive)) {
+            //     $suggestion1 = $this->getSuggestion($arrive, $depart);
+            // }
 
             $currTime = new DateTime();
             foreach($suggestion as $sug) {

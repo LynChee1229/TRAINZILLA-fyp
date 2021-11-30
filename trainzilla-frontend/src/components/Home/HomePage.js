@@ -34,6 +34,7 @@ const MyComponent = () => {
             getRoutesDetails(departStation, arriveStation)
                 .then(res => {
                     let arr = [];
+                    console.log(res)
 
                     for (let i = 0; i < res.num; i++) {
                         let currentRouteSuggestion = res.routeSuggestion[i], routePassThrough = [];
