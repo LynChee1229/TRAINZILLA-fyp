@@ -2,6 +2,10 @@ import React, {useEffect, useRef, useState} from 'react'
 import Highcharts from 'highcharts/highstock'
 import HighchartsReact from 'highcharts-react-official'
 import networkgraph from 'highcharts/modules/networkgraph'
+import dayjs from "dayjs";
+import LocalizedFormat from "dayjs/plugin/localizedFormat";
+
+dayjs.extend(LocalizedFormat)
 
 require('highcharts/modules/exporting')(Highcharts);
 require('highcharts/modules/export-data')(Highcharts);
@@ -144,6 +148,7 @@ const RouteMap = ({mapRouteData}) => {
             exporting: {
                 sourceWidth: 2800,
                 sourceHeight: 1900,
+                filename: 'Trainzilla Route Map ' + dayjs().format('LLL').toString(),
                 buttons: {
                     contextButton: {
                         menuItems: ["viewFullscreen", "separator", 'downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG'],

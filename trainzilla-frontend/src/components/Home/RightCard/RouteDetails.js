@@ -4,24 +4,21 @@ import Highcharts from 'highcharts/highstock'
 import HighchartsReact from 'highcharts-react-official'
 import timeline from 'highcharts/modules/timeline'
 import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone';
+import LocalizedFormat from "dayjs/plugin/localizedFormat";
 
-dayjs.extend(utc);
-dayjs.extend(timezone);
-dayjs.tz.setDefault('Australia/Sydney');
+dayjs.extend(LocalizedFormat);
 
 if (typeof Highcharts === "object") {
     timeline(Highcharts);
 }
 
-export default function RouteDetails({openDialog, setOpenDialog, routes}) {
+export default function RouteDetails({openDialog, setOpenDialog, routes, path}) {
 
     const [options, setOptions] = useState({
         chart: {
             zoomType: 'x',
             type: 'timeline',
-            inverted: true
+            inverted: true,
         },
         xAxis: {
             type: 'datetime',
@@ -103,11 +100,17 @@ export default function RouteDetails({openDialog, setOpenDialog, routes}) {
                 }
             },
             exporting: {
+                sourceWidth: 2800,
+                sourceHeight: 1900,
+                filename: path +  "'s Route Review " + dayjs().format('LLL').toString(),
                 buttons: {
                     contextButton: {
                         menuItems: ["viewFullscreen", "separator", 'downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG'],
                     },
                 },
+                chartOptions: {
+                    caption: null
+                }
             },
             legend: {
                 enabled: false
@@ -117,6 +120,9 @@ export default function RouteDetails({openDialog, setOpenDialog, routes}) {
             },
             title: {
                 text: null
+            },
+            caption:{
+                text: 'Please click and drag for zooming the chart.'
             },
             tooltip: {
                 style: {
@@ -149,7 +155,7 @@ export default function RouteDetails({openDialog, setOpenDialog, routes}) {
             className="default-font"
         >
             <DialogTitle className="blueFont bold center">Route Review</DialogTitle>
-            <DialogContent>
+            <DialogContent >
                 <DialogContentText>
                     <HighchartsReact
                         ref={useRef()}
@@ -159,18 +165,6 @@ export default function RouteDetails({openDialog, setOpenDialog, routes}) {
                         imutable={false}
                         allowChartUpdate={false}
                     />
-                    <Box className="default-font centerFont greyFont title" style={{padding: '0', paddingTop: '1.5vw'}}>
-                        Route Distance: {routes.distance} km
-                    </Box>
-                    <Box className="default-font centerFont greyFont title" style={{padding: '0'}}>
-                        {() => {
-                            let hour = dayjs(routes.timeTaken).format("h"),
-                                minute = dayjs(routes.timeTaken).format("m"),
-                                sec = dayjs(routes.timeTaken).format("s");
-
-                            return hour +' '+ minute +' '+ sec;
-                        }}
-                    </Box>
                 </DialogContentText>
             </DialogContent>
             <DialogActions>

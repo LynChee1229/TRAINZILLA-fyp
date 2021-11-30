@@ -48,26 +48,35 @@ body
     height: 100%
     border-radius: 1vw
 
-    .routeBox
-      //margin-top: 1vw
-      margin-bottom: 2vw
+    .cardBox
+      display: flex
+      justify-content: space-around
+      flex-direction: column
+      //border: 1px solid black
+      height: 100%
 
-    .routeDetails
-      border-style: solid
-      border-width: thin medium
-      border-color: #004684
-      border-radius: 0.8vw
-      padding: 2vw 1vw 4vw 1vw
+      .routeBox
+        //margin-top: 1vw
+        //margin-bottom: 2.5vw
 
-    .button
-      width: 20vw
-      alignment: center
-      display: block
-      margin-left: auto
-      margin-right: auto
-      margin-top: -2vw
-      background-color: white
-      border-color: #004684
-      border-width: 0.1vw
-      border-radius: 0.5vw
-      box-shadow: 0 1vw 0.6vw -0.6vw #444444
+      .routeDetails
+        border-style: solid
+        border-width: thin medium
+        border-color: #004684
+        border-radius: 0.8vw
+        padding: 1vw 1vw 4vw 1vw
+
+        .space
+          margin: 0.5vw 10vw -1vw 10vw
+
+      .button
+        width: 20vw
+        alignment: center
+        display: block
+        margin: -2.3vw auto 0 auto
+        padding: 0.5vw
+        background-color: white
+        border-color: #004684
+        border-width: 0.1vw
+        border-radius: 0.5vw
+        box-shadow: 0 1vw 0.6vw -0.6vw #444444

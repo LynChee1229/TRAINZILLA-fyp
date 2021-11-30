@@ -52,7 +52,7 @@ const MyComponent = () => {
                         })
                     }
 
-                    setRoutes(arr);
+                    setRoutes(_.orderBy(arr, ['timeTaken'],['asc']));
                     setTicketPrice(res.ticketPrice);
                 })
 

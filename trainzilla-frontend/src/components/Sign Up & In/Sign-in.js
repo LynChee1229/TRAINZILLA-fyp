@@ -1,12 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import {Button, Card, CardContent, Container, IconButton, TextField,} from '@mui/material'
+import {Button, Card, CardContent, Container, TextField,} from '@mui/material'
 import {NavLink, useHistory} from 'react-router-dom'
 import DoubleArrowIcon from '@mui/icons-material/DoubleArrow'
-import AppleIcon from '@mui/icons-material/Apple'
-import FacebookIcon from '@mui/icons-material/Facebook'
 import '../../styles/css/sign-in.sass'
 import {Login} from '../../API/signinAuth'
-import GoogleLogin from "react-google-login";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import $ from 'jquery'
@@ -49,7 +46,7 @@ const SignIn = () => {
 
     return (
         <div>
-            <Header />
+            <Header/>
             <div id="bgPaper">
                 <div id="loginBG">
                     <div className="bigTitle">LOGIN</div>
@@ -111,33 +108,33 @@ const SignIn = () => {
 
                         <NavLink to="/forget-password" className="forgetLink">Forget Password?</NavLink>
 
-                        <Container className="orTitle">OR : </Container>
+                        {/*<Container className="orTitle">OR : </Container>*/}
 
-                        <CardContent className="flexDisplay">
+                        {/*<CardContent className="flexDisplay">*/}
 
-                            <GoogleLogin
-                                className="icon"
-                                clientId={clientId}
-                                buttonText=""
-                                onSuccess={handleLogin}
-                                // onFailure={handleLogin}
-                                cookiePolicy={'single_host_origin'}
-                            />
+                        {/*    <GoogleLogin*/}
+                        {/*        className="icon"*/}
+                        {/*        clientId={clientId}*/}
+                        {/*        buttonText=""*/}
+                        {/*        onSuccess={handleLogin}*/}
+                        {/*        // onFailure={handleLogin}*/}
+                        {/*        cookiePolicy={'single_host_origin'}*/}
+                        {/*    />*/}
 
-                            <IconButton aria-label="apple" className="icon">
-                                <AppleIcon/>
-                            </IconButton>
-                            <IconButton aria-label="facebook" className="icon">
-                                <FacebookIcon/>
-                            </IconButton>
-                        </CardContent>
+                        {/*    <IconButton aria-label="apple" className="icon">*/}
+                        {/*        <AppleIcon/>*/}
+                        {/*    </IconButton>*/}
+                        {/*    <IconButton aria-label="facebook" className="icon">*/}
+                        {/*        <FacebookIcon/>*/}
+                        {/*    </IconButton>*/}
+                        {/*</CardContent>*/}
                         <CardContent>
                             <NavLink to="/sign-up">
                                 <Button
                                     variant="contained"
                                     aria-label="registerAcc"
                                     className="registerBtn"
-                                    onClick={()=>{
+                                    onClick={() => {
                                         $(window).scrollTop(0);
                                     }}
                                 >
