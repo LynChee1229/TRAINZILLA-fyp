@@ -18,7 +18,7 @@ use DateTime;
 
 class RouteController extends Controller
 {
-    
+
     function getAvailableStation()
     {
         $data = Route::join('routes_stations', function ($join) {
@@ -86,7 +86,7 @@ class RouteController extends Controller
 
                         if($prev != null) {
                             $prevSta = Station::where('stationID', $prev)->first();
-    
+
                             $rsTemp = Stos::where([
                                 ['stationA', '=', $station->stationName],
                                 ['stationB', '=', $prevSta->stationName],
@@ -94,7 +94,7 @@ class RouteController extends Controller
                                 ['stationA', '=', $prevSta->stationName],
                                 ['stationB', '=', $station->stationName],
                             ])->first();
-    
+
                             if($rsTemp) {
                                 $rs->timeTaken += $rsTemp->stationTimeTaken;
                             }
@@ -124,7 +124,7 @@ class RouteController extends Controller
                         $tempSuggest[] = $t;
                         $tempSuggest = new Collection($tempSuggest);
                         $tempSuggest = $tempSuggest->unique('stationID')->values();
-                        
+
                         if( $t->stationID == $arrive->stationID ) {
                             $found = true;
                             break;
@@ -172,7 +172,7 @@ class RouteController extends Controller
 
                         if($prev != null) {
                             $prevSta = Station::where('stationID', $prev)->first();
-    
+
                             $rsTemp = Stos::where([
                                 ['stationA', '=', $station->stationName],
                                 ['stationB', '=', $prevSta->stationName],
@@ -180,7 +180,7 @@ class RouteController extends Controller
                                 ['stationA', '=', $prevSta->stationName],
                                 ['stationB', '=', $station->stationName],
                             ])->first();
-    
+
                             if($rsTemp) {
                                 $rs->timeTaken += $rsTemp->stationTimeTaken;
                             }
@@ -253,7 +253,7 @@ class RouteController extends Controller
         $data['status'] = False;
         $ticketPrice = 0;
 
-        if(isset($item->departStation) && isset($item->arriveStation)) 
+        if(isset($item->departStation) && isset($item->arriveStation))
         {
             $depart = Station::where('stationName', $item->departStation)->first();
             $arrive = Station::where('stationName', $item->arriveStation)->first();
@@ -330,6 +330,7 @@ class RouteController extends Controller
                 'routeDistance' => $distance ,
                 'routeTimeTaken' => $timeTaken ,
                 'suggestedTime' => $suggestedTime ,
+                'num' => count($suggestion) ,
             ];
         }
         return $data;
