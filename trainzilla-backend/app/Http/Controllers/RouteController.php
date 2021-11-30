@@ -59,6 +59,7 @@ class RouteController extends Controller
         return $data;
     }
 
+
     function tracingRoute($departLine, $arrive, $depart, $trace)
     {
         $totalCond = count(Route::all()); //Total Routes, return int.
@@ -104,26 +105,10 @@ class RouteController extends Controller
                                 $tempTime = $t->modify("+ ".$cal." minutes");
                             }
 
-<<<<<<< HEAD
                             $rs->stationDeparture = $tempTime->format("H:i");
                             $departTime = [$tempTime->format("H:i")];
-                            for($i=2; $i<=$rs->routeTrainNum; $i++) {
+                            for($i=2; $i<=60; $i++) {
                                 array_push($departTime, $tempTime->modify("+ 15 minutes")->format("H:i"));
-=======
-                        if($prev != null) {
-                            $prevSta = Station::where('stationID', $prev)->first();
-
-                            $rsTemp = Stos::where([
-                                ['stationA', '=', $station->stationName],
-                                ['stationB', '=', $prevSta->stationName],
-                            ])->orWhere([
-                                ['stationA', '=', $prevSta->stationName],
-                                ['stationB', '=', $station->stationName],
-                            ])->first();
-
-                            if($rsTemp) {
-                                $rs->timeTaken += $rsTemp->stationTimeTaken;
->>>>>>> 2e166069a731e63733f8afd006d0c8c5c9880ef8
                             }
                             $rs->departTime = $departTime;
 
@@ -132,7 +117,6 @@ class RouteController extends Controller
                         }
                     }
 
-<<<<<<< HEAD
                     $found = false;
                     $tempSuggest = [];
                     foreach($temp as $t) {
@@ -145,22 +129,6 @@ class RouteController extends Controller
                                 $found = true;
                                 break;
                             }
-=======
-                $found = false;
-                $tempSuggest = [];
-                // $num = 0;
-                foreach($temp as $t) {
-                    if( $t->route_station_sequence <= $dLine->route_station_sequence ) {
-                        // $num++;
-                        $tempSuggest[] = $t;
-                        $tempSuggest = new Collection($tempSuggest);
-                        $tempSuggest = $tempSuggest->unique('stationID')->values();
-
-                        if( $t->stationID == $arrive->stationID ) {
-                            $found = true;
-                            break;
-                        }
->>>>>>> 2e166069a731e63733f8afd006d0c8c5c9880ef8
 
                             if($t->stationID != $depart->stationID) {
                                 $interChange = RouteStation::where('stationID', $t->stationID)->get();
@@ -234,26 +202,10 @@ class RouteController extends Controller
                                 $tempTime = $t->modify("+ ".$cal." minutes");
                             }
 
-<<<<<<< HEAD
                             $rs->stationDeparture = $tempTime->format("H:i");
                             $departTime = [$tempTime->format("H:i")];
-                            for($i=2; $i<=50; $i++) {
+                            for($i=2; $i<=60; $i++) {
                                 array_push($departTime, $tempTime->modify("+ 15 minutes")->format("H:i"));
-=======
-                        if($prev != null) {
-                            $prevSta = Station::where('stationID', $prev)->first();
-
-                            $rsTemp = Stos::where([
-                                ['stationA', '=', $station->stationName],
-                                ['stationB', '=', $prevSta->stationName],
-                            ])->orWhere([
-                                ['stationA', '=', $prevSta->stationName],
-                                ['stationB', '=', $station->stationName],
-                            ])->first();
-
-                            if($rsTemp) {
-                                $rs->timeTaken += $rsTemp->stationTimeTaken;
->>>>>>> 2e166069a731e63733f8afd006d0c8c5c9880ef8
                             }
                             $rs->departTime = $departTime;
 
@@ -333,11 +285,10 @@ class RouteController extends Controller
             $arrive = Station::where('stationName', $item->arriveStation)->first();
 
             if(isset($depart) && isset($arrive)) {
-                // Check depart station occurs in which routes, return array
                 $departLine = RouteStation::where('stationID', $depart->stationID)->get();
             }
 
-            // The routeID in departLine
+
             $departID = [];
             foreach($departLine as $d) {
                 $departID[] = $d->routeID;
@@ -345,9 +296,6 @@ class RouteController extends Controller
             $trace[] = $departID[0];
             $suggestion = $this->tracingRoute($departLine, $arrive, $depart, []);
 
-            // if(isset($depart) && isset($arrive)) {
-            //     $suggestion1 = $this->getSuggestion($arrive, $depart);
-            // }
 
             $currTime = new DateTime();
             foreach($suggestion as $index => $sug) {
