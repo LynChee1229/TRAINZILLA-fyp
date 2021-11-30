@@ -191,7 +191,7 @@ class RouteController extends Controller
 
                         $rs->stationDeparture = $tempTime->format("H:i");
                         $departTime = [$tempTime->format("H:i")];
-                        for($i=2; $i<=$rs->routeTrainNum; $i++) {
+                        for($i=2; $i<=50; $i++) {
                             array_push($departTime, $tempTime->modify("+ 15 minutes")->format("H:i"));
                         }
                         $rs->departTime = $departTime;
