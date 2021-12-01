@@ -6,12 +6,9 @@ import _ from "lodash";
 import RouteDetails from "./RouteDetails";
 import MapIcon from '@mui/icons-material/Map';
 import TimelapseIcon from '@mui/icons-material/Timelapse';
-import '../../../styles/css/booking_confirmation.sass'
 import $ from 'jquery'
 
 const RightCard = ({routes}) => {
-
-    // if(!_.isEmpty(routes)) $('.loader').removeClass('d-none');
 
     const [route, setRoute] = useState(routes);
     const [openRouteDetail, setOpenRouteDetail] = useState(false);
@@ -20,7 +17,11 @@ const RightCard = ({routes}) => {
     useEffect(() => {
         setRoute(routes)
     },[routes])
-    // console.log(routes)
+    console.log(routes)
+
+    if (!_.isEmpty(route))  {
+        $('.loader').addClass('d-none');
+    }
 
     const handleClickOpen = (index) => {
         setOpenRouteDetail(true);
@@ -113,7 +114,7 @@ const RightCard = ({routes}) => {
 
     return (
         <Card elevation={15} className="default-font rightCard">
-            {/*<div className="loader d-none"></div>*/}
+            <div className="loader"></div>
             <CardContent className="cardBox">
                 {
                     route.map((suggestion, i) => {
