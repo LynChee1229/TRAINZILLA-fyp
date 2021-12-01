@@ -84,7 +84,7 @@ const LeftCard = (props) => {
                     showTicketDetails={showTicketDetails}
                     ticketNum={ticketNum}
                     setTicketNum={ticketNumCallback}
-                    ticketPrice={ticketPrice}
+                    ticketPrice={parseFloat(ticketPrice).toFixed(2)}
                 />
             </CardContent>
         </Card>

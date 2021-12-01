@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import {Box, Button, Card, CardContent, Paper, Stack} from '@mui/material'
 import '../../../styles/css/homepage.sass'
 import '../../../styles/Font/fonts.sass'
@@ -6,14 +6,25 @@ import _ from "lodash";
 import RouteDetails from "./RouteDetails";
 import MapIcon from '@mui/icons-material/Map';
 import TimelapseIcon from '@mui/icons-material/Timelapse';
+import '../../../styles/css/booking_confirmation.sass'
+import $ from 'jquery'
 
 const RightCard = ({routes}) => {
 
-    const [openRouteDetail, setOpenRouteDetail] = useState(false);
+    // if(!_.isEmpty(routes)) $('.loader').removeClass('d-none');
 
-    const handleClickOpen = () => {
+    const [route, setRoute] = useState(routes);
+    const [openRouteDetail, setOpenRouteDetail] = useState(false);
+    const [clickIndex, setClickIndex] = useState(0);
+
+    useEffect(() => {
+        setRoute(routes)
+    },[routes])
+    // console.log(routes)
+
+    const handleClickOpen = (index) => {
         setOpenRouteDetail(true);
-        console.log(routes)
+        setClickIndex(index);
     };
 
     const setOpenDialogCallback = (bool) => {
@@ -43,19 +54,22 @@ const RightCard = ({routes}) => {
 
     }
 
-    const path = (routePath) => {
-        let path;
-        for (let i = 0; i < routePath.length; i++) {
-            if (_.isEmpty(path)) {
-                path = routePath[i];
-            } else {
-                path += " >> " + routePath[i];
+    const path = (route) => {
+        if(route){
+            let path = '', routePath = route["routePassing"];
+            for (let i = 0; i < routePath.length; i++) {
+                if (_.isEmpty(path)) {
+                    path = routePath[i];
+                } else {
+                    path += " >> " + routePath[i];
+                }
             }
-        }
-        return path;
+            return path.toUpperCase();
+        }else return '';
+
     }
 
-    const routeDetail = (suggestion) => {
+    const routeDetail = (suggestion, index) => {
         let distance = suggestion.distance, timeTaken = suggestion.timeTaken;
 
         // routePath = suggestion.routePassing;
@@ -70,7 +84,7 @@ const RightCard = ({routes}) => {
         return (
             <Box className="default-font routeBox">
                 <Paper className="routeDetails">
-                    <Box className="center bold blueFont">{path(suggestion.routePassing).toUpperCase()}</Box>
+                    <Box className="center bold blueFont">{path(suggestion).toUpperCase()}</Box>
                     <Box className="center space">
                         <Box>
                             <MapIcon sx={{fontSize: '1vw'}} color="secondary"/> {' '}
@@ -88,7 +102,7 @@ const RightCard = ({routes}) => {
                     variant="outlined"
                     className="button default-font bold"
                     sx={{color: '#004684', fontSize: '1vw'}}
-                    onClick={handleClickOpen}
+                    onClick={() => handleClickOpen(index)}
                 >
                     View Route Details
                 </Button>
@@ -99,19 +113,20 @@ const RightCard = ({routes}) => {
 
     return (
         <Card elevation={15} className="default-font rightCard">
+            {/*<div className="loader d-none"></div>*/}
             <CardContent className="cardBox">
                 {
-                    routes.map((suggestion, i) => {
+                    route.map((suggestion, i) => {
                         if (i < 3) {
                             return (
                                 <Stack key={i}>
-                                    {routeDetail(suggestion)}
-                                    <RouteDetails
-                                        openDialog={openRouteDetail}
-                                        setOpenDialog={setOpenDialogCallback}
-                                        routes={suggestion}
-                                        path={path(suggestion.routePassing).toUpperCase()}
-                                    />
+                                    {routeDetail(suggestion, i)}
+                                    {/*<RouteDetails*/}
+                                    {/*    openDialog={openRouteDetail}*/}
+                                    {/*    setOpenDialog={setOpenDialogCallback}*/}
+                                    {/*    routes={suggestion}*/}
+                                    {/*    path={path(suggestion.routePassing).toUpperCase()}*/}
+                                    {/*/>*/}
                                 </Stack>
                             )
                         } else {
@@ -119,6 +134,12 @@ const RightCard = ({routes}) => {
                         }
                     })
                 }
+                <RouteDetails
+                    openDialog={openRouteDetail}
+                    setOpenDialog={setOpenDialogCallback}
+                    routes={route[clickIndex]}
+                    path={path(route[clickIndex])}
+                />
 
             </CardContent>
         </Card>

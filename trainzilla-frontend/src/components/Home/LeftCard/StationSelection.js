@@ -12,7 +12,6 @@ const StationSelection = ({stationName, setStationName, stations}) => {
     }
 
     const handleStationChange = (e) => {
-        console.log(e.target.value)
         setStationName(e.target.innerText)
         setAnchorEl(null)
     }

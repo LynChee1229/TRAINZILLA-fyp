@@ -43,7 +43,7 @@ const TicketDetails = (props) => {
             <Box className="ticketDetailBox">
                 <Box className="center" style={{fontSize: "1.2vw", marginBottom: '1vw'}}>
                     <Box sx={{flexGrow: 1}} className="bold">Price per ticket:</Box>
-                    <Box>RM {ticketPrice}</Box>
+                    <Box>RM {' '}{ticketPrice}</Box>
                 </Box>
 
                 <Box className="center">
