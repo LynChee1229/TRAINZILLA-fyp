@@ -10,6 +10,5 @@ export async function getRouteData() {
             throw error;
         });
 
-    // console.log(result);
     return (result.data);
 }

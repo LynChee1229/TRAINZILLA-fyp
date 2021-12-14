@@ -73,7 +73,6 @@ export default function RouteDetails({openDialog, setOpenDialog, routes, path}) 
     useEffect(() => {
         if (!_.isEmpty(routes)){
             let arr = [], timestamp = dayjs().valueOf();
-            // setSuggestionRoute(routes.suggestRoute)
             routes.suggestRoute.forEach(suggestion => {
                 arr.push({
                     x: timestamp + 28800000, //28800000 is local timezone (GMT +08:00)
@@ -145,7 +144,7 @@ export default function RouteDetails({openDialog, setOpenDialog, routes, path}) 
             })
         }
 
-    }, [routes]);
+    }, [path, routes]);
 
 
     return (

@@ -139,10 +139,10 @@ const ProfileTicket = ({newTicket}) => {
                                 <div>
                                     { item.ticketUniqueCode }
                                     {
-                                        (item.ticketStatus == 1) ? <span className="activeStatus">Active</span> : (item.ticketStatus == 0) ? <span className="inactiveStatus">Invalid</span> : ""
+                                        (item.ticketStatus === 1) ? <span className="activeStatus">Active</span> : (item.ticketStatus === 0) ? <span className="inactiveStatus">Invalid</span> : ""
                                     }
                                     {
-                                        (item.ticketStatus == 1) ? <button className="btn qrBtn" onClick={() => handleShow(item.ticketUniqueCode)}>Show QR Code</button> : (item.ticketStatus == 0) ? "" : ""
+                                        (item.ticketStatus === 1) ? <button className="btn qrBtn" onClick={() => handleShow(item.ticketUniqueCode)}>Show QR Code</button> : ""
                                     }
                                 </div>
                             </td>

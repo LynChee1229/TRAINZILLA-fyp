@@ -46,7 +46,6 @@ const AdminRouteMap = () => {
             key === 'map'
             && !_.isEmpty(mapStation())
         ){
-            // console.log('here', mapRouteData)
             return <RouteMap mapRouteData={mapStation()}/>;
         } else {
             return null;

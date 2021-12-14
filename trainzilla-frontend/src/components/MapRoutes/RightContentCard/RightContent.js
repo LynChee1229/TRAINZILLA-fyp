@@ -40,27 +40,8 @@ function RightContent({contentKey}) {
             routeMapData.routeNameStation = routesNameStation;
             routeMapData.centralStation = "KL Sentral"
         }
-        // console.log(routeMapData)
         return routeMapData;
     }
-
-    // const mapStation = () => {
-    //     let arr = [];
-    //     getRouteData().then(res => {
-    //         arr.push(res.flatMap(({station}) => {
-    //             return station.reduce((segments, current, i, stations) => {
-    //                 if (stations[i + 1]) {
-    //                     segments.push(
-    //                         current.stationName,
-    //                     );
-    //                 }
-    //                 return segments;
-    //             }, []);
-    //         }))
-    //     })
-    //     console.log(arr)
-    // }
-
 
     const content = (key) => {
 
@@ -70,7 +51,6 @@ function RightContent({contentKey}) {
             key === 'map'
             && !_.isEmpty(mapStation())
         ){
-            // console.log('here', mapRouteData)
             return <RouteMap mapRouteData={mapStation()}/>;
         }
         else if (availableRoute.includes(key)) {

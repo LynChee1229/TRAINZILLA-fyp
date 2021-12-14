@@ -9,7 +9,5 @@ export async function getRouteData() {
         .catch(error => {
             throw error;
         });
-
-    // console.log(result);
     return (result.data);
 }

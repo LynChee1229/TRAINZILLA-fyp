@@ -29,21 +29,6 @@ const SignIn = () => {
         }
     })
 
-    const handleLogin = async googleData => {
-        // const res = await fetch("http://localhost:8000/api/api/v1/auth/google", {
-        //     method: "POST",
-        //     body: JSON.stringify({
-        //         token: googleData.tokenId
-        //     }),
-        //     headers: {
-        //         "Content-Type": "application/json"
-        //     }
-        // })
-        // const data = await res.json()
-        // console.log(data)
-        // store returned user somehow
-    }
-
     return (
         <div>
             <Header/>

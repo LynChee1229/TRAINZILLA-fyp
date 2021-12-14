@@ -164,7 +164,6 @@
                             },
                             success: function( data, textStatus, jQxhr ){
                                 if(data) {
-                                    console.log(data);
                                     $('#bookingHistoryModal .viewName').html((data.userName).charAt(0).toUpperCase() + (data.userName).slice(1));
                                 }
                                 callback({

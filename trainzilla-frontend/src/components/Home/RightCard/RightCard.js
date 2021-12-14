@@ -16,8 +16,7 @@ const RightCard = ({routes}) => {
 
     useEffect(() => {
         setRoute(routes)
-    },[routes])
-    console.log(routes)
+    },[routes]);
 
     if (!_.isEmpty(route))  {
         $('.loader').addClass('d-none');

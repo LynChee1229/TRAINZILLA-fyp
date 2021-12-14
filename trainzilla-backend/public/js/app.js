@@ -2266,7 +2266,6 @@ var AdminRouteMap = function AdminRouteMap() {
 
   var content = function content(key) {
     if (key === 'map' && !_.isEmpty(mapStation())) {
-      // console.log('here', mapRouteData)
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_RouteMap__WEBPACK_IMPORTED_MODULE_3__["default"], {
         mapRouteData: mapStation()
       });

@@ -22,7 +22,7 @@ const TicketDetails = (props) => {
     const user = JSON.parse(localStorage.getItem('user-info'))
 
     const handleBookTicketButton = () => {
-        if(ticketNum == 0) {
+        if(ticketNum === 0) {
             $('.ticketError').html('Please select the number of tickets.');
         } else if (!user) {
             history.push('/sign-in');

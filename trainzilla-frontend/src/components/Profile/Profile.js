@@ -14,7 +14,7 @@ const Profile = () => {
     const [tuc, setTUC] = useState([]);
 
     useEffect(() => {
-        if( location.state  &&  location.state.tab == "ticket" ) {
+        if( location.state  &&  location.state.tab === "ticket" ) {
             setTUC(location.state.ticketUC);
             $('#ticketBtn').click();
         }

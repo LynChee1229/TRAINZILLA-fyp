@@ -11,12 +11,5 @@ axios.post("/api/v1/auth/google", async (req, res) => {
     });
     const { name, email, picture } = ticket.getPayload();
 
-    console.log(name, email)
-    // const user = await db.user.upsert({
-    //     where: { email: email },
-    //     update: { name, picture },
-    //     create: { name, email, picture }
-    // })
     res.status(201)
-    // res.json(user)
 })

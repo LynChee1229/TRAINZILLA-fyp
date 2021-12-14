@@ -29,16 +29,10 @@ const LeftCard = (props) => {
     }
 
     const departCallback = (depart) => {
-        // setStationList(depart);
         setDepartStation(depart);
-
-        // console.log(stationList)
     }
     const arriveCallback = (arrive) => {
-        // setStationList(arrive);
         setArriveStation(arrive);
-
-        // console.log(stationList)
     }
     const ticketNumCallback = (ticketNum) => {
         setTicketNum(ticketNum);

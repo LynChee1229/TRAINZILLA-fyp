@@ -88,7 +88,7 @@ const BookingConfirmation = () => {
             }
         });
         result = await result.json();
-        if(result.status == "success") {
+        if(result.status === "success") {
             history.push( {pathname: "/profile",
                 state: {
                     tab: "ticket" ,
@@ -207,7 +207,7 @@ const BookingConfirmation = () => {
                         </p>
                     </div>
 
-                    <div className="applyText">{userVoucher != 0 ? "1 voucher will be applied automatically. 10% discount for each ticket." : "" }</div>
+                    <div className="applyText">{userVoucher !== 0 ? "1 voucher will be applied automatically. 10% discount for each ticket." : "" }</div>
 
                     <div className="row">
                         <div className="col-lg-4 col-md totalText">
