@@ -3,5 +3,5 @@
 /workspace.xml
 # Editor-based HTTP Client requests
 /httpRequests/
-Admin Module/
-User Module/
+readme src/Admin Module/
+readme src/User Module/

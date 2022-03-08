@@ -87,6 +87,11 @@ transaction. Users can redeem points to obtain discount vouchers that can be app
   <h3 id="user-auth"> &#x25B8; User Login & Registration</h3>
   
   https://user-images.githubusercontent.com/76613893/157061839-b45f59d5-e3b9-45e0-ac8c-5cfc615fe19e.mp4
+  
+  <br/>
+  
+  > An email that the user will receive to reset password : <br><br>
+  > <img src="/readme src/Email/user reset pw.png" height="auto" width="420">
 
 <br/>
   
@@ -94,6 +99,12 @@ transaction. Users can redeem points to obtain discount vouchers that can be app
   <h3 id="booking"> &#x25B8; Booking Process</h3>
   
   https://user-images.githubusercontent.com/76613893/157061927-60e76b12-56e2-4e86-94b6-b00dc03b1669.mp4
+  
+  
+  <br/>
+  
+  > An electronic receipt that the user will receive after the booking process : <br><br>
+  > <img src="/readme src/Email/e-receipt.png" height="auto" width="420">
 
 <br/>
 
@@ -153,6 +164,11 @@ transaction. Users can redeem points to obtain discount vouchers that can be app
   <h3 id="admin-auth"> &#x25B8; Admin Authentication</h3>
   
   https://user-images.githubusercontent.com/76613893/157096751-5dd081e2-f3d3-474f-a2d0-3e0143914b2a.mp4
+  
+  <br/>
+  
+  > An email that the admin will receive to reset password : <br><br>
+  > <img src="/readme src/Email/admin reset pw.png" height="auto" width="420">
 
 
 <br/>
@@ -161,7 +177,11 @@ transaction. Users can redeem points to obtain discount vouchers that can be app
   <h3 id="admin-list"> &#x25B8; Admin List</h3>
   
   https://user-images.githubusercontent.com/76613893/157096777-60b05a74-d286-4066-8bc1-fd541fac03c0.mp4
-
+  
+  <br/>
+  
+  > An email that the new administrator will receive : <br><br>
+  > <img src="/readme src/Email/new admin.png" height="auto" width="420">
 
 <br/>
 
